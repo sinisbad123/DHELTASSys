@@ -1,0 +1,104 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+//Imports
+using System.Data;
+using DHELTASSys.DataAccess;
+
+namespace DHELTASSys.modules
+{
+    public class BenefitsModuleBL
+    {
+        //Getters & Setters
+        private int emp_id;
+        public int Emp_id
+        {
+            get { return emp_id; }
+            set { emp_id = value; }
+        }
+        private int company_id;
+        public int Company_id
+        {
+            get { return company_id; }
+            set { company_id = value; }
+        }
+        private int benefit_id;
+        public int Benefit_id
+        {
+            get { return benefit_id; }
+            set { benefit_id = value; }
+        }
+        private string benefit_type;
+        public string Benefit_type
+        {
+            get { return benefit_type; }
+            set { benefit_type = value; }
+        }
+        private string benefit_info;
+        public string Benefit_info
+        {
+            get { return benefit_info; }
+            set { benefit_info = value; }
+        }
+
+        private string dependent_name;
+        public string Dependent_name
+        {
+            get { return dependent_name; }
+            set { dependent_name = value; }
+        }
+        private string contact_number;
+        public string Contact_number
+        {
+            get { return contact_number; }
+            set { contact_number = value; }
+        }
+        private string relation;
+        public string Relation
+        {
+            get { return relation; }
+            set { relation = value; }
+        }
+        
+        //Processes
+            //Employee Benefits
+        public void AddEmployeeBenefits()
+        {
+            string manageEmployeeBenefitsQuery = "EXECUTE AddEmployeeBenefits '" + Emp_id + "','" + Benefit_id + "'";
+            DHELTASSysDataAccess.Modify(manageEmployeeBenefitsQuery);
+        }
+
+        public DataTable ViewEmployeeBenefits()
+        {
+            string viewBenefitsQuery = "EXECUTE ViewEmployeeBenefits '" + Emp_id + "'";
+            DataTable dtEmployeeBenefits = DHELTASSysDataAccess.Select(viewBenefitsQuery);
+            return dtEmployeeBenefits;
+        }
+
+            //Benefits
+        public DataTable ViewBenefits()
+        {
+            string viewBenefitsQuery = "EXECUTE ViewBenefits '" + company_id + "'";
+            DataTable dtBenefits = DHELTASSysDataAccess.Select(viewBenefitsQuery);
+            return dtBenefits;
+        }
+
+        public void AddBenefits()
+        {
+            string addBenefitsQuery = "EXECUTE AddBenefits '" + Benefit_type + "','" + Benefit_info + "','" + Company_id + "'";
+            DHELTASSysDataAccess.Modify(addBenefitsQuery);
+        }
+
+            //Dependents
+        public void AddDependents() {
+            string addDepenedentsQuery = "EXECUTE AddDependents '" + Dependent_name + "','" + Relation + "','" + Contact_number + "','" + Emp_id + "'";
+        }
+    }
+}
+
+
+/*V1.0 Created By MikeDR
+*Created Getters & Setters
+*Created Process(Add Employee Benefits,View Employee Benefits,View Benefits,Add Benefits,Add Dependents)
+*/
