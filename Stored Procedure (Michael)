@@ -1,0 +1,239 @@
+--SELECT ALL EMPLOYEES
+CREATE PROCEDURE SelectAllEmployee
+AS BEGIN
+	SELECT
+	  employee.emp_id AS [Employee ID],
+		employee.last_name AS [Last Name],
+		employee.first_name  AS [First Name],
+		employee.middle_name AS [Middle Name],
+		position.position_name AS [Position],
+		company.company_name AS [Company],
+		employee.primary_contact_number AS [Primary Contact Number],
+		employee.alternative_contact_number AS [Alternative Contact Number] 
+	FROM employee 
+	INNER JOIN position ON employee.position_id = position.position_id 
+	INNER JOIN company ON employee.company_id = company.company_id
+END
+
+--SELECT ALL EMPLOYEES (COMPANY)
+CREATE PROCEDURE SelectCompanyEmployees
+	@company_name as varchar(50)
+AS BEGIN
+	SELECT 
+		employee.emp_id AS [Employee ID],
+		employee.last_name AS [Last Name],
+		employee.first_name  AS [First Name],
+		employee.middle_name AS [Middle Name],
+		position.position_name AS [Position],
+		employee.primary_contact_number AS [Primary Contact Number],
+		employee.alternative_contact_number AS [Alternative Contact Number] 
+	FROM employee 
+		INNER JOIN position ON employee.position_id = position.position_id 
+		INNER JOIN company ON employee.company_id = company.company_id 
+	WHERE company.company_name=@company_name
+END
+/*==================================================*/
+/*----------Benefits Module----------*/
+
+--VIEW PERSONAL BENEFITS
+CREATE PROCEDURE ViewEmployeeBenefits
+	@emp_id AS int
+AS BEGIN
+	SELECT
+		benefit.benefit_type AS [Benefit Type],
+		benefit.benefit_info AS [Benefit Information],
+		empBenefit.date_acquired AS [Date Acquired] 
+	FROM empBenefit 
+		INNER JOIN benefit ON empBenefit.benefit_id=benefit.benefit_id 
+	WHERE empBenefit.emp_id=@emp_id
+END
+
+--ADD EMPLOYEE BENEFITS
+CREATE PROCEDURE AddEmployeeBenefits
+	@emp_id as int,
+	@benefit_id as int
+AS BEGIN
+	INSERT INTO empBenefit
+		(emp_id,
+		benefit_id,
+		date_acquired)
+	VALUES
+		(@emp_id,
+		@benefit_id,
+		GETDATE())
+END
+
+--ADD BENEFITS
+CREATE PROCEDURE AddBenefits
+	@benefit_type as varchar(50),
+	@benefit_info as varchar(50),
+	@employee_id as int,
+	@position_name as varchar(50)
+AS BEGIN
+INSERT INTO benefit
+	(benefit_type,
+	benefit_info,
+	company_id,
+	position_id) 
+VALUES 
+	(@benefit_type,
+	@benefit_info,
+	(SELECT 
+		company.company_id 
+	FROM company 
+		INNER JOIN employee ON company.company_id=employee.company_id 
+	WHERE employee.emp_id=@employee_id),
+	(SELECT
+		position_id 
+	FROM position 
+	WHERE position_name=@position_name))
+END
+
+--VIEW ALL BENEFITS
+CREATE PROCEDURE ViewBenefits
+	@emp_id as int
+AS BEGIN
+	SELECT 
+		benefit.benefit_type AS [Benefit Type],
+		benefit.benefit_info AS [Benefit Information]
+	FROM benefit
+		INNER JOIN employee ON benefit.company_id = employee.company_id 
+	WHERE employee.emp_id=@emp_id
+END
+
+--ADD DEPENDENTS
+CREATE PROCEDURE AddDependents
+	@dependent_name as varchar(50),
+	@contact_number as varchar(20),
+	@relation as varchar(50)
+AS BEGIN
+	INSERT INTO dependent
+	(dependent_name,
+	contact_number,
+	relation)
+	VALUES
+	(@dependent_name,
+	@contact_number,
+	@relation)
+END
+--VIEW EMPLOYEE DEPENDENTS
+CREATE PROCEDURE ViewDependents
+	@emp_id as int
+AS BEGIN
+	SELECT 
+		dependent_name AS [Depenedent Name],
+		contact_number AS [Contact Number],
+		relation AS [Relationship]
+	FROM dependent 
+	WHERE emp_id=@emp_id
+END
+
+
+/*----------Leave Module----------*/
+--ADD LEAVE REQUEST
+CREATE PROCEDURE AddLeaveRequests
+	@emp_id as int,
+	@leave_type as varchar(50),
+	@date_from as date,
+	@date_to as date,
+	@reason as nvarchar(100)
+AS BEGIN
+	INSERT INTO leaveRequest
+		(emp_id,
+		leave_type_id,
+		date_from,
+		date_to,
+		reason)
+	VALUES 
+		(@emp_id,
+		(SELECT leave_type_id 
+		FROM leaveType 
+		WHERE leave_type=@leave_type),
+		@date_from,
+		@date_to,
+		@reason)
+END
+
+--VIEW ALLOWABLE LEAVE
+CREATE PROCEDURE ViewAllowableLeave
+	@emp_id as int
+AS BEGIN
+	SELECT 
+		leaveType.leave_type AS [Leave Type],
+		allowable_leave AS [Allowable Leave]
+	FROM allowableLeave 
+	INNER JOIN leaveType ON allowableLeave.leave_type_id=leaveType.leave_type_id
+	WHERE allowableLeave.emp_id=@emp_id
+END
+
+--VIEW LEAVE REQUEST
+CREATE PROCEDURE ViewLeaveRequest
+	@emp_id as int
+AS BEGIN
+	SELECT 
+		leaveType.leave_type AS [Leave Type],
+		leaveRequest.date_from AS [Date From],
+		leaveRequest.date_to AS [Date To],
+		leaveRequest.vp_decision AS [Vice President Desicion],
+		leaveRequest.hr_manager_decision AS [HR Manager Decision] 
+	FROM leaveRequest 
+	INNER JOIN leaveType ON leaveRequest.leave_type_id = leaveType.leave_type_id
+	WHERE emp_id=@emp_id
+END
+
+--DECIDE LEAVE REQUEST (VP)
+CREATE PROCEDURE VPDecision
+	@vp_decision as bit,
+	@leave_req_id as int
+AS BEGIN
+	UPDATE leaveRequest 
+	SET vp_decision=@vp_decision
+	WHERE leave_req_id=@leave_req_id
+END
+
+--DECIDE LEAVE REQUEST(HR)
+CREATE PROCEDURE HRDecision
+	@hr_manager_decision as bit,
+	@leave_req_id as int
+AS BEGIN
+	UPDATE leaveRequest 
+	SET hr_manager_decision=@hr_manager_decision 
+	WHERE leave_req_id=@leave_req_id
+END
+
+
+/*----------Shift Module----------*/
+
+--VIEW EMPLOYEE SHIFT (MISSING FILTER MAX(empShift.emp_shift_id);
+CREATE PROCEDURE ViewEmployeeShift
+	@emp_id as int
+AS BEGIN
+	SELECT 
+		shift.from_time,
+		shift.to_time,
+		empShift.from_date,
+		empShift.to_date 
+	FROM shift
+	INNER JOIN empShift ON shift.shift_id = empShift.shift_id
+	WHERE emp_id=@emp_id 
+END
+
+--ASSIGN EMPLOYEE SHIFT
+CREATE PROCEDURE AssignEmployeeShift
+	@emp_id as int,
+	@shift_type as varchar(50),
+	@from_date as date,
+	@to_date as date
+AS BEGIN
+	INSERT INTO empShift
+		(emp_id,
+		shift_id,
+		from_date,
+		to_date)
+	VALUES (@emp_id,
+		(SELECT shift_id 
+		FROM shift 
+		WHERE shift_type=@shift_type),
+		@from_date,
+		@to_date)
+END
