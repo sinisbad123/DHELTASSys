@@ -14,11 +14,17 @@ namespace DHELTASSys
     {
         class DHELTASSysAuditTrail
         {
+            private int emp_id;
+            public int Emp_id
+            {
+                get { return emp_id; }
+                set { emp_id = value; }
+            }
 
-            public static void AddAuditTrail(int emp_id, string process)
+            public void AddAuditTrail(string process)
             {
                 string cmd = "EXECUTE AddAuditTrail"
-                    + "'" + emp_id + "',"
+                    + "'" + Emp_id + "',"
                     + "'" + process + "'";
                 DHELTASSysDataAccess.Modify(cmd);
             }
