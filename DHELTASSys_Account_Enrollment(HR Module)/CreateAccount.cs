@@ -26,6 +26,11 @@ namespace Enrollment
             audit.Emp_id = emp_id;
 		}
 
+        protected void EmptyFields()
+        {
+
+        }
+
 		private void CloseButton_Click(object sender, EventArgs e)
 		{
 			Close();
@@ -113,15 +118,30 @@ namespace Enrollment
                 }
                 else
                 {
+
                     MemoryStream fingerprintData = new MemoryStream();
                     Template.Serialize(fingerprintData);
                     fingerprintData.Position = 0;
                     BinaryReader br = new BinaryReader(fingerprintData);
-                    Byte[] bytes = br.ReadBytes((Int32)fingerprintData.Length);
+                    byte[] bytes = br.ReadBytes((Int32)fingerprintData.Length);
+
+
 
                     obj.Biometric_code = bytes;
                     obj.AddAccountSetTempPassword();
                     audit.AddAuditTrail("Created account for " + obj.First_name + " " + obj.Last_name + ".");
+
+                    MessageBox.Show("Account Created for " + txtLastname.Text + "," + txtFirstName.Text);
+
+                    txtConfirmTempPassword.Text = "";
+                    txtFirstName.Text = "";
+                    txtLastname.Text = "";
+                    txtMiddleName.Text = "";
+                    txtTempPassword.Text = "";
+                    cmbCompany.Text = "";
+                    cmbDepartment.Text = "";
+                    cmbPosition.Text = "";
+
                 }
             }
         }

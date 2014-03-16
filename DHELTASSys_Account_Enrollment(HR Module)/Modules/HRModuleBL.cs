@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 //Imports
 using System.Data;
@@ -127,8 +128,8 @@ namespace DHELTASSys.Modules
             set { philHealth_number = value; }
         }
 
-        private Byte[] biometric_code;
-        public Byte[] Biometric_code
+        private byte[] biometric_code;
+        public byte[] Biometric_code
         {
             get { return biometric_code; }
             set { biometric_code = value; }
@@ -163,30 +164,58 @@ namespace DHELTASSys.Modules
         {
             if (Position_name == "Supervisor") //If employee is supervisor
             {
-                string cmd = "EXECUTE AddAccountSetTempPassword '" + Password + "',"
-                + "'" + Last_name + "',"
-                + "'" + First_name + "',"
-                + "'" + Middle_name + "',"
-                + "'" + Position_name + "',"
-                + "'" + Company_name + "',"
-                + "'" + Department_name + "',"
-                + "'" + Biometric_code + "'";
-                DHELTASSysDataAccess.Modify(cmd);
+                //string cmd = "AddAccountSetTempPassword '" + Password + "',"
+                //+ "'" + Last_name + "',"
+                //+ "'" + First_name + "',"
+                //+ "'" + Middle_name + "',"
+                //+ "'" + Position_name + "',"
+                //+ "'" + Company_name + "',"
+                //+ "'" + Department_name + "',"
+                //+ "'" + Biometric_code + "'";
+
+
+                //DHELTASSysDataAccess.Modify(cmd);
+
+                string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+
+                SqlConnection con = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand("AddAccountSetTempPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = Password;
+                cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = Last_name;
+                cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = First_name;
+                cmd.Parameters.Add("@middle_name", SqlDbType.VarChar).Value = Middle_name;
+                cmd.Parameters.Add("@position_name", SqlDbType.VarChar).Value = Position_name;
+                cmd.Parameters.Add("@company_name", SqlDbType.VarChar).Value = Company_name;
+                cmd.Parameters.Add("@department_name", SqlDbType.VarChar).Value = Department_name;
+                cmd.Parameters.Add("@biometrics_image", SqlDbType.VarBinary).Value = Biometric_code;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
 
                 string cmdTwo = "Execute AddSupervisor";
                 DHELTASSysDataAccess.Modify(cmdTwo);
             }
             else //If employee isn't a supervisor
             {
-                string cmd = "EXECUTE AddAccountSetTempPassword '" + Password + "',"
-                + "'" + Last_name + "',"
-                + "'" + First_name + "',"
-                + "'" + Middle_name + "',"
-                + "'" + Position_name + "',"
-                + "'" + Company_name + "',"
-                + "'" + Department_name + "',"
-                + "'" + Biometric_code + "'";
-                DHELTASSysDataAccess.Modify(cmd);
+                string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+
+                SqlConnection con = new SqlConnection(connectionString);
+                SqlCommand cmd = new SqlCommand("AddAccountSetTempPassword", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = Password;
+                cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = Last_name;
+                cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = First_name;
+                cmd.Parameters.Add("@middle_name", SqlDbType.VarChar).Value = Middle_name;
+                cmd.Parameters.Add("@position_name", SqlDbType.VarChar).Value = Position_name;
+                cmd.Parameters.Add("@company_name", SqlDbType.VarChar).Value = Company_name;
+                cmd.Parameters.Add("@department_name", SqlDbType.VarChar).Value = Department_name;
+                cmd.Parameters.Add("@biometrics_image", SqlDbType.VarBinary).Value = Biometric_code;
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
 
             }
 

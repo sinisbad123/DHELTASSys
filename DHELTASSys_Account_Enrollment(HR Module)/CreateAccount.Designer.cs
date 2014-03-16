@@ -47,7 +47,6 @@ namespace Enrollment
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtValue = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cmbDepartment
@@ -233,19 +232,11 @@ namespace Enrollment
             this.label1.TabIndex = 30;
             this.label1.Text = "Last name: ";
             // 
-            // txtValue
-            // 
-            this.txtValue.Location = new System.Drawing.Point(364, 229);
-            this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(100, 20);
-            this.txtValue.TabIndex = 49;
-            // 
             // CreateAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 471);
-            this.Controls.Add(this.txtValue);
             this.Controls.Add(this.cmbDepartment);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.VerifyButton);
@@ -297,7 +288,6 @@ namespace Enrollment
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtValue;
 
     }
 }

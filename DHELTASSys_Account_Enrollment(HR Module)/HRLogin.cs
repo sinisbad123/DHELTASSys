@@ -32,30 +32,44 @@ namespace Enrollment
 
         private void txtLogin_Click(object sender, EventArgs e)
         {
-            obj.Emp_id = int.Parse(txtEmpID.Text);
-            audit.Emp_id = int.Parse(txtEmpID.Text);
-            obj.Password = txtPassword.Text;
+            int text;
 
-            if (obj.AccountEnrollmentLogin().Rows.Count == 0) 
+            if (int.TryParse(txtEmpID.Text, out text))
             {
-                MessageBox.Show("Username and Password is incorrect!");
-            }
-            else if (obj.CheckIfHRManager().Rows.Count == 0)
-            {
-                MessageBox.Show("You are not allowed to access this system!");
+
+
+
+                obj.Emp_id = int.Parse(txtEmpID.Text);
+                audit.Emp_id = int.Parse(txtEmpID.Text);
+                obj.Password = txtPassword.Text;
+
+                if (obj.AccountEnrollmentLogin().Rows.Count == 0)
+                {
+                    MessageBox.Show("Username and Password is incorrect!");
+                }
+                else if (obj.CheckIfHRManager().Rows.Count == 0)
+                {
+                    MessageBox.Show("You are not allowed to access this system!");
+                }
+                else
+                {
+                    CreateAccount frm = new CreateAccount(int.Parse(txtEmpID.Text));
+
+                    frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
+
+                    audit.AddAuditTrail("Has logged in into the Fingerprint Enrollment System.");
+
+                    txtEmpID.Text = "";
+                    txtPassword.Text = "";
+
+                    frm.Show();
+                    this.Hide();
+                }
             }
             else
             {
-                CreateAccount frm = new CreateAccount(int.Parse(txtEmpID.Text));
-
-                frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
-
-                audit.AddAuditTrail("Has logged in into the Fingerprint Enrollment System.");
-
-
-                frm.Show();
-                this.Hide();
-            }  
+                MessageBox.Show("Please input numerical values for Employee ID!!");
+            }
         }
 
         void frm_FormClosed(object sender, FormClosedEventArgs e)
