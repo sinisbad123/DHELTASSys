@@ -156,6 +156,34 @@ namespace DHELTASSys.Modules
             set { department_name = value; }
         }
 
+        private int shift_id;
+        public int Shift_id
+        {
+            get { return shift_id; }
+            set { shift_id = value; }
+        }
+
+        private DateTime from_date;
+        public DateTime From_date
+        {
+            get { return from_date; }
+            set { from_date = value; }
+        }
+
+        private DateTime to_date;
+        public DateTime To_date
+        {
+            get { return to_date; }
+            set { to_date = value; }
+        }
+
+        private int leave_type_id;
+        public int Leave_type_id
+        {
+            get { return leave_type_id; }
+            set { leave_type_id = value; }
+        }
+
         //Methods
 
         //Create account and set temporary password for employee
@@ -252,6 +280,43 @@ namespace DHELTASSys.Modules
             //DHELTASSysAuditTrail.AddAuditTrail("Account details updated.");
         }
 
+        public void AssignEmployeeShift()
+        {
+            string cmd = "EXECUTE AssignEmployeeShift"
+                + "'" + Shift_id + "',"
+                + "'" + From_date + "',"
+                + "'" + To_date + "'";
+            DHELTASSysDataAccess.Modify(cmd);
+        }
+
+        public void AddLeaveBalance()
+        {
+            string cmd = "EXECUTE AddLeaveBalance"
+                + "'" + Leave_type_id + "'";
+            DHELTASSysDataAccess.Modify(cmd);
+        }
+
+        public DataTable GetCompanyForDropdown()
+        {
+            string cmd = "EXECUTE GetCompanyForDropdown";
+            DataTable dt = DHELTASSysDataAccess.Select(cmd);
+            return dt;
+        }
+
+        public DataTable GetDepartmentForDropdown()
+        {
+            string cmd = "EXECUTE GetDepartmentForDropdown";
+            DataTable dt = DHELTASSysDataAccess.Select(cmd);
+            return dt;
+        }
+
+        public DataTable GetPositionForDropdown()
+        {
+            string cmd = "EXECUTE GetPositionForDropdown";
+            DataTable dt = DHELTASSysDataAccess.Select(cmd);
+            return dt;
+        }
+
         //Displays all employees' information
         public DataTable ViewEmployeeInformation()
         {
@@ -276,6 +341,21 @@ namespace DHELTASSys.Modules
         {
             string cmd = "EXECUTE CheckIfHRManager"
                 + "'" + Emp_id + "'";
+            DataTable dt = DHELTASSysDataAccess.Select(cmd);
+            return dt;
+        }
+
+        public DataTable SelectAllLeaveType()
+        {
+            string selectAllLeaveTypeQuery = "EXECUTE SelectAllLeaveType";
+            DataTable dtSelectAllLeaveType = DHELTASSysDataAccess.Select(selectAllLeaveTypeQuery);
+            return dtSelectAllLeaveType;
+        }
+
+        //Get Shift for dropdown
+        public DataTable SelectShift()
+        {
+            string cmd = "EXECUTE SelectShift";
             DataTable dt = DHELTASSysDataAccess.Select(cmd);
             return dt;
         }

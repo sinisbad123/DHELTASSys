@@ -81,7 +81,5 @@ namespace Enrollment
         {
             this.Close();
         }
-
-
     }
 }

@@ -26,10 +26,6 @@ namespace Enrollment
             audit.Emp_id = emp_id;
 		}
 
-        protected void EmptyFields()
-        {
-
-        }
 
 		private void CloseButton_Click(object sender, EventArgs e)
 		{
@@ -71,10 +67,13 @@ namespace Enrollment
             obj.Last_name = txtLastname.Text;
             obj.First_name = txtFirstName.Text;
             obj.Middle_name = txtMiddleName.Text;
-            obj.Position_name = cmbPosition.Text;
-            obj.Company_name = cmbCompany.Text;
+            obj.Position_name = cmbPosition.ValueMember;
+            obj.Company_name = cmbCompany.ValueMember;
             obj.Password = txtTempPassword.Text;
-            obj.Department_name = cmbDepartment.Text;
+            obj.Department_name = cmbDepartment.ValueMember;
+            obj.Shift_id = int.Parse(cmbShift.ValueMember);
+            obj.From_date = Convert.ToDateTime(dateFrom.Value.ToString("yyyy-MM-dd"));
+            obj.To_date = Convert.ToDateTime(dateFrom.Value.ToString("yyyy-MM-dd"));
 
             if (obj.Last_name == string.Empty) //Validation for empty texts
             {
@@ -129,6 +128,19 @@ namespace Enrollment
 
                     obj.Biometric_code = bytes;
                     obj.AddAccountSetTempPassword();
+                    obj.AssignEmployeeShift();
+
+                    DataTable dtLeaveType = obj.SelectAllLeaveType();
+                    if (dtLeaveType.Rows.Count >= 1)
+                    {
+                        for (int leaveType = 0; leaveType < dtLeaveType.Rows.Count; leaveType++)
+                        {
+                            obj.Leave_type_id = int.Parse(dtLeaveType.Rows[leaveType][0].ToString());
+                            obj.AddLeaveBalance();
+                        }
+                    }
+
+
                     audit.AddAuditTrail("Created account for " + obj.First_name + " " + obj.Last_name + ".");
 
                     MessageBox.Show("Account Created for " + txtLastname.Text + "," + txtFirstName.Text);
@@ -150,6 +162,26 @@ namespace Enrollment
         {
             VerificationForm Verifier = new VerificationForm();
             Verifier.Verify(Template);
+        }
+
+        private void CreateAccount_Load(object sender, EventArgs e)
+        {
+            //Fill up ze combo boxes LIKE A BOWWZZZ
+            cmbCompany.DataSource = obj.GetCompanyForDropdown();
+            cmbCompany.DisplayMember = "company_name";
+            cmbCompany.ValueMember = "company_name";
+
+            cmbDepartment.DataSource = obj.GetDepartmentForDropdown();
+            cmbDepartment.DisplayMember = "department_name";
+            cmbDepartment.ValueMember = "department_name";
+
+            cmbPosition.DataSource = obj.GetPositionForDropdown();
+            cmbPosition.DisplayMember = "position_name";
+            cmbPosition.ValueMember = "position_name";
+
+            cmbShift.DataSource = obj.SelectShift();
+            cmbShift.DisplayMember = "Shift";
+            cmbShift.ValueMember = "ID";
         }
 	}
 }

@@ -47,6 +47,12 @@ namespace Enrollment
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.cmbShift = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dateFrom = new System.Windows.Forms.DateTimePicker();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.dateTo = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // cmbDepartment
@@ -110,10 +116,6 @@ namespace Enrollment
             // cmbCompany
             // 
             this.cmbCompany.FormattingEnabled = true;
-            this.cmbCompany.Items.AddRange(new object[] {
-            "Sinag Energy Philippines Inc.",
-            "EnerPlus Inc.",
-            "ORBIT Trading Corporation"});
             this.cmbCompany.Location = new System.Drawing.Point(194, 233);
             this.cmbCompany.Name = "cmbCompany";
             this.cmbCompany.Size = new System.Drawing.Size(100, 21);
@@ -134,7 +136,7 @@ namespace Enrollment
             // 
             // txtConfirmTempPassword
             // 
-            this.txtConfirmTempPassword.Location = new System.Drawing.Point(194, 303);
+            this.txtConfirmTempPassword.Location = new System.Drawing.Point(194, 439);
             this.txtConfirmTempPassword.Name = "txtConfirmTempPassword";
             this.txtConfirmTempPassword.PasswordChar = '*';
             this.txtConfirmTempPassword.Size = new System.Drawing.Size(100, 20);
@@ -143,7 +145,7 @@ namespace Enrollment
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(49, 306);
+            this.label7.Location = new System.Drawing.Point(49, 442);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(145, 13);
             this.label7.TabIndex = 40;
@@ -165,7 +167,7 @@ namespace Enrollment
             // 
             // txtTempPassword
             // 
-            this.txtTempPassword.Location = new System.Drawing.Point(194, 267);
+            this.txtTempPassword.Location = new System.Drawing.Point(194, 403);
             this.txtTempPassword.Name = "txtTempPassword";
             this.txtTempPassword.PasswordChar = '*';
             this.txtTempPassword.Size = new System.Drawing.Size(100, 20);
@@ -181,7 +183,7 @@ namespace Enrollment
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(49, 270);
+            this.label6.Location = new System.Drawing.Point(49, 406);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(126, 13);
             this.label6.TabIndex = 35;
@@ -232,11 +234,66 @@ namespace Enrollment
             this.label1.TabIndex = 30;
             this.label1.Text = "Last name: ";
             // 
+            // cmbShift
+            // 
+            this.cmbShift.FormattingEnabled = true;
+            this.cmbShift.Location = new System.Drawing.Point(194, 266);
+            this.cmbShift.Name = "cmbShift";
+            this.cmbShift.Size = new System.Drawing.Size(121, 21);
+            this.cmbShift.TabIndex = 49;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(53, 269);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(31, 13);
+            this.label9.TabIndex = 50;
+            this.label9.Text = "Shift:";
+            // 
+            // dateFrom
+            // 
+            this.dateFrom.Location = new System.Drawing.Point(194, 309);
+            this.dateFrom.Name = "dateFrom";
+            this.dateFrom.Size = new System.Drawing.Size(200, 20);
+            this.dateFrom.TabIndex = 51;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(52, 315);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 13);
+            this.label10.TabIndex = 52;
+            this.label10.Text = "Effective Shift Date:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(53, 363);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(101, 13);
+            this.label11.TabIndex = 53;
+            this.label11.Text = "Finishing Shift Date:";
+            // 
+            // dateTo
+            // 
+            this.dateTo.Location = new System.Drawing.Point(194, 355);
+            this.dateTo.Name = "dateTo";
+            this.dateTo.Size = new System.Drawing.Size(200, 20);
+            this.dateTo.TabIndex = 54;
+            // 
             // CreateAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 471);
+            this.ClientSize = new System.Drawing.Size(543, 520);
+            this.Controls.Add(this.dateTo);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.dateFrom);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.cmbShift);
             this.Controls.Add(this.cmbDepartment);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.VerifyButton);
@@ -262,6 +319,7 @@ namespace Enrollment
             this.Name = "CreateAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DHELTASSys Account and Fingerprint Enrollment Module";
+            this.Load += new System.EventHandler(this.CreateAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,6 +346,12 @@ namespace Enrollment
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbShift;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker dateFrom;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DateTimePicker dateTo;
 
     }
 }
