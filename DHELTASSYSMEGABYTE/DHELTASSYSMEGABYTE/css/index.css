@@ -1,0 +1,56 @@
+﻿body 
+{
+   background:url( '/images/cream_pixels.png');
+}
+
+
+#logo
+{
+    margin:20px;
+    margin-left:20%;
+    margin-top:5%; 
+    max-width:100%;
+}
+
+.mainContent
+{
+    max-width:330px;
+    padding:15px;
+    margin:0 auto;
+    margin-top:-12%;
+    margin-left:50%;
+
+}
+
+.mainContent input[type=text], .mainContent input[type=password]
+{
+    margin-bottom: 10px;
+    border-radius:10px;
+    padding:10px 40px;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+	font-family: 'Lato-Bla';
+	font-size: .9em;
+	color:#F90;
+	width:70%;
+}
+.mainContent input[type=text]:focus, .mainContent input[type=password]:focus
+{
+    outline:none;    
+}
+
+
+.mainContent input[type=submit]
+{
+    border-radius:10px;
+    padding:3%;
+    background: #FF9900;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.05);
+	color: #ecf0f1;
+	font-family: 'Lato-Bla';
+	font-size: .9em;
+    width:70%;
+	/*margin-left:-3%;!important;*/
+}
+
+
