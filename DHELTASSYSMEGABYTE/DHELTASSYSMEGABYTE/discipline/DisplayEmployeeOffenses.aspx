@@ -67,7 +67,7 @@
             </tr>
             <tr>
                 <td class="auto-style2">
-                    <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click" Text="Back to Disciplinary Page" />
+                    <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click" Text="Back" />
                 </td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>

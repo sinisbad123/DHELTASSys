@@ -35,20 +35,15 @@ namespace DHELTASSys
 
             grdDisplayOffense.DataSource = discipline.DisplayOffense();
             grdDisplayOffense.DataBind();
-
-            Session.Remove("SelectedEmpFirstName");
-            Session.Remove("SelectedEmpLastName");
-            Session.Remove("SelectedEmployee");
         }
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FileOffense.aspx");
-        }
+            Session.Remove("SelectedEmpFirstName");
+            Session.Remove("SelectedEmpLastName");
+            Session.Remove("SelectedEmployee");
 
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("LogOut.aspx");
+            Response.Redirect(@"~/discipline/FileOffense.aspx");
         }
     }
 }

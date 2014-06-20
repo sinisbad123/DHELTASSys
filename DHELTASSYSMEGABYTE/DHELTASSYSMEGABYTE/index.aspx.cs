@@ -35,6 +35,8 @@ namespace DHELTASSYSMEGABYTE
                 {
                     hr.Emp_id = int.Parse(txtEmployeeID.Text);
                     DataTable dtUser = hr.LogIn();
+                    DataTable dtCompanyName = hr.GetCompany();
+
 
                     if (dtUser.Rows[0][1].ToString() == txtPassword.Text && dtUser.Rows[0][0].Equals(int.Parse(txtEmployeeID.Text)))
                     {
@@ -55,27 +57,27 @@ namespace DHELTASSYSMEGABYTE
                         Session.Add("Birthdate", dtUser.Rows[0][15].ToString());
                         Session.Add("SSS", dtUser.Rows[0][16].ToString());
                         Session.Add("PhilHealth", dtUser.Rows[0][17].ToString());
-                        
+                        Session.Add("Company", dtCompanyName.Rows[0][0].ToString());
 
                         if (dtUser.Rows[0][6].ToString() == "Employee")
                         {
-                            Response.Redirect("EmployeeMainPage.aspx");
                             Session.Add("MainPage", @"~/EmployeeMainPage.aspx");
+                            Response.Redirect("EmployeeMainPage.aspx");
                         }
                         else if (dtUser.Rows[0][6].ToString() == "Supervisor")
                         {
-                            Response.Redirect("SVMainPage.aspx");
                             Session.Add("MainPage", @"~/SVMainPage.aspx");
+                            Response.Redirect("SVMainPage.aspx");
                         }
                         else if (dtUser.Rows[0][6].ToString() == "Vice President")
                         {
-                            Response.Redirect("VPMainPage.aspx");
                             Session.Add("MainPage", @"~/VPMainPage.aspx");
+                            Response.Redirect("VPMainPage.aspx");
                         }
                         else if (dtUser.Rows[0][6].ToString() == "HR Manager")
                         {
-                            Response.Redirect("HRMainPage.aspx");
                             Session.Add("MainPage", @"~/HRMainPage.aspx");
+                            Response.Redirect("HRMainPage.aspx");
                         }
                         else
                         {

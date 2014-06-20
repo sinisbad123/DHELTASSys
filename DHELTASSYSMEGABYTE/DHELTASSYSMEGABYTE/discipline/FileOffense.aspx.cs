@@ -38,11 +38,11 @@ namespace DHELTASSys
             {
                 Response.Redirect(@"~/index.aspx");
             }
-            else if (position != "Supervisor")
+
+            if (position != "Supervisor")
             {
                 Response.Redirect(@"~/AccessDenied.aspx");
             }
-
             RefreshOffenseType();
             RefreshDropDownList();
             discipline.Company_name = Session["Company"].ToString();

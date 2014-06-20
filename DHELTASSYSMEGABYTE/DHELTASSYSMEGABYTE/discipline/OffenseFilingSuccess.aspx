@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td>
-                    <asp:Button ID="btnReturn" runat="server" OnClick="btnReturn_Click" Text="Return to Disciplinary Page" />
+                    <asp:Button ID="btnReturn" runat="server" OnClick="btnReturn_Click" Text="File another offense" />
                 </td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>

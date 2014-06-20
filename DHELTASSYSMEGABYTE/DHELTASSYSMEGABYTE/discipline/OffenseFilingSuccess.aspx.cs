@@ -31,7 +31,7 @@ namespace DHELTASSys
 
         protected void btnReturn_Click(object sender, EventArgs e)
         {
-            Response.Redirect(@"~/discipline/DisciplineHome.aspx");
+            Response.Redirect(@"~/discipline/FileOffense.aspx");
         }
 
         protected void btnHome_Click(object sender, EventArgs e)

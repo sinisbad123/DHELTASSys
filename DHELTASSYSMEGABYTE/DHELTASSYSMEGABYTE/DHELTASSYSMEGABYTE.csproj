@@ -304,6 +304,7 @@
     <Compile Include="modules\BenefitsModuleBL.cs" />
     <Compile Include="modules\DHELTASSysDataHandling.cs" />
     <Compile Include="modules\DisciplineModuleBL.cs" />
+    <Compile Include="modules\Encryptor.cs" />
     <Compile Include="modules\HRModuleBL.cs" />
     <Compile Include="modules\LeaveModuleBL.cs" />
     <Compile Include="modules\ShiftModuleBL.cs" />

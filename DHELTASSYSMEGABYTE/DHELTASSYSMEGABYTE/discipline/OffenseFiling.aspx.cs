@@ -96,7 +96,7 @@ namespace DHELTASSys
                 if (IsImage() == true)
                 {
                     //Check if directory exists
-                    if (!Directory.Exists(MapPath(@"~/Uploads_Proofs/")));
+                    if (!Directory.Exists(MapPath(@"~/Uploads_Proofs/")))
                     {
                         Directory.CreateDirectory(MapPath(@"~/Uploads_Proofs/"));
                     }
@@ -209,6 +209,14 @@ namespace DHELTASSys
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Response.Redirect("LogOut.aspx");
+        }
+
+        protected void btnBack_Click(object sender, EventArgs e)
+        {
+            Session.Remove("SelectedEmpLastName");
+            Session.Remove("SelectedEmpFirstName");
+            Session.Remove("SelectedEmployee");
+            Response.Redirect(@"~/discipline/FileOffense.aspx");
         }
     }
 }
