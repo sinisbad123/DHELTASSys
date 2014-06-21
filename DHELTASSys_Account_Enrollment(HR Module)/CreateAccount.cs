@@ -20,10 +20,17 @@ namespace Enrollment
         HRModuleBL obj = new HRModuleBL();
         DHELTASSysAuditTrail audit = new DHELTASSysAuditTrail();
         
-		public CreateAccount(int emp_id)
+		public CreateAccount(string emp_id)
 		{
 			InitializeComponent();
-            audit.Emp_id = emp_id;
+            if (emp_id == "superadmin")
+            {
+                audit.Emp_id = 1;
+            }
+            else
+            {
+                audit.Emp_id = int.Parse(emp_id);
+            }
 		}
 
 

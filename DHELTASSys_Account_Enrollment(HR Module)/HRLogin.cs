@@ -32,44 +32,58 @@ namespace Enrollment
 
         private void txtLogin_Click(object sender, EventArgs e)
         {
-            int text;
-
-            if (int.TryParse(txtEmpID.Text, out text))
+            //check if account is admin account
+            if (txtEmpID.Text == "superadmin" && txtPassword.Text == "admin12345")
             {
+                CreateAccount frm = new CreateAccount(txtEmpID.Text);
 
+                frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
 
+                txtEmpID.Text = "";
+                txtPassword.Text = "";
 
-                obj.Emp_id = int.Parse(txtEmpID.Text);
-                audit.Emp_id = int.Parse(txtEmpID.Text);
-                obj.Password = txtPassword.Text;
-
-                if (obj.AccountEnrollmentLogin().Rows.Count == 0)
-                {
-                    MessageBox.Show("Username and Password is incorrect!");
-                }
-                else if (obj.CheckIfHRManager().Rows.Count == 0)
-                {
-                    MessageBox.Show("You are not allowed to access this system!");
-                }
-                else
-                {
-                    CreateAccount frm = new CreateAccount(int.Parse(txtEmpID.Text));
-
-                    frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
-
-                    audit.AddAuditTrail("Has logged in into the Fingerprint Enrollment System.");
-
-                    txtEmpID.Text = "";
-                    txtPassword.Text = "";
-
-                    frm.Show();
-                    this.Hide();
-                }
+                frm.Show();
+                this.Hide();
             }
             else
             {
-                MessageBox.Show("Please input numerical values for Employee ID!!");
+
+                try
+                {
+                    obj.Emp_id = int.Parse(txtEmpID.Text);
+                    obj.Password = txtPassword.Text;
+                }
+                catch
+                {
+                    MessageBox.Show("Invalid input type, please input numerical values.");
+                }
+
+                //if account logged in is a valid account 
+                if (obj.AccountEnrollmentLogin().Rows.Count >= 1)
+                {
+                    if (obj.CheckIfHRManager().Rows.Count == 0)
+                    {
+                        MessageBox.Show("You are not allowed to access this system!");
+                    }
+                    else
+                    {
+                        CreateAccount frm = new CreateAccount(txtEmpID.Text);
+
+                        frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
+
+                        txtEmpID.Text = "";
+                        txtPassword.Text = "";
+
+                        frm.Show();
+                        this.Hide();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username and Password is incorrect!");
+                }
             }
+            
         }
 
         void frm_FormClosed(object sender, FormClosedEventArgs e)
