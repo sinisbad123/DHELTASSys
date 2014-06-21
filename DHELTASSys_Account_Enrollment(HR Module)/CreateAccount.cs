@@ -8,8 +8,22 @@ using System.Windows.Forms;
 using System.IO;
 
 //imports
-using DHELTASSys.AuditTrail;
 using DHELTASSys.Modules;
+
+/* * * * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * * 
+ * 
+ * Developed by: Marcus Ang                                                 
+ * With the help of: Michael del Rosario, Mack Sola and Karol Alambra
+ * 
+ * DHELTASSys Accouunt Enrollment module
+ * Finished: June 21, 2014
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 namespace Enrollment
 {
@@ -18,19 +32,10 @@ namespace Enrollment
 	public partial class CreateAccount : Form
 	{
         HRModuleBL obj = new HRModuleBL();
-        DHELTASSysAuditTrail audit = new DHELTASSysAuditTrail();
         
-		public CreateAccount(string emp_id)
+		public CreateAccount()
 		{
 			InitializeComponent();
-            if (emp_id == "superadmin")
-            {
-                audit.Emp_id = 1;
-            }
-            else
-            {
-                audit.Emp_id = int.Parse(emp_id);
-            }
 		}
 
 
@@ -71,16 +76,18 @@ namespace Enrollment
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+
+            //Assign values to respective properties of the HRModule
             obj.Last_name = txtLastname.Text;
             obj.First_name = txtFirstName.Text;
             obj.Middle_name = txtMiddleName.Text;
-            obj.Position_name = cmbPosition.ValueMember;
-            obj.Company_name = cmbCompany.ValueMember;
+            obj.Position_name = cmbPosition.SelectedValue.ToString();
+            obj.Company_name = cmbCompany.SelectedValue.ToString();
             obj.Password = txtTempPassword.Text;
-            obj.Department_name = cmbDepartment.ValueMember;
-            obj.Shift_id = int.Parse(cmbShift.ValueMember);
-            obj.From_date = Convert.ToDateTime(dateFrom.Value.ToString("yyyy-MM-dd"));
-            obj.To_date = Convert.ToDateTime(dateFrom.Value.ToString("yyyy-MM-dd"));
+            obj.Department_name = cmbDepartment.SelectedValue.ToString();
+            obj.Shift_id = int.Parse(cmbShift.SelectedValue.ToString());
+            obj.From_date = dateFrom.Value.ToString("yyyy-MM-dd");
+            obj.To_date = dateTo.Value.ToString("yyyy-MM-dd");
 
             if (obj.Last_name == string.Empty) //Validation for empty texts
             {
@@ -115,13 +122,14 @@ namespace Enrollment
             }
             else
             {
-
+                //If password doesn't match
                 if (txtTempPassword.Text != txtConfirmTempPassword.Text)
                 {
 
                     MessageBox.Show("Password does not match", "Password Mismatch",
                         MessageBoxButtons.OK);
                 }
+                //proceed with streaming and serializing fingerprint template
                 else
                 {
 
@@ -146,9 +154,6 @@ namespace Enrollment
                             obj.AddLeaveBalance();
                         }
                     }
-
-
-                    audit.AddAuditTrail("Created account for " + obj.First_name + " " + obj.Last_name + ".");
 
                     MessageBox.Show("Account Created for " + txtLastname.Text + "," + txtFirstName.Text);
 
@@ -189,6 +194,10 @@ namespace Enrollment
             cmbShift.DataSource = obj.SelectShift();
             cmbShift.DisplayMember = "Shift";
             cmbShift.ValueMember = "ID";
+
+            cmbCompany.Text = "";
+            cmbDepartment.Text = "";
+            cmbPosition.Text = "";
         }
 	}
 }

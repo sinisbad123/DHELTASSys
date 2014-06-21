@@ -163,15 +163,15 @@ namespace DHELTASSys.Modules
             set { shift_id = value; }
         }
 
-        private DateTime from_date;
-        public DateTime From_date
+        private string from_date;
+        public string From_date
         {
             get { return from_date; }
             set { from_date = value; }
         }
 
-        private DateTime to_date;
-        public DateTime To_date
+        private string to_date;
+        public string To_date
         {
             get { return to_date; }
             set { to_date = value; }

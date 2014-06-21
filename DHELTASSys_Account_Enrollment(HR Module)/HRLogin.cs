@@ -15,6 +15,22 @@ using DHELTASSys.DataAccess;
 using DHELTASSys.Modules;
 using DHELTASSys.AuditTrail;
 
+
+/* * * * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * * 
+ * 
+ * Developed by: Marcus Ang                                                 
+ * With the help of: Michael del Rosario, Mack Sola and Karol Alambra
+ * 
+ * DHELTASSys Accouunt Enrollment module
+ * Finished: June 21, 2014
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 namespace Enrollment
 {
     public partial class HRLogin : Form
@@ -35,7 +51,7 @@ namespace Enrollment
             //check if account is admin account
             if (txtEmpID.Text == "superadmin" && txtPassword.Text == "admin12345")
             {
-                CreateAccount frm = new CreateAccount(txtEmpID.Text);
+                CreateAccount frm = new CreateAccount();
 
                 frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
 
@@ -67,7 +83,7 @@ namespace Enrollment
                     }
                     else
                     {
-                        CreateAccount frm = new CreateAccount(txtEmpID.Text);
+                        CreateAccount frm = new CreateAccount();
 
                         frm.FormClosed += new FormClosedEventHandler(frm_FormClosed);
 
