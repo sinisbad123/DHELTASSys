@@ -1,0 +1,282 @@
+﻿body 
+{
+    background:url('/images/cream_pixels.png');
+}
+
+#footer 
+{
+  position:fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+  background-color:rgba(219,87,5,1);
+}
+
+.container .content
+{
+    margin:3%;
+    border:rgba(0,0,0,.05);
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+}
+
+.container .content .mainContent
+{
+    padding:3%;
+    
+}
+
+.mainContent .greetings
+{
+    font-family:Calisto MT;
+    font-size:100%;
+    font-weight:700;
+}
+.mainContent .mainBody .btnRequests
+{
+    margin-left:10%;
+}
+.mainContent .mainBody .btnRequests a
+{
+    background-color:rgba(219,87,5,1);
+    padding:2%;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+    border-radius:5px;
+	font-family: 'Lato-Bla';
+	font-size: 1em;
+	color:white;
+	width:40%;
+}
+
+.mainContent .mainBody .pendingRequest
+{
+    font-family:Calisto MT;
+    font-weight:700;
+    font-size:100%;
+}
+
+.containerFluid .mainContainer
+{
+    border:solid;
+    margin:5%;
+    width:60%;
+}
+
+.containerFluid, .mainContainer .greetings
+{
+    font-family:Calisto MT;
+    font-size:100%;
+    font-weight:700;
+}
+
+.mainContainer .mainBody .btnRequests
+{
+    margin-left:10%;
+}
+.mainContainer .mainBody .btnRequests a
+{
+    background-color:rgba(219,87,5,1);
+    padding:2%;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+    border-radius:5px;
+	font-family: 'Lato-Bla';
+	font-size: 1em;
+	color:white;
+	width:40%;
+}
+
+.mainContainer .mainBody .pendingRequest
+{
+    font-family:Calisto MT;
+    font-weight:700;
+    font-size:100%;
+}
+
+.containerFluid .mainContainer .profile
+{
+    margin:5%;
+    font-family:Calisto MT;
+    font-size:100%;
+}
+
+.containerFluid .mainContainer .employeeinformation
+{ 
+    margin-bottom:5%;
+    font-family:Calisto MT;
+}
+
+.containerFluid .mainContainer .employeeinformation .editprofile
+{
+    float:right;
+    margin-right:5%;
+    margin-bottom:.3%;
+}
+
+.containerFluid .mainContainer .attendanceSummary
+{
+    margin:5%;
+    font-family:Calisto MT;
+    text-decoration:underline;
+}
+
+.sidemenu
+{
+    float:right;
+    margin-right:10%;
+    margin-top:auto;
+    font-family:Calisto MT;
+    font-size:100%;
+}
+
+.updateprofile tr.update,
+.updateprofile tr.update input[type=text],
+.updateprofile tr.update input[type=text]:focus
+{
+    margin-bottom:2%;
+    border-radius:5px;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+	font-family: 'Lato-Bla';
+	padding:3px;
+	outline:none;
+}
+
+.updateprofile table
+{
+    margin-left:-30%;
+}
+
+.ddl,
+.ddl input[type=DropDownList],
+.ddl input[type=DropDownList]:focus
+{
+    margin-bottom: 10px;
+    margin-top:3%;
+    border-radius:5px;
+    padding:.6%;
+    outline:none;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+	font-family: 'Lato-Bla';
+	font-size: 1em;
+	color:#F90;
+}
+
+.leaverequest .requestLeave input[type=date],
+.leaverequest .requestLeave input[type=text],
+.leaverequest .requestLeave input[type=date]:focus
+{
+    outline:none;
+    margin-bottom: 3%;
+    border-radius:5px;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+	font-family: 'Lato-Bla';
+	font-size: .9em;
+	color:#F90;
+	width:40%;
+}
+
+.addEvaluation .evalForm input[type=text],
+.addEvaluation .evalForm input[type=text]:focus
+{
+    outline:none;
+    margin-bottom: 3%;
+    margin-top:3%;
+    border-radius:5px;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+	font-family: 'Lato-Bla';
+	font-size: .9em;
+	color:#F90;
+	width:40;
+	padding:3px;
+}
+
+.addBenefit .benefitinfo input[type=text],
+.addBenefit .benefitinfo input[type=text]:focus
+{
+    outline:none;
+    margin-top:3%;
+    border-radius:5px;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+	font-family: 'Lato-Bla';
+	font-size: .9em;
+	color:#F90;
+	width:40;
+	padding:3px;
+}
+
+.mainContainer .greetings .benefit
+{
+    margin:5%;
+}
+
+.mainContent .shifting .heading
+{
+    font-family:Calisto MT;
+    font-size:100%;
+    font-weight:700;
+}
+
+.mainContent .shifting .mainBody .shiftingSchedule
+{
+    font-family:Calisto MT;
+    font-size:100%;
+    font-weight:700;
+    width:30%;
+    margin-left:65%;
+    margin-top:-20%;
+}
+
+.mainContent .shifting .mainBody .shiftingSchedule h4
+{
+    font-family:Calisto MT;
+    text-decoration:underline;
+}
+
+.mainContent .transfer .heading
+{
+    font-family:Calisto MT;
+    font-size:100%;
+    font-weight:700;
+}
+
+.mainContent .transfer .mainBody .transferEmp
+{
+    font-family:Calisto MT;
+    font-size:100%;
+    font-weight:700;
+    width:30%;
+    margin-left:65%;
+    margin-top:-18%;
+}
+
+.mainContent .transfer .mainBody .transferEmp h4
+{
+    font-family:Calisto MT;
+    text-decoration:underline;
+}
+
+.mainContent .dependent .mainBody table input[type=text],
+.mainContent .dependent .mainBody table input[type=text]:focus
+{
+    margin-bottom:3%;
+    border-radius:5px;
+    border: #F93 3px solid;
+    box-shadow: 5px 5px 0 rgba(0,0,0,.05);
+	font-family: 'Lato-Bla';
+	font-size: .9em;
+	color:#F90;
+	width:40;
+	padding:3px;
+	outline:none;
+	
+}
+
+.mainContent .offense .mainBody table
+{
+    margin-bottom:10%;
+}
