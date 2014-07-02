@@ -20,7 +20,8 @@ namespace DHELTAFINALPROJECT.DHELTASV
         DHELTASSysAuditTrail audit = new DHELTASSysAuditTrail();
         DisciplineModuleBL discipline = new DisciplineModuleBL();
 
-        void RefreshDropDownList()
+        //for Offense Category only
+        void RefreshOffenseCategory()
         {
             dpCategory.DataSource = discipline.GetOffenseCategory();
             dpCategory.DataTextField = "offense_category_name";
@@ -28,10 +29,17 @@ namespace DHELTAFINALPROJECT.DHELTASV
             dpCategory.DataBind();
         }
 
+
+        //Refresh Offense type
         void RefreshOffenseType()
         {
-            gvDisplayOffense.DataSource = discipline.DisplayOffenseType();
-            gvDisplayOffense.DataBind();
+            //Start here for today
+
+            //Fill up dropdown for Offense type needed for filing an offense
+            dpOffenseTypelist.DataSource = discipline.DisplayOffenseTypeForFiling();
+            dpOffenseTypelist.DataTextField = "offense_info";
+            dpOffenseTypelist.DataValueField = "offense_type_id";
+            dpOffenseTypelist.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -48,12 +56,16 @@ namespace DHELTAFINALPROJECT.DHELTASV
             else
             {
 
-                RefreshOffenseType();
-                RefreshDropDownList();
+                if (!IsPostBack)
+                {
+                    RefreshOffenseType();
+                    RefreshOffenseCategory();
+                }
                 discipline.Company_name = Session["CompanyName"].ToString();
                 discipline.Department_name = Session["Department"].ToString();
                 gvEmployee.DataSource = discipline.DisplayEmployeeLastNameFirstName();
                 gvEmployee.DataBind();
+                lnkFileOffense.Visible = false;
             }
         }
 
@@ -185,8 +197,8 @@ namespace DHELTAFINALPROJECT.DHELTASV
 
                 discipline.Filing_emp = int.Parse(Session["EmployeeID"].ToString());
                 discipline.Filed_emp = int.Parse(lblID.Text);
-                discipline.Offense_info = dpOffenseTypelist.Text;
-                discipline.Statement = txtStatement.Text.Replace("<","").Replace(">", "").Replace("'", "");
+                discipline.Offense_type_id = int.Parse(dpOffenseTypelist.SelectedValue);
+                discipline.Statement = txtStatement.Text.Replace("<", "").Replace(">", "").Replace("'", "''");
 
                 if (fileUploadProof.HasFile)
                 {
@@ -196,7 +208,7 @@ namespace DHELTAFINALPROJECT.DHELTASV
                         discipline.AddOffense();
                         AttachProof();
                         audit.AddAuditTrail("Offense and Proof Added for " + lblName.ToString() + ", " + lblName.ToString());
-                        Response.Redirect("OffenseFilingSuccess.aspx");
+                        Response.Write("<script>alert('Offense Successfully Filed.');</script>");
                     }
                     else
                     {
@@ -207,31 +219,32 @@ namespace DHELTAFINALPROJECT.DHELTASV
                 else
                 {
                     discipline.AddOffense();
-                    audit.AddAuditTrail("Offense Added for " + Session["SelectedEmpLastName"].ToString() + ", " + Session["SelectedEmpFirstName"].ToString());
-                    Response.Redirect("OffenseFilingSuccess.aspx");
+                    audit.AddAuditTrail("Offense Added for " + gvEmployee.SelectedRow.Cells[1].Text + ", " + gvEmployee.SelectedRow.Cells[2].Text);
+                    Response.Write("<script>alert('Offense Successfully Filed.');</script>");
                 }
             }
         }
 
         protected void btnAddOffenseType_Click(object sender, EventArgs e)
         {
-            audit.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+            try
+            {
+                audit.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+                discipline.Offense_info = txtOffenseInfo.Text;
+                discipline.Offense_type = dpOffenseType.Text;
+                discipline.Offense_category_name = dpCategory.Text;
 
-            discipline.Offense_info = txtOffenseInfo.Text.Replace("<", "").Replace(">", "").Replace("'", "");
-            discipline.Offense_type = dpOffenseType.Text;
-            discipline.Offense_category_name = dpCategory.Text;
+                discipline.AddOffenseType();
+                audit.AddAuditTrail("Added Offense Type");
 
-            discipline.AddOffenseType();
-            audit.AddAuditTrail("Added Offense Type");
-            RefreshOffenseType();
+                RefreshOffenseType();
 
-            audit.Emp_id = int.Parse(Session["EmployeeID"].ToString());
-            discipline.Offense_category_name = txtAddCategory.Text.Replace("<", "").Replace(">", "").Replace("'", "");
-
-            discipline.AddOffenseCategory();
-            audit.AddAuditTrail("Added Offense Category");
-
-            RefreshDropDownList();
+                Response.Write("<script>alert('Successfully added an offense type.');</script>");
+            }
+            catch
+            {
+                Response.Write("<script>alert('For some reason, we can't add a new offense type.');</script>");
+            }
         }
 
         protected void gvEmployee_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -248,11 +261,16 @@ namespace DHELTAFINALPROJECT.DHELTASV
 
         protected void gvEmployee_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblID.Text = gvEmployee.SelectedRow.Cells[0].Text;
-            lblName.Text = gvEmployee.SelectedRow.Cells[1].Text + gvEmployee.SelectedRow.Cells[2].Text;
+            int emp_id = int.Parse(gvEmployee.SelectedRow.Cells[0].Text);
 
+            lblID.Text = gvEmployee.SelectedRow.Cells[0].Text;
+            lblName.Text = gvEmployee.SelectedRow.Cells[1].Text + ", " + gvEmployee.SelectedRow.Cells[2].Text;
+
+            discipline.Emp_id = emp_id;
             gvOffense.DataSource = discipline.DisplayOffense();
             gvOffense.DataBind();
+
+            lnkFileOffense.Visible = true;
         }
     }
 }

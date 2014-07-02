@@ -183,7 +183,7 @@
               </div>
               <div class="modal-body">
                <div class="updateprofile">
-                   <table class="style1" width="100%">
+                   <table class="style1" width="100%" style="margin-left: auto;">
                     <tr class="update">
                         <td align="right" class="style12">
                             ID Number:</td>
@@ -257,7 +257,7 @@
                 </table> 
               </div>
               <div class="modal-footer">
-             <asp:Button ID="btnSubmit" runat="server" Text="Done" class="btn btn-primary"/>
+             <asp:Button ID="btnSubmit" runat="server" Text="Done" class="btn btn-primary" OnClick="btnSubmit_Click"/>
               <asp:Button ID="btnClose" runat="server" Text="Cancel" class="btn btn-default" data-dismiss="modal" />
               </div>
             </div>

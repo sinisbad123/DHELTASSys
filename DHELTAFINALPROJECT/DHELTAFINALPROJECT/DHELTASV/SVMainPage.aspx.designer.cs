@@ -139,15 +139,6 @@ namespace DHELTAFINALPROJECT.DHELTASV {
         protected global::System.Web.UI.WebControls.DropDownList dpCategory;
         
         /// <summary>
-        /// txtAddCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddCategory;
-        
-        /// <summary>
         /// txtQuestion control.
         /// </summary>
         /// <remarks>
@@ -155,15 +146,6 @@ namespace DHELTAFINALPROJECT.DHELTASV {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtQuestion;
-        
-        /// <summary>
-        /// dpPosition control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpPosition;
         
         /// <summary>
         /// btnAddOffense control.
@@ -182,5 +164,32 @@ namespace DHELTAFINALPROJECT.DHELTASV {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button2;
+        
+        /// <summary>
+        /// txtOffenseCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOffenseCategory;
+        
+        /// <summary>
+        /// btnAddCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddCategory;
+        
+        /// <summary>
+        /// Button3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button3;
     }
 }

@@ -22,6 +22,15 @@ namespace DHELTAFINALPROJECT.DHELTASV {
         protected global::System.Web.UI.WebControls.GridView gvEmployee;
         
         /// <summary>
+        /// lnkFileOffense control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkFileOffense;
+        
+        /// <summary>
         /// lblOffense control.
         /// </summary>
         /// <remarks>
@@ -67,15 +76,6 @@ namespace DHELTAFINALPROJECT.DHELTASV {
         protected global::System.Web.UI.WebControls.DropDownList dpCategory;
         
         /// <summary>
-        /// txtAddCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAddCategory;
-        
-        /// <summary>
         /// txtQuestion control.
         /// </summary>
         /// <remarks>
@@ -83,15 +83,6 @@ namespace DHELTAFINALPROJECT.DHELTASV {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtQuestion;
-        
-        /// <summary>
-        /// dpPosition control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpPosition;
         
         /// <summary>
         /// btnAddOffenseType control.

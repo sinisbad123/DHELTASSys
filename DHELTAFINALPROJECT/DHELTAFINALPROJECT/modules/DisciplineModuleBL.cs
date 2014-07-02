@@ -61,6 +61,13 @@ namespace DHELTASSys.Modules
             set { offense_info = value; }
         }
 
+        private int offense_type_id;
+        public int Offense_type_id
+        {
+            get { return offense_type_id; }
+            set { offense_type_id = value; }
+        }
+
         private string offense_category_name;
         public string Offense_category_name
         {
@@ -115,7 +122,7 @@ namespace DHELTASSys.Modules
             string cmd = "EXECUTE AddOffense"
                 + "'" + Filed_emp + "',"
                 + "'" + Filing_emp + "',"
-                + "'" + Offense_info + "',"
+                + "'" + Offense_type_id + "',"
                 + "'" + DateTime.Now.ToString("MM-dd-yyyy") + "',"
                 + "'" + Statement + "'";
             DHELTASSysDataAccess.Modify(cmd);

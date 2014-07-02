@@ -10,6 +10,8 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using DHELTASSYS.DataAccess;
 using DHELTASSys.Modules;
+
+//Import to use Cryptography class
 using BAHV.Common.Cryptography;
 
 namespace DHELTAFINALPROJECT
@@ -21,35 +23,30 @@ namespace DHELTAFINALPROJECT
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //Remove all sessions when there's a current existing session.
+            Session.RemoveAll();
         }
 
         protected void btnSignin_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            
+                    //Assign employee ID to HR Business logic to retrieve data from DB
                     hr.Emp_id = int.Parse(txtEmployeeID.Text);
+
+                    //set datatabe for retrieving data
                     DataTable dtUser = hr.LogIn();
+                    if (!(dtUser.Rows.Count == 0))
+                    {
 
-                    //Response.Write(dtUser.Rows[0][1].ToString() + "<br>");
-                    ////Response.Write(password);
-                    //string hashed = "$2a$10$pGr0pdnzM2Cr2C519Vp2weifyEGKx1v8FLCWS.bT0UtMfFBXBqVOS";
-                    //string notHashed = "12345";
-
-                    //if (BCryptEncryption.BCrypt.CheckPassword(notHashed, hashed))
-                    //{
-                    //    Response.Write("<script>alert('Right!')</script");
-                    //}
-                    //else
-                    //{
-                    //    Response.Write("<script>alert('Wrong!')</script");
-                    //}
+                    //Decrypt hashed password retrieved from DB for comparison
                     string hashing = aes.DecryptString(dtUser.Rows[0][1].ToString());
 
-                    if ( hashing == txtPassword.Text && dtUser.Rows[0][0].Equals(int.Parse(txtEmployeeID.Text)))
+                    //Compare and see if it is a valid employee
+                    if (hashing == txtPassword.Text && dtUser.Rows[0][0].Equals(int.Parse(txtEmployeeID.Text)))
                     {
                         Response.Write(dtUser.Rows[0][1].ToString());
 
+                        //Set sessions for employee information
                         Session.Add("EmployeeID", dtUser.Rows[0][0].ToString());
                         Session.Add("LastName", dtUser.Rows[0][2].ToString());
                         Session.Add("FirstName", dtUser.Rows[0][3].ToString());
@@ -96,13 +93,11 @@ namespace DHELTAFINALPROJECT
                     {
                         Response.Write("<script>alert('Incorrect ID Number or Password')</script");
                     }
-
-                
-            //}
-            //catch
-            //{
-            //    Response.Write("<script>alert('Invalid Inputs')</script>");
-            //}
+                }
+                else
+                {
+                    Response.Write("<script>alert('No existing employee exists')</script");
+                }
         }
     }
 }

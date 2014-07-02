@@ -14,6 +14,10 @@
             <li class="sidebarmenu">
                  <a data-toggle="modal" href="#filterModal2" class="benefit">Add Offense Type</a>
             </li>
+
+            <li class="sidebarmenu">
+                 <a data-toggle="modal" href="#filterModal3" class="benefit">Add Offense Category</a>
+            </li>
         </ul>
     </div>
 </div>
@@ -97,15 +101,10 @@
                     </p>
                     <p class="offenseInfo">Category:&nbsp&nbsp 
                         <asp:DropDownList ID="dpCategory" runat="server" CssClass="ddl">
-                        </asp:DropDownList> OR 
-                        <asp:TextBox ID="txtAddCategory" runat="server" placholder="Add Category"></asp:TextBox>
+                        </asp:DropDownList>
                     </p>
                     <p class="offenseInfo">Offense Description:&nbsp&nbsp
                        <asp:TextBox ID="txtQuestion" runat="server" Width="100%" Height="100px"></asp:TextBox></p>
-                    <p class="evalForm">Position:&nbsp&nbsp 
-                        <asp:DropDownList ID="dpPosition" runat="server" CssClass="ddl">
-                        </asp:DropDownList>
-                    </p>
                     
 
                 </div>
@@ -115,6 +114,30 @@
                   <asp:Button ID="btnAddOffense" runat="server" Text="Submit" 
                     class="btn btn-primary" onclick="btnAddOffense_Click" />
                   <asp:Button ID="Button2" runat="server" Text="Cancel" class="btn btn-default" data-dismiss="modal" />
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="filterModal3" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add Offense Category</h4>
+              </div>
+              <div class="modal-body">
+                <div class="addOffenseCategory">
+                    <p class="offenseInfo">
+                        <p>Offense Category Name:<asp:TextBox ID="txtOffenseCategory" runat="server"></asp:TextBox> </p>
+                    </p>
+                </div>
+                  
+              </div>
+              <div class="modal-footer">
+                  <asp:Button ID="btnAddCategory" runat="server" Text="Submit" 
+                    class="btn btn-primary" onclick="btnAddCategory_Click" />
+                  <asp:Button ID="Button3" runat="server" Text="Cancel" class="btn btn-default" data-dismiss="modal" />
               </div>
           </div>
         </div>

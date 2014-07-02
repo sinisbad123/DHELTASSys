@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 //Imports
 using System.Data;
 using DHELTASSYS.DataAccess;
+using System.Data.SqlClient;
 //using DHELTASSYS.AuditTrail;
 
 namespace DHELTASSys.Modules
@@ -288,6 +289,20 @@ namespace DHELTASSys.Modules
             string login = "EXECUTE loginUser'" + Emp_id + "'";
             DataTable dt = DHELTASSysDataAccess.Select(login);
             return dt;
+        }
+
+        public void UpdateProfile()
+        {
+            string update = "EXECUTE UpdateProfile"
+                + "'" + Emp_id + "',"
+                + "'" + Last_name + "',"
+                + "'" + First_name + "',"
+                + "'" + Middle_name + "',"
+                + "'" + Sss_Number + "',"
+                + "'" + Philhealth_number + "'";
+            DHELTASSysDataAccess.Modify(update);
+                
+            
         }
 
 

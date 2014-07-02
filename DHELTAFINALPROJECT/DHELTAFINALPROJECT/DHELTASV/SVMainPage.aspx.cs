@@ -45,6 +45,8 @@ namespace DHELTAFINALPROJECT.DHELTASV
                     dpLeaveType.DataTextField = "Leave Type";
                     dpLeaveType.DataValueField = "ID";
                     dpLeaveType.DataBind();
+
+                    RefreshDropDownList();
                 }
             }
         }
@@ -139,23 +141,51 @@ namespace DHELTAFINALPROJECT.DHELTASV
             }
         }
 
+        //Add Offense Type
         protected void btnAddOffense_Click(object sender, EventArgs e)
         {
-            audit.Emp_id = int.Parse(Session["EmployeeID"].ToString());
-            discipline.Offense_info = txtOffenseInfo.Text;
-            discipline.Offense_type = dpOffenseType.Text;
-            discipline.Offense_category_name = dpCategory.Text;
+            try
+            {
+                audit.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+                discipline.Offense_info = txtOffenseInfo.Text;
+                discipline.Offense_type = dpOffenseType.Text;
+                discipline.Offense_category_name = dpCategory.Text;
 
-            discipline.AddOffenseType();
-            audit.AddAuditTrail("Added Offense Type");
+                discipline.AddOffenseType();
+                audit.AddAuditTrail("Added Offense Type");
 
-            audit.Emp_id = int.Parse(Session["EmployeeID"].ToString());
-            discipline.Offense_category_name = txtAddCategory.Text;
+                txtOffenseInfo.Text = "";
 
-            discipline.AddOffenseCategory();
-            audit.AddAuditTrail("Added Offense Category");
+                Response.Write("<script>alert('Successfully added an offense type.');</script>");
+            }
+            catch
+            {
+                Response.Write("<script>alert('For some reason, we can't add a new offense type.');</script>");
+            }
+        }
 
-            RefreshDropDownList();
+
+        //Add Offense Category
+        protected void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                discipline.Offense_category_name = txtOffenseCategory.Text;
+
+                discipline.AddOffenseCategory();
+
+                RefreshDropDownList();
+
+                txtOffenseCategory.Text = "";
+
+                Response.Write("<script>alert('Successfully added an offense category.');</script>");
+
+            }
+            catch
+            {
+                Response.Write("<script>alert('For some reason, we can't add a new offense category.');</script>");
+            }
+           
         }
     }
 }

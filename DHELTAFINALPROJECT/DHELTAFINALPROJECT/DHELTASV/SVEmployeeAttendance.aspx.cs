@@ -25,7 +25,7 @@ namespace DHELTAFINALPROJECT.DHELTASV
 
             else if (position == "HR Manager" || position == "Supervisor")
             {
-                attendance.Company_name = Session["CompanyName"].ToString();
+                attendance.Company_id = int.Parse(Session["CompanyID"].ToString());
 
                 grdviewAllSummary.DataSource = attendance.GetEmployeesForAttendanceViewing();
                 grdviewAllSummary.DataBind();
@@ -53,16 +53,16 @@ namespace DHELTAFINALPROJECT.DHELTASV
         protected void grdviewAllSummary_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedEmployeeID = grdviewAllSummary.SelectedRow.Cells[0].Text;
-            Session.Add("SelectedEmployee", selectedEmployeeID);
+            //Session.Add("SelectedEmployee", selectedEmployeeID);
 
             string selectedEmpLastName = grdviewAllSummary.SelectedRow.Cells[1].Text;
-            Session.Add("SelectedEmpLastName", selectedEmpLastName);
+            //Session.Add("SelectedEmpLastName", selectedEmpLastName);
 
             string selectedEmpFirstName = grdviewAllSummary.SelectedRow.Cells[2].Text;
-            Session.Add("SelectedEmpFirstName", selectedEmpFirstName);
+            //Session.Add("SelectedEmpFirstName", selectedEmpFirstName);
 
             lblAttendance.Visible = true;
-            lblEmployeeName.Text = Session["SelectedEmpLastName"].ToString() + ", " + Session["SelectedEmpFirstName"].ToString();
+            lblEmployeeName.Text = selectedEmpLastName + ", " + selectedEmpFirstName;
 
             attendance.Emp_id = int.Parse(Session["SelectedEmployee"].ToString());
 

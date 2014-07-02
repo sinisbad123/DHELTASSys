@@ -26,6 +26,13 @@ namespace DHELTASSys.Modules
             set { company_name = value; }
         }
 
+        private int company_id;
+        public int Company_id
+        {
+            get { return company_id; }
+            set { company_id = value; }
+        }
+
         public DataTable GetPersonalAttendanceRecord()
         {
             string cmd = "EXECUTE GetPersonalAttendanceRecord"
@@ -37,7 +44,7 @@ namespace DHELTASSys.Modules
         public DataTable GetEmployeesForAttendanceViewing()
         {
             string cmd = "EXECUTE GetEmployeesForAttendanceViewing"
-                + "'" + Company_name + "'";
+                + "'" + Company_id + "'";
             DataTable dt = DHELTASSysDataAccess.Select(cmd);
             return dt;
         }

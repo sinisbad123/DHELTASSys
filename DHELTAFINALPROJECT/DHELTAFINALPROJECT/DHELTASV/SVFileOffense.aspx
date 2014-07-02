@@ -32,7 +32,7 @@
 
             <hr />
 
-            <a data-toggle="modal" href="#filterModal3" class="benefit">File An Offense</a>
+            <a data-toggle="modal" id="lnkFileOffense" href="#filterModal3" class="benefit" runat="server">File An Offense</a>
 
             <hr />
             <asp:Label ID="lblOffense" runat="server" Text="Offense Made by the Employee:"></asp:Label>
@@ -62,19 +62,10 @@
                     </p>
                     <p class="offenseInfo">Category:&nbsp&nbsp 
                         <asp:DropDownList ID="dpCategory" runat="server" CssClass="ddl">
-                        </asp:DropDownList> OR 
-                        <asp:TextBox ID="txtAddCategory" runat="server" placholder="Add Category"></asp:TextBox>
-                    </p>
+                        </asp:DropDownList>
                     <p class="offenseInfo">Offense Description:&nbsp&nbsp
                        <asp:TextBox ID="txtQuestion" runat="server" Width="100%" Height="100px"></asp:TextBox></p>
-                    <p class="evalForm">Position:&nbsp&nbsp 
-                        <asp:DropDownList ID="dpPosition" runat="server" CssClass="ddl">
-                        </asp:DropDownList>
-                    </p>
-                    
-
                 </div>
-                  
               </div>
               <div class="modal-footer">
                   <asp:Button ID="btnAddOffenseType" runat="server" Text="Submit" 
