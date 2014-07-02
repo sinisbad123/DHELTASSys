@@ -41,9 +41,9 @@ namespace Enrollment
             // 
             this.btnTimeIn.Location = new System.Drawing.Point(84, 186);
             this.btnTimeIn.Name = "btnTimeIn";
-            this.btnTimeIn.Size = new System.Drawing.Size(75, 23);
+            this.btnTimeIn.Size = new System.Drawing.Size(134, 23);
             this.btnTimeIn.TabIndex = 11;
-            this.btnTimeIn.Text = "Time-in";
+            this.btnTimeIn.Text = "Time-in / Time-Out";
             this.btnTimeIn.UseVisualStyleBackColor = true;
             this.btnTimeIn.Click += new System.EventHandler(this.btnTimeIn_Click);
             // 

@@ -44,7 +44,7 @@ namespace Enrollment
 		{
             int i = 0;
 
-            int x = 6;
+            int x = 0;
 
             DataTable dt = attendance.GetEmployeeFingerprint();
             
@@ -95,16 +95,19 @@ namespace Enrollment
                             {
                                 attendance.TimeInEmployee("Present");
                                 MessageBox.Show("Successfully Timed-in.");
+                                break;
                             }
                             else if (currentTime.Subtract(timeIn).TotalMinutes <= 20)
                             {
                                 attendance.TimeInEmployee("Late");
                                 MessageBox.Show("Successfully Timed-in.");
+                                break;
                             }
                             else if (currentTime.Subtract(timeIn).TotalMinutes > 20)
                             {
                                 attendance.TimeInEmployee("Absent");
                                 MessageBox.Show("Successfully Timed-in.");
+                                break;
                             }
                         }
                         else
@@ -113,18 +116,21 @@ namespace Enrollment
                             //that employee
                             DateTime timeOut = DateTime.Parse(attendance.GetTimeOutOfEmployee().Rows[0][0].ToString());
                             DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
-                            if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count == 0 && currentTime.Subtract(timeOut).TotalMinutes < -180)
+                            if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes < -180)
                             {
                                 MessageBox.Show("Can't allow time-out, time-out at least 3 hours before your shift.");
+                                break;
                             }
-                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count == 0 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
+                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
                             {
                                 attendance.TimeOutEmployee();
                                 MessageBox.Show("Successfully Timed-out.");
+                                break;
                             }
                             else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 0)
                             {
                                 MessageBox.Show("You have already timed-out.");
+                                break;
                             }
 
                         }
@@ -135,6 +141,7 @@ namespace Enrollment
                     {
                         MakeReport("No matching records found.");
                         x++;
+                        break;
                     }
                 }
             } while (i == 0);

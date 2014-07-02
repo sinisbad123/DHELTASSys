@@ -51,8 +51,7 @@ namespace DHELTASSys.Modules
         public DataTable AccountEnrollmentLogin()
         {
             string cmd = "EXECUTE AccountEnrollmentLogin"
-                + "'" + Emp_id + "',"
-                + "'" + Password + "'";
+                + "'" + Emp_id + "'";
             DataTable dt = DHELTASSysDataAccess.Select(cmd);
             return dt;
         }

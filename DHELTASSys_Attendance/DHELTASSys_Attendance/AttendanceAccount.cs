@@ -12,6 +12,8 @@ using System.Net.NetworkInformation;
 //imports
 using DHELTASSys.AuditTrail;
 using DHELTASSys.Modules;
+using Marcucu;
+using BAHV.Common.Cryptography;
 
 namespace Enrollment
 {
@@ -21,17 +23,19 @@ namespace Enrollment
 	{
         AttendanceModuleBL attendance = new AttendanceModuleBL();
         DHELTASSysAuditTrail audit = new DHELTASSysAuditTrail();
+        NetworkUtility network = new NetworkUtility();
+        AESEncryption aes = new AESEncryption();
         
 		public TimeInAccount()
 		{
 			InitializeComponent();
-            attendance.MacAddress = GetMacAddress();
+            attendance.MacAddress = network.GetMacAddress();
 
             DataTable dt = attendance.CheckIfMacAddressRegistered();
 
             if (dt.Rows.Count == 0)
             {
-                string macAddress = GetMacAddress();
+                string macAddress = network.GetMacAddress();
                 DHELTASSys_Attendance.RegisterTerminal register = new DHELTASSys_Attendance.RegisterTerminal(macAddress);
 
                 register.FormClosed += new FormClosedEventHandler(register_FormClosed);
@@ -42,22 +46,6 @@ namespace Enrollment
             
 
 		}
-
-        public string GetMacAddress()
-        {
-            NetworkInterface[] ni = NetworkInterface.GetAllNetworkInterfaces();
-            String macAddress = string.Empty;
-            foreach (NetworkInterface adapter in ni)
-            {
-                if (macAddress == string.Empty)
-                {
-                    IPInterfaceProperties properties = adapter.GetIPProperties();
-                    macAddress = adapter.GetPhysicalAddress().ToString();
-                }
-            }
-
-            return macAddress;
-        }
 
         private void btnTimeIn_Click(object sender, EventArgs e)
         {
@@ -73,9 +61,14 @@ namespace Enrollment
                 else
                 {
                     attendance.Emp_id = int.Parse(txtEmployeeID.Text);
-                    attendance.Password = txtPassword.Text;
+
+                    DataTable dtUsers = attendance.AccountEnrollmentLogin();
+
+                    //Decrypt hashed password retrieved from DB for comparison
+                    string hashing = aes.DecryptString(dtUsers.Rows[0][1].ToString());
+
                     //check if valid account
-                    if (attendance.AccountEnrollmentLogin().Rows.Count == 0)
+                    if (!(hashing == txtPassword.Text))
                     {
                         MessageBox.Show("Invalid Employee ID or Password");
                     }
@@ -86,7 +79,7 @@ namespace Enrollment
                         {
                             DateTime timeIn = DateTime.Parse(attendance.GetTimeInOfEmployee().Rows[0][0].ToString());
                             DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
-                            attendance.MacAddress = GetMacAddress();
+                            attendance.MacAddress = network.GetMacAddress();
                             // Time him in
                             if (currentTime.Subtract(timeIn).TotalMinutes <= 0)
                             {
@@ -110,11 +103,11 @@ namespace Enrollment
                             //that employee
                             DateTime timeOut = DateTime.Parse(attendance.GetTimeOutOfEmployee().Rows[0][0].ToString());
                             DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
-                            if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count == 0 && currentTime.Subtract(timeOut).TotalMinutes < -180)
+                            if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >=1 && currentTime.Subtract(timeOut).TotalMinutes < -180)
                             {
                                 MessageBox.Show("Can't allow time-out, time-out at least 3 hours before your shift.");
                             }
-                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count == 0 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
+                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
                             {
                                 attendance.TimeOutEmployee();
                                 MessageBox.Show("Successfully Timed-out.");

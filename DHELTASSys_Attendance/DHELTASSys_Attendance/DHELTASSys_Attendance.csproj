@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Cryptography.cs" />
+    <Compile Include="App_Code\NetworkUtility.cs" />
     <Compile Include="AuditTrail.cs" />
     <Compile Include="CaptureForm.cs">
       <SubType>Form</SubType>
