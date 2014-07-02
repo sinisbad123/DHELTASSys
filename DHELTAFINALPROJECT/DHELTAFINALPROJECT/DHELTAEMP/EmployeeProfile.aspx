@@ -263,7 +263,7 @@
     </div>
     
     
-    <div class="modal fade" id="filterModal3" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <%--<div class="modal fade" id="filterModal3" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -271,7 +271,7 @@
                 <h4 class="modal-title">View Offense</h4>
               </div>
               <div class="modal-body">
-                <div class="viewBenefit">
+                <div class="viewOffense">
                     <asp:GridView ID="gvOffense" runat="server" CssClass="table table-striped table-bordered table-condensed">
                     </asp:GridView>
                 </div>
@@ -279,6 +279,27 @@
               </div>
               <div class="modal-footer">
                   <asp:Button ID="Button3" runat="server" Text="Close" class="btn btn-default" data-dismiss="modal" />
+              </div>
+          </div>
+        </div>
+    </div>--%>
+
+    <div class="modal fade" id="filterModal3" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Your offenses</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="viewOffense">
+                    <asp:GridView ID="gvOffenses" runat="server" CssClass="table table-striped table-bordered table-condensed">
+                    </asp:GridView>
+                </div>
+                  
+              </div>
+              <div class="modal-footer">
+                   <asp:Button ID="Button3" runat="server" Text="Close" class="btn btn-default" data-dismiss="modal" />
               </div>
           </div>
         </div>

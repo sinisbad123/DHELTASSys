@@ -20,6 +20,7 @@ namespace DHELTAFINALPROJECT.DHELTAEMP
         HRModuleBL hr = new HRModuleBL();
         BenefitsModuleBL benefit = new BenefitsModuleBL();
         AttendanceModuleBL attendance = new AttendanceModuleBL();
+        DisciplineModuleBL discipline = new DisciplineModuleBL();
         int userSession;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -70,6 +71,10 @@ namespace DHELTAFINALPROJECT.DHELTAEMP
                         attendance.Emp_id = int.Parse(Session["EmployeeID"].ToString());
                         gvAttendanceSummary.DataSource = attendance.GetPersonalAttendanceRecord();
                         gvAttendanceSummary.DataBind();
+
+                        discipline.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+                        gvOffenses.DataSource = discipline.DisplayOffense();
+                        gvOffenses.DataBind();
 
                     }
                 }

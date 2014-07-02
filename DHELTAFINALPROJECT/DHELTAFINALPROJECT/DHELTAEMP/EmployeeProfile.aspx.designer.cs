@@ -229,13 +229,13 @@ namespace DHELTAFINALPROJECT.DHELTAEMP {
         protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
-        /// gvOffense control.
+        /// gvOffenses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvOffense;
+        protected global::System.Web.UI.WebControls.GridView gvOffenses;
         
         /// <summary>
         /// Button3 control.

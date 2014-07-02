@@ -20,6 +20,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
         HRModuleBL hr = new HRModuleBL();
         BenefitsModuleBL benefit = new BenefitsModuleBL();
         AttendanceModuleBL attendance = new AttendanceModuleBL();
+        DisciplineModuleBL discipline = new DisciplineModuleBL();
         int userSession;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,6 +41,10 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                     if (!IsPostBack)
                     {
                         RefreshProfile();
+
+                        discipline.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+                        gvOffense.DataSource = discipline.DisplayOffense();
+                        gvOffense.DataBind();
                     }
                 }
             }

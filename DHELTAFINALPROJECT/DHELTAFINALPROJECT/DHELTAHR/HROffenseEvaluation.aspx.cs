@@ -27,7 +27,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
             else
             {
 
-                discipline.Company_name = Session["CompanyName"].ToString();
+                discipline.Company_id = int.Parse(Session["CompanyID"].ToString());
                 grdPedingOffense.DataSource = discipline.DisplayPendingEmployeeOffenses();
                 grdPedingOffense.DataBind();
             }
