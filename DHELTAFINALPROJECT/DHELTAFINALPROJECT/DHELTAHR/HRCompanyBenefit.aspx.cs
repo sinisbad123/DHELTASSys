@@ -43,7 +43,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                         dpPosition.DataValueField = "position_name";
                         dpPosition.DataBind();
 
-                        cmbPositionFilter.Items.Insert(0, new ListItem("All Position", "All"));
+                        cmbPositionFilter.Items.Insert(0, new ListItem("All Position", "All Position"));
                         for (int i = 0; i < dtPosition.Rows.Count; i++)
                         {
                             cmbPositionFilter.Items.Insert(i + 1, new ListItem(dtPosition.Rows[i]["position_name"].ToString()));
@@ -92,12 +92,13 @@ namespace DHELTAFINALPROJECT.DHELTAHR
         {
             benefits.Emp_id = userSession;
 
-            if (cmbPositionFilter.SelectedValue == "All")
+            if (cmbPositionFilter.SelectedValue == "All Position")
             {
-                DataTable dtBenefits = benefits.ViewBenefits();
-                dtBenefits.Columns.Remove("ID");
-                gvBenefit.DataSource = dtBenefits;
+                DataTable dtAllBenefits = benefits.ViewBenefits();
+                dtAllBenefits.Columns.Remove("ID");
+                gvBenefit.DataSource = dtAllBenefits;
                 gvBenefit.DataBind();
+                gvBenefit.Visible = true;
             }
             else
             {

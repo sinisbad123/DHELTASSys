@@ -1,38 +1,41 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DHELTAHR/HumanResource.Master" AutoEventWireup="true" CodeBehind="HRAssessPersonnel.aspx.cs" Inherits="DHELTAFINALPROJECT.DHELTAHR.WebForm10" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DHELTAHR/HumanResource.Master" AutoEventWireup="true" CodeBehind="HRAssessPersonnel.aspx.cs" Inherits="DHELTASSYSMEGABYTE.HRAssessPersonnel" EnableEventValidation="false"%>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-<div class="sidemenu">
-    <div class="menulist">
-        <ul class="menu">
-        <li class="sidebar"><u>Other Things You Can Do:</u></li>
-           <li class="sidebarmenu">
-                 <a data-toggle="modal" href="#" class="benefit">Assess Personnel</a>
-            </li>
-
-            <li class="sidebarmenu">
-                 <a data-toggle="modal" href="#filterModal3" class="benefit">Add Evaluation Question</a>
-            </li>
-
-            <li class="sidebarmenu">
-                 <a data-toggle="modal" href="#filterModal2" class="benefit">View Evalutaion Question</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<div class="containerFluid">
+    <div class="containerfluid">
     <div class="mainContainer">
-        <div class="greetings">
-        <h4>Employee(s) in the Company</h4>
+        <div class="humanresource">
+        <br />
+            <h1>Personnel Assessment</h1>
+            <hr />
+                <asp:Label ID="lblNotification" runat="server"></asp:Label>
+                <asp:GridView ID="gvCompanyEmployees" runat="server"
+                    CssClass="table table-striped table-bordered table-condensed" 
+                    onselectedindexchanged="gvCompanyEmployees_SelectedIndexChanged" 
+                    onrowdatabound="gvCompanyEmployees_RowDataBound" 
+                    Caption="Company Personnel">
+                </asp:GridView>
+                    <br />
+                <asp:GridView ID="gvEvaluationStatus_Group" runat="server"
+                    CssClass="table table-striped table-bordered table-condensed"  
+                    onrowdatabound="gvEvaluationStatus_Group_RowDataBound" 
+                    onselectedindexchanged="gvEvaluationStatus_Group_SelectedIndexChanged">
+                </asp:GridView>
+                    <br />
+                <asp:GridView ID="gvEmployeeEvaluationStatus" runat="server" Caption="Evaluation Status" 
+                    CssClass="table table-striped table-bordered table-condensed" 
+                    onrowdatabound="gvEmployeeEvaluationStatus_RowDataBound" 
+                    onselectedindexchanged="gvEmployeeEvaluationStatus_SelectedIndexChanged">
+                </asp:GridView>
+                    <br />
+                <asp:GridView ID="gvEvaluationAnswers" runat="server"
+                    CssClass="table table-striped table-bordered table-condensed">
+                </asp:GridView>
+                    <br />
+                    <div class="modal-footer">
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" onclick="btnSubmit_Click" />
+                    </div>
+                <br />
+            <br />
         </div>
-
-        <div class="mainBody">
-        
-        </div>
-
     </div>
 </div>
-
 </asp:Content>

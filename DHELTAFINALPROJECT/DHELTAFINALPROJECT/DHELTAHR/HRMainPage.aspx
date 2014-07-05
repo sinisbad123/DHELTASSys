@@ -8,15 +8,15 @@
         <ul class="menu">
         <li class="sidebar"><u>Other Things You Can Do:</u></li>
            <li class="sidebarmenu">
-                 <a data-toggle="modal" href="#" class="benefit">Assess Personnel</a>
+                 <asp:HyperLink ID="lnkAssess" runat="server" href="HRAssessPersonnel.aspx" class="benefit">Assess Personnel</asp:HyperLink>
             </li>
 
             <li class="sidebarmenu">
-                 <a data-toggle="modal" href="#filterModal3" class="benefit">Add Evaluation Question</a>
+                 <asp:HyperLink ID="lnkEvalQuestion" runat="server" href="HREvaluationQuestion.aspx" class="benefit">View Evaluation Question</asp:HyperLink>
             </li>
 
             <li class="sidebarmenu">
-                 <a data-toggle="modal" href="#filterModal2" class="benefit">View Evalutaion Question</a>
+                 <asp:HyperLink ID="lnkTransferRequest" runat="server" href="HREmployeeTransfer.aspx" class="benefit">Transfer Request</asp:HyperLink>
             </li>
         </ul>
     </div>

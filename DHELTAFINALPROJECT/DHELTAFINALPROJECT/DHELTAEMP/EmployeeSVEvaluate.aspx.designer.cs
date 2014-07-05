@@ -10,52 +10,25 @@
 namespace DHELTASSYSMEGABYTE {
     
     
-    public partial class HRAssessPersonnel {
+    public partial class EmployeeSVEvaluate {
         
         /// <summary>
-        /// lblNotification control.
+        /// gvSVEvaluate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNotification;
+        protected global::System.Web.UI.WebControls.GridView gvSVEvaluate;
         
         /// <summary>
-        /// gvCompanyEmployees control.
+        /// btnEvaluate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCompanyEmployees;
-        
-        /// <summary>
-        /// gvEvaluationStatus_Group control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEvaluationStatus_Group;
-        
-        /// <summary>
-        /// gvEmployeeEvaluationStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEmployeeEvaluationStatus;
-        
-        /// <summary>
-        /// gvEvaluationAnswers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEvaluationAnswers;
+        protected global::System.Web.UI.WebControls.LinkButton btnEvaluate;
         
         /// <summary>
         /// btnSubmit control.
@@ -65,5 +38,14 @@ namespace DHELTASSYSMEGABYTE {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
+        
+        /// <summary>
+        /// btnClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClose;
     }
 }

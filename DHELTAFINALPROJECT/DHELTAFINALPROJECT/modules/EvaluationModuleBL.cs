@@ -7,6 +7,7 @@ using System.Web;
 using System.Data;
 using DHELTASSYS.DataAccess;
 using DHELTASSys.AuditTrail;
+using System.Data.SqlClient;
 
 namespace DHELTASSys.modules
 {
@@ -34,6 +35,7 @@ namespace DHELTASSys.modules
             get { return emp_selected_id; }
             set { emp_selected_id = value; }
         }
+
         private int company_id;
         public int Company_id
         {
@@ -244,10 +246,41 @@ namespace DHELTASSys.modules
 
         public void AddAssessmentStatusEmployee()
         {
-            string AddAssessmentStatusEmployeeQuery = "EXECUTE AddAssessmentStatusEmployee '" +
-                Eval_status_id + "','" +
-                Eval_score + "'";
-            DHELTASSysDataAccess.Modify(AddAssessmentStatusEmployeeQuery);
+            string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand("AddAccountSetTempPassword", con);
+            //cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = Password;
+            //cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = Last_name;
+            //cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = First_name;
+            //cmd.Parameters.Add("@middle_name", SqlDbType.VarChar).Value = Middle_name;
+            //cmd.Parameters.Add("@gender", SqlDbType.VarChar).Value = Gender;
+            //cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = Email;
+            //cmd.Parameters.Add("@birthdate", SqlDbType.Date).Value = Birthdate;
+            //cmd.Parameters.Add("@position_name", SqlDbType.VarChar).Value = Position_name;
+            //cmd.Parameters.Add("@company_name", SqlDbType.VarChar).Value = Company_name;
+            //cmd.Parameters.Add("@department_name", SqlDbType.VarChar).Value = Department_name;
+            //cmd.Parameters.Add("@biometrics_image", SqlDbType.VarBinary).Value = Biometric_code;
+
+            //con.Open();
+            //cmd.ExecuteNonQuery();
+            //con.Close();
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("AddAssessmentStatusEmployee", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@eval_status_id", SqlDbType.Int).Value = Eval_status_id;
+            cmd.Parameters.Add("@eval_score", SqlDbType.Float).Value = Eval_score;
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+
+            //string AddAssessmentStatusEmployeeQuery = "EXECUTE AddAssessmentStatusEmployee '" +
+            //    Eval_status_id + "','" +
+            //    Eval_score + "'";
+            //DHELTASSysDataAccess.Modify(AddAssessmentStatusEmployeeQuery);
         }
 
         public void AddAssessmentStatusSupervisor_Group()
@@ -336,9 +369,27 @@ namespace DHELTASSys.modules
             return DHELTASSysDataAccess.Select(SearchCompanyPersonnelQuery);
         }
 
+        public DataTable ViewEvalStatSV_Group_QuarterYEar() // [HR MANAGER] View ALL employees of the company
+        {
+            string ViewEvalStatSV_Group_QuarterYEarQuery = "EXECUTE ViewEvalStatSV_Group_QuarterYEar '" + Eval_quarter + "','" + Eval_year + "'";
+            DataTable dtStatSV_Group_QuarterYEar = DHELTASSysDataAccess.Select(ViewEvalStatSV_Group_QuarterYEarQuery);
+            return dtStatSV_Group_QuarterYEar;
+        }
+
+        public DataTable ViewEvalStatAnswers() // [HR MANAGER] View ALL employees of the company
+        {
+            string ViewEvalStatAnswersQuery = "EXECUTE ViewEvalStatAnswers '" +
+                Emp_evaluating_id + "','" +
+                Emp_evaluated_id + "','" +
+                Eval_quarter + "','" + 
+                Eval_year + "'";
+            DataTable dtViewEvalStatAnswers = DHELTASSysDataAccess.Select(ViewEvalStatAnswersQuery);
+            return dtViewEvalStatAnswers;
+        }
+
         public DataTable ViewEvaluationStatusEmployee() // [HR MANAGER] View ALL employees of the company
         {
-            string ViewEvaluationStatusEmployeeQuery = "EXECUTE ViewEvaluationStatusEmployee '" + Emp_selected_id + "'";
+            string ViewEvaluationStatusEmployeeQuery = "EXECUTE ViewEvaluationStatusEmployee '" + Emp_evaluated_id + "'";
             DataTable dtEmployeeEvaluationStatus = DHELTASSysDataAccess.Select(ViewEvaluationStatusEmployeeQuery);
             return dtEmployeeEvaluationStatus;
         }
@@ -346,15 +397,22 @@ namespace DHELTASSys.modules
         public DataTable ViewEvaluationStatusSupervisor() // [HR MANAGER] View ALL employees of the company
         {
             string ViewEvaluationStatusSupervisorQuery = "EXECUTE ViewEvaluationStatusSupervisor '" + Eval_quarter + "','" + Eval_year + "'";
-            DataTable dtEmployeeEvaluationStatus = DHELTASSysDataAccess.Select(ViewEvaluationStatusSupervisorQuery);
-            return dtEmployeeEvaluationStatus;
+            DataTable dtSupervisorEvaluationStatus = DHELTASSysDataAccess.Select(ViewEvaluationStatusSupervisorQuery);
+            return dtSupervisorEvaluationStatus;
+        }
+
+        public DataTable ViewEvaluationStatusSupervisor_PerEmployee() // [HR MANAGER] View ALL employees of the company
+        {
+            string ViewEvaluationStatusSupervisor_PerEmployeeQuery = "EXECUTE ViewEvaluationStatusSupervisor_PerEmployee '" + Emp_evaluating_id + "','" + Eval_quarter + "','" + Eval_year + "'";
+            DataTable dtSupervisorEvaluationStatus = DHELTASSysDataAccess.Select(ViewEvaluationStatusSupervisor_PerEmployeeQuery);
+            return dtSupervisorEvaluationStatus;
         }
 
         public DataTable ViewEvaluationStatusSupervisor_Group() // [HR MANAGER] View ALL employees of the company
         {
-            string ViewEvaluationStatusSupervisor_GroupQuery = "EXECUTE ViewEvaluationStatusSupervisor_Group '" + Emp_selected_id + "'";
-            DataTable dtEmployeeEvaluationStatus = DHELTASSysDataAccess.Select(ViewEvaluationStatusSupervisor_GroupQuery);
-            return dtEmployeeEvaluationStatus;
+            string ViewEvaluationStatusSupervisor_GroupQuery = "EXECUTE ViewEvaluationStatusSupervisor_Group '" + Emp_evaluated_id + "'";
+            DataTable dtSupervisorEvaluationStatus = DHELTASSysDataAccess.Select(ViewEvaluationStatusSupervisor_GroupQuery);
+            return dtSupervisorEvaluationStatus;
         }
 
         public DataTable ViewCompanyEmployees() // [HR MANAGER] View ALL employees of the company

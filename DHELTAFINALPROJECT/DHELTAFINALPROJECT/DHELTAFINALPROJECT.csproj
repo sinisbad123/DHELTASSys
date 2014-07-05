@@ -74,6 +74,10 @@
     <Content Include="css\reset.css" />
     <Content Include="DHELTAEMP\EmployeeMainPage.aspx" />
     <Content Include="DHELTAEMP\EmployeeProfile.aspx" />
+    <Content Include="DHELTAEMP\EmployeeSVEvalForm.aspx" />
+    <Content Include="DHELTAEMP\EmployeeSVEvaluate.aspx" />
+    <Content Include="DHELTAHR\HRAssessPersonnel.aspx" />
+    <Content Include="DHELTAHR\HREvaluationQuestion.aspx" />
     <Content Include="DHELTAHR\HRMainPage.aspx" />
     <Content Include="DHELTAHR\HRProfile.aspx" />
     <Content Include="DHELTAHR\HRHumanResource.aspx" />
@@ -83,10 +87,11 @@
     <Content Include="DHELTAHR\HRCompanyRequest.aspx" />
     <Content Include="DHELTAHR\HRRequestReceiving.aspx" />
     <Content Include="DHELTAHR\HRApproveLeaveRequest.aspx" />
-    <Content Include="DHELTAHR\HRAssessPersonnel.aspx" />
     <Content Include="DHELTAHR\HROffenseEvaluation.aspx" />
     <Content Include="DHELTAHR\HREmployeeOffense.aspx" />
     <Content Include="DHELTAHR\HROffenseSummary.aspx" />
+    <Content Include="DHELTASV\SVEmployeeEvalForm.aspx" />
+    <Content Include="DHELTASV\SVEmployeeEvaluate.aspx" />
     <Content Include="DHELTASV\SVMainPage.aspx" />
     <Content Include="DHELTASV\SVProfile.aspx" />
     <Content Include="DHELTASV\SVEmployeeAttendance.aspx" />
@@ -185,6 +190,34 @@
     <Compile Include="DHELTAEMP\EmployeeProfile.aspx.designer.cs">
       <DependentUpon>EmployeeProfile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvalForm.aspx.cs">
+      <DependentUpon>EmployeeSVEvalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvalForm.aspx.designer.cs">
+      <DependentUpon>EmployeeSVEvalForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvaluate.aspx.cs">
+      <DependentUpon>EmployeeSVEvaluate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvaluate.aspx.designer.cs">
+      <DependentUpon>EmployeeSVEvaluate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRAssessPersonnel.aspx.cs">
+      <DependentUpon>HRAssessPersonnel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRAssessPersonnel.aspx.designer.cs">
+      <DependentUpon>HRAssessPersonnel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HREvaluationQuestion.aspx.cs">
+      <DependentUpon>HREvaluationQuestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HREvaluationQuestion.aspx.designer.cs">
+      <DependentUpon>HREvaluationQuestion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DHELTAHR\HumanResource.Master.cs">
       <DependentUpon>HumanResource.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -255,13 +288,6 @@
     <Compile Include="DHELTAHR\HRApproveLeaveRequest.aspx.designer.cs">
       <DependentUpon>HRApproveLeaveRequest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="DHELTAHR\HRAssessPersonnel.aspx.cs">
-      <DependentUpon>HRAssessPersonnel.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DHELTAHR\HRAssessPersonnel.aspx.designer.cs">
-      <DependentUpon>HRAssessPersonnel.aspx</DependentUpon>
-    </Compile>
     <Compile Include="DHELTAHR\HROffenseEvaluation.aspx.cs">
       <DependentUpon>HROffenseEvaluation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -289,6 +315,20 @@
     </Compile>
     <Compile Include="DHELTASV\Supervisor.Master.designer.cs">
       <DependentUpon>Supervisor.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvalForm.aspx.cs">
+      <DependentUpon>SVEmployeeEvalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvalForm.aspx.designer.cs">
+      <DependentUpon>SVEmployeeEvalForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvaluate.aspx.cs">
+      <DependentUpon>SVEmployeeEvaluate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvaluate.aspx.designer.cs">
+      <DependentUpon>SVEmployeeEvaluate.aspx</DependentUpon>
     </Compile>
     <Compile Include="DHELTASV\SVMainPage.aspx.cs">
       <DependentUpon>SVMainPage.aspx</DependentUpon>

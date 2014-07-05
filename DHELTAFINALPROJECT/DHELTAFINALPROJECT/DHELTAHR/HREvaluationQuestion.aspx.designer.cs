@@ -10,60 +10,69 @@
 namespace DHELTASSYSMEGABYTE {
     
     
-    public partial class HRAssessPersonnel {
+    public partial class HREvaluationQuestion {
         
         /// <summary>
-        /// lblNotification control.
+        /// lnkAssess control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNotification;
+        protected global::System.Web.UI.WebControls.HyperLink lnkAssess;
         
         /// <summary>
-        /// gvCompanyEmployees control.
+        /// gvEvaluationQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCompanyEmployees;
+        protected global::System.Web.UI.WebControls.GridView gvEvaluationQuestion;
         
         /// <summary>
-        /// gvEvaluationStatus_Group control.
+        /// txtQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEvaluationStatus_Group;
+        protected global::System.Web.UI.WebControls.TextBox txtQuestion;
         
         /// <summary>
-        /// gvEmployeeEvaluationStatus control.
+        /// dpEvaluationCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEmployeeEvaluationStatus;
+        protected global::System.Web.UI.WebControls.DropDownList dpEvaluationCategory;
         
         /// <summary>
-        /// gvEvaluationAnswers control.
+        /// dpPosition control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvEvaluationAnswers;
+        protected global::System.Web.UI.WebControls.DropDownList dpPosition;
         
         /// <summary>
-        /// btnSubmit control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
+        protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// btnClose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClose;
     }
 }

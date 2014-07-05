@@ -49,9 +49,9 @@ namespace DHELTASSys.modules
             string viewEmployeeShiftQuery = "EXECUTE ViewEmployeeShift '"+Emp_id+"'";
             return DHELTASSysDataAccess.Select(viewEmployeeShiftQuery);
         }
-        public void AssignEmployeeShift()
+        public void AssignNewEmployeeShift()
         {
-            string assignEmployeeShift = "EXECUTE AssignEmployeeShift '"+Emp_id+"','"+Shift_id+"','"+From_date+"','"+To_date+"'";
+            string assignEmployeeShift = "EXECUTE AssignNewEmployeeShift '"+Emp_id+"','"+Shift_id+"','"+From_date+"','"+To_date+"'";
             DHELTASSysDataAccess.Modify(assignEmployeeShift);
         }
         public DataTable selectShift()

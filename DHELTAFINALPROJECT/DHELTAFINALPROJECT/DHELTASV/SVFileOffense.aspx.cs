@@ -157,8 +157,8 @@ namespace DHELTAFINALPROJECT.DHELTASV
                 graphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
 
                 //get name of the employee to be file to be used as naming convention for the saved image.
-                string employeeFirstName = Session["SelectedEmpFirstName"].ToString();
-                string employeeLastName = Session["SelectedEmpLastName"].ToString();
+                string employeeFirstName = gvEmployee.SelectedRow.Cells[2].Text;
+                string employeeLastName = gvEmployee.SelectedRow.Cells[1].Text;
 
                 //also the current datetime
                 string datetime = DateTime.Now.ToString("MM-dd-yyyy");

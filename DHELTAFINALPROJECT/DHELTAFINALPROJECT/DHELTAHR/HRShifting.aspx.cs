@@ -121,7 +121,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                                     shift.Shift_id = int.Parse(cmbShift.SelectedValue);
                                     shift.From_date = fromDate.ToShortDateString();
                                     shift.To_date = toDate.ToShortDateString();
-                                    shift.AssignEmployeeShift();
+                                    shift.AssignNewEmployeeShift();
 
                                     auditTrail.Emp_id = userSession;
                                     auditTrail.AddAuditTrail("Updated shift of employee " + shift.Emp_id + "");
@@ -153,7 +153,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                                     shift.Shift_id = int.Parse(cmbShift.SelectedValue);
                                     shift.From_date = fromDate.ToShortDateString();
                                     shift.To_date = toDate.ToShortDateString();
-                                    shift.AssignEmployeeShift();
+                                    shift.AssignNewEmployeeShift();
 
                                     auditTrail.Emp_id = userSession;
                                     auditTrail.AddAuditTrail("Updated shift of employee " + shift.Emp_id + "");

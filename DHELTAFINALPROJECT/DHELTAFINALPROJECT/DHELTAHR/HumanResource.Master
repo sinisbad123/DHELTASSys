@@ -29,9 +29,11 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="HRMainPage.aspx">Home</a></li>
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Comapny <b class="caret"></b></a>
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="HRHumanResource.aspx">Human Resource</a></li>
+                                <li><a href="HRAssessPersonnel.aspx">Personnel Assessment</a></li>
+                                <li><a href="HREvaluationQuestion.aspx">Evaluation Questions</a></li>
                                 <li><a href="HRShifting.aspx">Shift Schedule</a></li>
                                 <li><a href="HRCompanyBenefit.aspx">Company Benefit</a></li>
                             </ul>
