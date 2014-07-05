@@ -38,7 +38,7 @@
                             <p class="requestInfo">Position:&nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
                                 <asp:Label ID="lblPos" runat="server" Text=""></asp:Label></p>
                             <p class="requestInfo">Date of Transfer:&nbsp 
-                                <asp:TextBox ID="txtDate" runat="server" TextMode="Date"></asp:TextBox></p><br />
+                                <asp:TextBox ID="txtDate" runat="server"  TextMode="Date"></asp:TextBox></p><br />
                             <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" 
                                 onclick="btnSubmit_Click"/>
                         </div>

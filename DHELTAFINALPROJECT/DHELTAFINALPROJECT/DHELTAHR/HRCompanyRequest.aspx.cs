@@ -41,10 +41,10 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                     if (!IsPostBack)
                     {
                         DataTable dtPosition = dataHandling.SelectAllPosition();
-                        dpPosition.DataSource = dtPosition;
+                        /*dpPosition.DataSource = dtPosition;
                         dpPosition.DataTextField = "position_name";
                         dpPosition.DataValueField = "position_name";
-                        dpPosition.DataBind();
+                        dpPosition.DataBind();*/
 
                         dpPosition.Items.Insert(0, new ListItem("All Position", "All"));
                         for (int i = 0; i < dtPosition.Rows.Count; i++)
@@ -52,6 +52,11 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                             dpPosition.Items.Insert(i + 1, new ListItem(dtPosition.Rows[i]["position_name"].ToString()));
                         }
                         dpPosition.DataBind();
+
+                        dataHandling.Company_id = int.Parse(Session["CompanyID"].ToString());
+                        dataHandling.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+                        gvEmployee.DataSource = dataHandling.SelectAllPositionTransfer();
+                        gvEmployee.DataBind();
                     }
                 }
             }
@@ -111,7 +116,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
             lblFirstName.Text = gvEmployee.SelectedRow.Cells[2].Text;
             lblMiddleName.Text = gvEmployee.SelectedRow.Cells[3].Text;
             lblComName.Text = gvEmployee.SelectedRow.Cells[5].Text;
-            lblPos.Text = gvEmployee.SelectedRow.Cells[6].Text;
+            //lblPos.Text = gvEmployee.SelectedRow.Cells[6].Text;
             lblComID.Text = gvEmployee.SelectedRow.Cells[4].Text;
             int ComID = int.Parse(Session["CompanyID"].ToString());
             lblYourCompanyID.Text = ComID.ToString();
@@ -135,17 +140,22 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                 }
                 else
                 {
-                    DateTime i;
-                    if (DateTime.TryParse(txtDate.Text, out i))
+                    // DateTime i;
+                    /*if (DateTime.TryParse(txtDate.Text, out i))
+                    {*/
+
+                    try
                     {
-                        if (DateTime.Parse(txtDate.Text) > DateTime.Now)
+                        DateTime selectedDate = DateTime.Parse(txtDate.Text);
+                        if (selectedDate > DateTime.Now)
                         {
 
                             transfer.CompanyID = int.Parse(lblComID.Text);
                             transfer.YourComID = int.Parse(lblYourCompanyID.Text);
                             transfer.Emp_id = int.Parse(lblEmpID.Text);
-                            transfer.Date_transfer = DateTime.Parse(txtDate.Text);
+                            transfer.Date_transfer = selectedDate.ToShortDateString();//txtDate.ToString();
                             transfer.ModifyRequests();
+
                             transfer.AddEmpRequest();
                             Response.Write("<script>alert('Successfully Added!')</script>");
                         }
@@ -154,12 +164,16 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                             Response.Write("<script>alert('Date should be later than now')</script>");
                         }
                     }
-                    else
+                    catch
                     {
-                        Response.Write("<script>alert('Please select a desired date to transfer the employee')</script>");
+                        Response.Write("<script>alert('Please input a valid date!')</script>");
                     }
-
                 }
+                /*else
+                {
+                    Response.Write("<script>alert('Please select a desired date to transfer the employee')</script>");
+                }*/
+
             }
         }
     }

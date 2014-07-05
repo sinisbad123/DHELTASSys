@@ -72,6 +72,12 @@ namespace DHELTASSys
                 string selectAllPositionQuery = "EXECUTE SelectAllPosition";
                 return DHELTASSysDataAccess.Select(selectAllPositionQuery);
             }
+
+            public DataTable SelectAllPositionTransfer()
+            {
+                string selectAllPositionTransfer = "EXECUTE ViewAllEmployeePositionTransfer'" + Emp_id + "','" + Company_id + "'";
+                return DHELTASSysDataAccess.Select(selectAllPositionTransfer);
+            }
             
             public DataTable SelectAllDepartment()
             {

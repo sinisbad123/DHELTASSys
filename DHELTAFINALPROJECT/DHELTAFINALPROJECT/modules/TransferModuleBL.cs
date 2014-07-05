@@ -20,8 +20,8 @@ namespace DHELTASSys.Modules
             set { emp_id = value; }
         }
 
-        private DateTime date_transfer;
-        public DateTime Date_transfer
+        private string date_transfer;
+        public string Date_transfer
         {
             get { return date_transfer; }
             set { date_transfer = value; }
@@ -108,9 +108,47 @@ namespace DHELTASSys.Modules
         //Inserting Requested Employee to EmpTransfer Table
         public void AddEmpRequest()
         {
-            string addEmpRequestQuery = "EXECUTE AddEmpTransfer '" + Emp_id + "','" + Date_transfer + "','" 
-                + TransferRequestID + "','" + TransfreReceivingID + "'";
-            DHELTASSysDataAccess.Modify(addEmpRequestQuery);
+            //string addEmpRequestQuery = "EXECUTE AddEmpTransfer '" + Emp_id + "','" + Date_transfer + "','" 
+            //    + TransferRequestID + "','" + TransfreReceivingID + "'";
+            //DHELTASSysDataAccess.Modify(addEmpRequestQuery);
+
+            //string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+
+            //    SqlConnection con = new SqlConnection(connectionString);
+            //    SqlCommand cmd = new SqlCommand("AddAccountSetTempPassword", con);
+            //    cmd.CommandType = CommandType.StoredProcedure;
+            //    cmd.Parameters.Add("@password", SqlDbType.NVarChar).Value = Password;
+            //    cmd.Parameters.Add("@last_name", SqlDbType.VarChar).Value = Last_name;
+            //    cmd.Parameters.Add("@first_name", SqlDbType.VarChar).Value = First_name;
+            //    cmd.Parameters.Add("@middle_name", SqlDbType.VarChar).Value = Middle_name;
+            //    cmd.Parameters.Add("@gender", SqlDbType.VarChar).Value = Gender;
+            //    cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = Email;
+            //    cmd.Parameters.Add("@birthdate", SqlDbType.Date).Value = Birthdate;
+            //    cmd.Parameters.Add("@position_name", SqlDbType.VarChar).Value = Position_name;
+            //    cmd.Parameters.Add("@company_name", SqlDbType.VarChar).Value = Company_name;
+            //    cmd.Parameters.Add("@department_name", SqlDbType.VarChar).Value = Department_name;
+            //    cmd.Parameters.Add("@biometrics_image", SqlDbType.VarBinary).Value = Biometric_code;
+
+            //    con.Open();
+            //    cmd.ExecuteNonQuery();
+            //    con.Close();
+
+            //    string cmdTwo = "Execute AddSupervisor";
+            //    DHELTASSysDataAccess.Modify(cmdTwo);
+
+            string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand("AddEmpTransfer", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@emp_id", SqlDbType.Int).Value = Emp_id;
+            cmd.Parameters.Add("@date_transfer", SqlDbType.Date).Value = Date_transfer;
+            cmd.Parameters.Add("@transfer_requesting_id", SqlDbType.Int).Value = TransferRequestID;
+            cmd.Parameters.Add("@transfer_receiving_id", SqlDbType.Int).Value = TransfreReceivingID;
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         public DataTable ViewTransferRequests()
