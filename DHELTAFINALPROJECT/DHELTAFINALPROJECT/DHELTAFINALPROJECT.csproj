@@ -92,6 +92,7 @@
     <Content Include="DHELTAHR\HROffenseSummary.aspx" />
     <Content Include="DHELTASV\SVEmployeeEvalForm.aspx" />
     <Content Include="DHELTASV\SVEmployeeEvaluate.aspx" />
+    <Content Include="DHELTASV\SVGenerateReport.aspx" />
     <Content Include="DHELTASV\SVMainPage.aspx" />
     <Content Include="DHELTASV\SVProfile.aspx" />
     <Content Include="DHELTASV\SVEmployeeAttendance.aspx" />
@@ -333,6 +334,13 @@
     </Compile>
     <Compile Include="DHELTASV\SVEmployeeEvaluate.aspx.designer.cs">
       <DependentUpon>SVEmployeeEvaluate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVGenerateReport.aspx.cs">
+      <DependentUpon>SVGenerateReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVGenerateReport.aspx.designer.cs">
+      <DependentUpon>SVGenerateReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="DHELTASV\SVMainPage.aspx.cs">
       <DependentUpon>SVMainPage.aspx</DependentUpon>

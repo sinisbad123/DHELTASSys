@@ -5,6 +5,8 @@ using System.Web;
 
 using System.Data;
 using DHELTASSYS.DataAccess;
+using DHELTASSys.AuditTrail;
+
 namespace DHELTASSys.modules
 {
     public class ReportsModuleBL
@@ -30,6 +32,14 @@ namespace DHELTASSys.modules
             get { return eval_year; }
             set { eval_year = value; }
         }
+
+        private int eval_month;
+        public int Eval_month
+        {
+            get { return eval_month; }
+            set { eval_month = value; }
+        }
+
         #endregion
 
         #region Process
@@ -41,7 +51,7 @@ namespace DHELTASSys.modules
 
         public DataTable ViewActiveEmployees()
         {
-            string viewActiveEmployeesQuery = "EXECUTE ViewActiveEmployees'"+Emp_id+"'";
+            string viewActiveEmployeesQuery = "EXECUTE ViewActiveEmployees'" + Emp_id + "'";
             return DHELTASSysDataAccess.Select(viewActiveEmployeesQuery);
         }
 
@@ -51,18 +61,27 @@ namespace DHELTASSys.modules
             return DHELTASSysDataAccess.Select(viewCurrentEmployeeLeaveBalanceQuery);
         }
 
+        public DataTable ViewEmployeeOffenses()
+        {
+            string ViewEmployeeOffensesQuery = "EXECUTE ViewEmployeeOffenses '" +
+                Emp_id + "','" +
+                Eval_year + "'";
+            ;
+            return DHELTASSysDataAccess.Select(ViewEmployeeOffensesQuery);
+        }
+
         public DataTable ViewOffensesCount()
         {
             string viewOffensesCountQuery = "EXECUTE ViewOffensesCount'" + Emp_id + "'";
             return DHELTASSysDataAccess.Select(viewOffensesCountQuery);
         }
-        
+
         public DataTable ViewOffensesCountDate()
         {
             string viewOffensesCountDateQuery = "EXECUTE ViewOffensesCountDate'" + Emp_id + "'";
             return DHELTASSysDataAccess.Select(viewOffensesCountDateQuery);
         }
-        
+
         public DataTable ViewDaysPresentCount()
         {
             string viewDaysPresentCountQuery = "EXECUTE ViewDaysPresentCount'" + Emp_id + "'";
@@ -99,18 +118,15 @@ namespace DHELTASSys.modules
             return DHELTASSysDataAccess.Select(viewAttendanceCountDateQuery);
         }
 
-        public DataTable ViewEmployeeEvaluationSupervisor()
+        public DataTable ViewEvaluationEmployees()
         {
-            string viewEmployeeEvaluationSupervisorQuery = "EXECUTE ViewEmployeeEvaluationSupervisor'" + Eval_quarter + "','" + Eval_year + "'";
-            return DHELTASSysDataAccess.Select(viewEmployeeEvaluationSupervisorQuery);
+            string viewEvaluationEmployeeQuery = "EXECUTE ViewEvaluationEmployees'" +
+                Emp_id + "','" +
+                Eval_quarter + "','" +
+                Eval_year + "'";
+            return DHELTASSysDataAccess.Select(viewEvaluationEmployeeQuery);
         }
 
-        public DataTable ViewEmployeeEvaluationEmployee()
-        {
-            string viewEmployeeEvaluationEmployeeQuery = "EXECUTE ViewEmployeeEvaluationEmployee'" + Eval_quarter + "','" + Eval_year + "'";
-            return DHELTASSysDataAccess.Select(viewEmployeeEvaluationEmployeeQuery);
-        }
-        
         #endregion
     }
 }

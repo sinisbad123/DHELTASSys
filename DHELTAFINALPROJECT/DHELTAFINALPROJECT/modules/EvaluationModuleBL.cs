@@ -246,7 +246,7 @@ namespace DHELTASSys.modules
 
         public void AddAssessmentStatusEmployee()
         {
-            string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+            string connectionString = "Server=localhost;Database=dheltassysfinal;UID=dheltassys;PWD=teammegabyte";
 
             //SqlConnection con = new SqlConnection(connectionString);
             //SqlCommand cmd = new SqlCommand("AddAccountSetTempPassword", con);

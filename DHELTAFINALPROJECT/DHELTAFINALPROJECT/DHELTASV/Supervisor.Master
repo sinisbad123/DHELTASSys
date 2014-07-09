@@ -33,6 +33,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="SVEmployeeEvaluate.aspx">Employee Evaluation</a></li>
+                                <li><a href="SVGenerateReport.aspx">Generate Quarterly Report</a></li>
                             </ul>
                         </li>
                         <li><a href="SVPerformance.aspx">Performance</a></li>
