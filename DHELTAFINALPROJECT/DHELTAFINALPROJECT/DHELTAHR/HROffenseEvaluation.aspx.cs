@@ -54,9 +54,31 @@ namespace DHELTAFINALPROJECT.DHELTAHR
             {
                 string offenseID = grdPedingOffense.SelectedRow.Cells[0].Text;
 
-                Session.Add("OffenseID", offenseID);
+                discipline.Offense_emp_id = int.Parse(offenseID);
+                discipline.Decision = drpDecision.SelectedValue;
 
-                Response.Redirect("HREmployeeOffense.aspx");
+                discipline.AddOffenseDecision();
+
+                ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('The offense has been evaluated successfully!');window.location='HRMainPage.aspx';</script>'");
+            }
+        }
+
+        protected void grdPedingOffense_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string offenseID = grdPedingOffense.SelectedRow.Cells[0].Text;
+
+            discipline.Offense_emp_id = int.Parse(offenseID);
+
+            DataTable proof = discipline.GetProof();
+
+            if (proof.Rows.Count == 0)
+            {
+                imgProof.Visible = false;
+            }
+            else
+            {
+                imgProof.Visible = true;
+                imgProof.ImageUrl = @"~/Uploads_Proofs/" + proof.Rows[0][0].ToString();
             }
         }
     }

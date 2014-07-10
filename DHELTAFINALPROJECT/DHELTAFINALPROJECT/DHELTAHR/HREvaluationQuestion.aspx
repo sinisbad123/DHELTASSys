@@ -1,21 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DHELTAHR/HumanResource.Master" AutoEventWireup="true" CodeBehind="HREvaluationQuestion.aspx.cs" Inherits="DHELTASSYSMEGABYTE.HREvaluationQuestion" EnableEventValidation="false" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<div class="sidemenu">
-    <div class="menulist">
-        <ul class="menu">
-        <li class="sidebar"><u>Other Things You Can Do:</u></li>
-            <li class="sidebarmenu">
-                <asp:HyperLink ID="lnkAssess" runat="server" href="HRAssessPersonnel.aspx">Assess Personnel</asp:HyperLink>
-            </li>
-           <li class="sidebarmenu">
-                <a data-toggle="modal" href="#filterModal">Add Evaluation Question</a>
-            </li>
-        </ul>
-    </div>
-</div>
-
 <div class="containerfluid">
     <div class="mainContainer">
         <div class="humanresource">
@@ -25,11 +9,15 @@
             <asp:GridView ID="gvEvaluationQuestion" runat="server" 
                 CssClass="table table-striped table-bordered table-condensed">
             </asp:GridView>
-                    <br />
+            <br />
+            <div class="modal-footer">
+                    <asp:LinkButton ID="btnAddQuestion" runat="server" Text="Add Question" CssClass="search"
+                data-toggle="modal" href="#filterModal"></asp:LinkButton>
+              </div>
                 <br />
             <br />
         </div>
-    </div>
+    </div> 
 </div>
 
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">

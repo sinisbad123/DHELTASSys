@@ -34,6 +34,10 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                     dpLeaveType.DataTextField = "Leave Type";
                     dpLeaveType.DataValueField = "ID";
                     dpLeaveType.DataBind();
+
+                    gvBalance.DataSource = leave.ViewLeaveBalance();
+                    gvBalance.DataBind();
+
                 }
             }
         }

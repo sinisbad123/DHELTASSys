@@ -22,56 +22,36 @@ namespace DHELTAFINALPROJECT.DHELTAHR
             {
                 Response.Redirect(@"~/index.aspx");
             }
-            else if (position != "HR Manager" || Session["OffenseID"] == null)
+            else if (position != "HR Manager")
             {
                 Response.Redirect(@"~/404.aspx");
             }
-            else
+            discipline.Company_name = Session["CompanyName"].ToString();
+                discipline.Department_name = Session["Department"].ToString();
+                gvEmployee.DataSource = discipline.DisplayEmployeeLastNameFirstName();
+                gvEmployee.DataBind();
+        }
+
+        protected void gvEmployee_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-                discipline.Offense_emp_id = int.Parse(Session["OffenseID"].ToString());
+                e.Row.Attributes["onmouseover"] = "this.style.cursor='hand';this.style.textDecoration='underline';";
+                e.Row.Attributes["onmouseout"] = "this.style.textDecoration='none';";
 
-                DataTable offense = discipline.GetOffense();
-                lblOffenseID.Text = offense.Rows[0][0].ToString();
-                lblEmpFiled.Text = offense.Rows[0][1].ToString();
-                lblSupervisor.Text = offense.Rows[0][2].ToString();
-                lblOffenseType.Text = offense.Rows[0][3].ToString();
-                lblOffenseInfo.Text = offense.Rows[0][4].ToString();
-                lblOffenseCategory.Text = offense.Rows[0][5].ToString();
-                lblOffenseDate.Text = offense.Rows[0][6].ToString();
-                lblSupervisorStatement.Text = offense.Rows[0][7].ToString();
-
-
-                DataTable proof = discipline.GetProof();
-
-                if (proof.Rows.Count == 0)
-                {
-                    Label9.Visible = false;
-                    imgProof.Visible = false;
-                }
-                else
-                {
-                    imgProof.ImageUrl = @"~/Uploads_Proofs/" + proof.Rows[0][0].ToString();
-                }
+                e.Row.Attributes["onclick"] = ClientScript.GetPostBackClientHyperlink(this.gvEmployee, "Select$" + e.Row.RowIndex);
             }
         }
 
-        protected void btnEvaluate_Click(object sender, EventArgs e)
+        protected void gvEmployee_SelectedIndexChanged(object sender, EventArgs e)
         {
-            discipline.Offense_emp_id = int.Parse(Session["OffenseID"].ToString());
-            discipline.Decision = drpDecision.Text;
+            int emp_id = int.Parse(gvEmployee.SelectedRow.Cells[0].Text);
 
-            discipline.AddOffenseDecision();
 
-            audit.Emp_id = int.Parse(Session["EmployeeID"].ToString());
-            audit.AddAuditTrail(drpDecision.Text + "ed the offense of the employee.");
-            Response.Redirect("HROffenseEvaluation.aspx");
+            discipline.Emp_id = emp_id;
+            gvOffense.DataSource = discipline.DisplayOffense();
+            gvOffense.DataBind();
         }
-
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
-            Session.Remove("OffenseID");
-            Response.Redirect("HROffenseEvaluation.aspx");
-        }
-    }
+     }
 }

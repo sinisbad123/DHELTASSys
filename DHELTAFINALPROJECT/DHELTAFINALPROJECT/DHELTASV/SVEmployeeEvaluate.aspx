@@ -8,7 +8,8 @@
             <hr />
             <asp:GridView ID="gvEmployeeEvaluate" runat="server" 
                 CssClass="table table-striped table-bordered table-condensed" 
-                onrowdatabound="gvEmployeeEvaluate_RowDataBound">
+                onrowdatabound="gvEmployeeEvaluate_RowDataBound" 
+                onselectedindexchanged="gvEmployeeEvaluate_SelectedIndexChanged">
             </asp:GridView>
                     <br />
                 <asp:LinkButton ID="btnEvaluate" runat="server" Text="Evaluate" CssClass="search"

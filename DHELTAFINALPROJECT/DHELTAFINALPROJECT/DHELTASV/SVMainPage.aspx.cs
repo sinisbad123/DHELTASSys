@@ -47,6 +47,9 @@ namespace DHELTAFINALPROJECT.DHELTASV
                     dpLeaveType.DataBind();
 
                     RefreshDropDownList();
+
+                    gvBalance.DataSource = leave.ViewLeaveBalance();
+                    gvBalance.DataBind();
                 }
             }
         }

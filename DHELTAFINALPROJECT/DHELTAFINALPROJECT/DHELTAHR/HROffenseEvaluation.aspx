@@ -16,10 +16,21 @@
                 <div class="mainBody">
                     <asp:GridView ID="grdPedingOffense" runat="server" 
                         CssClass="table table-hover table-striped" 
-                        onrowdatabound="grdPedingOffense_RowDataBound">
+                        onrowdatabound="grdPedingOffense_RowDataBound" OnSelectedIndexChanged="grdPedingOffense_SelectedIndexChanged">
                     </asp:GridView>
                 </div>
 
+                <hr />
+                <asp:Image
+                ID="imgProof" runat="server" Visible="False" /> 
+                <hr />
+                <asp:DropDownList
+                ID="drpDecision" 
+                runat="server" 
+                    >
+                    <asp:ListItem>Approve</asp:ListItem>
+                    <asp:ListItem>Disapprove</asp:ListItem>
+                </asp:DropDownList>
                 <hr />
                 <asp:Button ID="btnEval" runat="server" Text="Evaluate Offense" 
                     class="btn btn-primary" onclick="btnEval_Click" />

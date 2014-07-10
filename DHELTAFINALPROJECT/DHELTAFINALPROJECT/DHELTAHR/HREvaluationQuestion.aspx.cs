@@ -22,6 +22,8 @@ namespace DHELTASSYSMEGABYTE
         DHELTASSysAuditTrail auditTrail = new DHELTASSysAuditTrail();
         int userSession;
 
+        DataTable dtEvaluationQuestion = new DataTable();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["EmployeeID"] != null)
@@ -73,16 +75,26 @@ namespace DHELTASSYSMEGABYTE
             }
             else
             {
+                evalQuestion.Emp_id = userSession;
                 evalQuestion.Eval_question = txtQuestion.Text;
                 evalQuestion.Eval_category = dpEvaluationCategory.SelectedItem.Text;
-                evalQuestion.Emp_id = userSession;
                 evalQuestion.Position_name = dpPosition.SelectedItem.Text;
-                evalQuestion.AddEvaluationQuestions();
 
-                auditTrail.Emp_id = userSession;
-                auditTrail.AddAuditTrail("Add Evaluation Question");
+                //dtEvaluationQuestion = evalQuestion.SelectEvaluationQuestionID();
 
-                Response.Redirect("HREvaluationQuestion.aspx");
+                //if (dtEvaluationQuestion.Rows.Count != 0)
+                //{                    
+                //    ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('There is already an existing question made!');window.location='HREvaluationQuestion.aspx';</script>'");
+                //}
+                //else
+                //{
+                    evalQuestion.AddEvaluationQuestions();
+
+                    auditTrail.Emp_id = userSession;
+                    auditTrail.AddAuditTrail("Add Evaluation Question");
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('You have successfully added an evaluation question!');window.location='HREvaluationQuestion.aspx';</script>'");        
+                //}
             }
         }
     }

@@ -66,10 +66,18 @@
                     </p>
 
                 </div>
+
+                <hr />
+
+                <div>
+                    <asp:GridView ID="gvBalance" runat="server" CssClass="table table-striped table-bordered table-condensed">
+                    </asp:GridView>
+                </div>
                   
               </div>
               <div class="modal-footer">
-                  <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary"/>
+                  <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" 
+        onclick="btnSubmit_Click"/>
                   <asp:Button ID="btnClose" runat="server" Text="Cancel" class="btn btn-default" data-dismiss="modal" />
                 
               </div>

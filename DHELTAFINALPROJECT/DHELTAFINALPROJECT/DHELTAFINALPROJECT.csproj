@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ExcelLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -77,6 +81,9 @@
     <Content Include="DHELTAEMP\EmployeeSVEvalForm.aspx" />
     <Content Include="DHELTAEMP\EmployeeSVEvaluate.aspx" />
     <Content Include="DHELTAHR\HRAssessPersonnel.aspx" />
+    <Content Include="DHELTAHR\HRAssessReport.aspx" />
+    <Content Include="DHELTAHR\HREmployeeAttendance.aspx" />
+    <Content Include="DHELTAHR\HREmployeeOffense.aspx" />
     <Content Include="DHELTAHR\HREvaluationQuestion.aspx" />
     <Content Include="DHELTAHR\HRMainPage.aspx" />
     <Content Include="DHELTAHR\HRProfile.aspx" />
@@ -88,8 +95,6 @@
     <Content Include="DHELTAHR\HRRequestReceiving.aspx" />
     <Content Include="DHELTAHR\HRApproveLeaveRequest.aspx" />
     <Content Include="DHELTAHR\HROffenseEvaluation.aspx" />
-    <Content Include="DHELTAHR\HREmployeeOffense.aspx" />
-    <Content Include="DHELTAHR\HROffenseSummary.aspx" />
     <Content Include="DHELTASV\SVEmployeeEvalForm.aspx" />
     <Content Include="DHELTASV\SVEmployeeEvaluate.aspx" />
     <Content Include="DHELTASV\SVGenerateReport.aspx" />
@@ -216,6 +221,27 @@
     <Compile Include="DHELTAHR\HRAssessPersonnel.aspx.designer.cs">
       <DependentUpon>HRAssessPersonnel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DHELTAHR\HRAssessReport.aspx.cs">
+      <DependentUpon>HRAssessReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRAssessReport.aspx.designer.cs">
+      <DependentUpon>HRAssessReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeAttendance.aspx.cs">
+      <DependentUpon>HREmployeeAttendance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeAttendance.aspx.designer.cs">
+      <DependentUpon>HREmployeeAttendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeOffense.aspx.cs">
+      <DependentUpon>HREmployeeOffense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeOffense.aspx.designer.cs">
+      <DependentUpon>HREmployeeOffense.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DHELTAHR\HREvaluationQuestion.aspx.cs">
       <DependentUpon>HREvaluationQuestion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -299,20 +325,6 @@
     </Compile>
     <Compile Include="DHELTAHR\HROffenseEvaluation.aspx.designer.cs">
       <DependentUpon>HROffenseEvaluation.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DHELTAHR\HREmployeeOffense.aspx.cs">
-      <DependentUpon>HREmployeeOffense.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DHELTAHR\HREmployeeOffense.aspx.designer.cs">
-      <DependentUpon>HREmployeeOffense.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DHELTAHR\HROffenseSummary.aspx.cs">
-      <DependentUpon>HROffenseSummary.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DHELTAHR\HROffenseSummary.aspx.designer.cs">
-      <DependentUpon>HROffenseSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="DHELTASV\Supervisor.Master.cs">
       <DependentUpon>Supervisor.Master</DependentUpon>

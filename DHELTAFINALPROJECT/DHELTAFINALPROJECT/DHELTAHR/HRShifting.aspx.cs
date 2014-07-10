@@ -64,10 +64,10 @@ namespace DHELTAFINALPROJECT.DHELTAHR
             DataTable dtEmployeeShift = shift.ViewEmployeeShift();
             if (dtEmployeeShift.Rows.Count == 1)
             {
-                lblTimeIn.Text = dtEmployeeShift.Rows[0][3].ToString();
-                lblTimeOut.Text = dtEmployeeShift.Rows[0][4].ToString();
-                DateTime latestFromDate = DateTime.Parse(dtEmployeeShift.Rows[0][5].ToString());
-                DateTime latestToDate = DateTime.Parse(dtEmployeeShift.Rows[0][6].ToString());
+                lblTimeIn.Text = dtEmployeeShift.Rows[0][0].ToString();
+                lblTimeOut.Text = dtEmployeeShift.Rows[0][1].ToString();
+                DateTime latestFromDate = DateTime.Parse(dtEmployeeShift.Rows[0][2].ToString());
+                DateTime latestToDate = DateTime.Parse(dtEmployeeShift.Rows[0][3].ToString());
                 lblDateFrom.Text = latestFromDate.ToShortDateString();
                 lblDateTo.Text = latestToDate.ToShortDateString();
 
@@ -112,7 +112,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                         DataTable dtSelectedEmployeeShift = shift.ViewEmployeeShift();
                         if (dtSelectedEmployeeShift.Rows.Count == 1)
                         {
-                            DateTime selectedEmployeeToDate = DateTime.Parse(dtSelectedEmployeeShift.Rows[0][6].ToString());
+                            DateTime selectedEmployeeToDate = DateTime.Parse(dtSelectedEmployeeShift.Rows[0][3].ToString());
                             //lblIn.Text = selectedEmployeeToDate.ToShortDateString();
                             if (fromDate.Date > selectedEmployeeToDate.Date)
                             {

@@ -67,7 +67,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                     {
                         transfer.HrManagerDecision = dpApproval.SelectedValue.ToString();
                         transfer.TransfreReceivingID = int.Parse(gvEmployee.Rows[i].Cells[1].Text);
-                        transfer.UpdateHRReceiving();
+                        transfer.DenyAllRequest();
                         transfer.AddTransferRecieve();
                     }
                 }

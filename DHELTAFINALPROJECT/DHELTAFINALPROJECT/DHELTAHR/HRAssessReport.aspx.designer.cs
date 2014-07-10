@@ -7,108 +7,81 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DHELTAFINALPROJECT.DHELTAEMP {
+namespace DHELTAFINALPROJECT.DHELTAHR {
     
     
-    public partial class WebForm1 {
+    public partial class HRAssessReport {
         
         /// <summary>
-        /// lblFirstName control.
+        /// gvReportStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFirstName;
+        protected global::System.Web.UI.WebControls.GridView gvReportStatus;
         
         /// <summary>
-        /// Label1 control.
+        /// gvActiveEmployees control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.GridView gvActiveEmployees;
         
         /// <summary>
-        /// lblPending control.
+        /// gvEmployeeLeave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPending;
+        protected global::System.Web.UI.WebControls.GridView gvEmployeeLeave;
         
         /// <summary>
-        /// gvRequests control.
+        /// gvEmployeeOffense control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvRequests;
+        protected global::System.Web.UI.WebControls.GridView gvEmployeeOffense;
         
         /// <summary>
-        /// dpLeaveType control.
+        /// gvEmployeePresent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpLeaveType;
+        protected global::System.Web.UI.WebControls.GridView gvEmployeePresent;
         
         /// <summary>
-        /// txtStartingDate control.
+        /// gvEmployeeAttendance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartingDate;
+        protected global::System.Web.UI.WebControls.GridView gvEmployeeAttendance;
         
         /// <summary>
-        /// txtEndingDate control.
+        /// gvEmployeeEvaluation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEndingDate;
+        protected global::System.Web.UI.WebControls.GridView gvEmployeeEvaluation;
         
         /// <summary>
-        /// txtReason control.
+        /// btnSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReason;
-        
-        /// <summary>
-        /// gvBalance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvBalance;
-        
-        /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSave;
-        
-        /// <summary>
-        /// btnClose control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClose;
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
     }
 }

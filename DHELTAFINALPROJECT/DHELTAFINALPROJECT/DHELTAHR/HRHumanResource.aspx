@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DHELTAHR/HumanResource.Master" AutoEventWireup="true" CodeBehind="HRHumanResource.aspx.cs" Inherits="DHELTAFINALPROJECT.DHELTAHR.WebForm3" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DHELTAHR/HumanResource.Master" AutoEventWireup="true" CodeBehind="HRHumanResource.aspx.cs" Inherits="DHELTAFINALPROJECT.DHELTAHR.WebForm3" EnableEventValidation="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -23,12 +23,103 @@
 </div>
 
 <div class="containerFluid">
-    <div class="mainContainer">
+    <div class="mainContainer" style="border-style: none;>
         <div class="collegues">
             <h4>Your Collegues:</h4>
             <hr />
-            <asp:GridView ID="gvEmployee" runat="server" CssClass="table table-striped table-bordered table-condensed">
+            <asp:GridView ID="gvEmployee" runat="server" CssClass="table table-striped table-bordered table-condensed"
+                 onrowdatabound="gvEmployee_RowDataBound" 
+                 onselectedindexchanged="gvEmployee_SelectedIndexChanged">
             </asp:GridView>
+
+            <hr />
+
+            <table>
+            <tr>
+            <td>
+                <asp:Label ID="Label1" runat="server" Text="ID"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label2" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label3" runat="server" Text="First Name"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label4" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label5" runat="server" Text="Middle Name"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label6" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label7" runat="server" Text="Last Name"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label8" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label9" runat="server" Text="Position"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label10" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label11" runat="server" Text="Department"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label12" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label13" runat="server" Text="Email"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label14" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label15" runat="server" Text="Gender"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label16" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label17" runat="server" Text="Address"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label18" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label19" runat="server" Text="Primary Number"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label20" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label21" runat="server" Text="Alternative Number"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label22" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label23" runat="server" Text="City"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label24" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label25" runat="server" Text="SSS Number"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label26" runat="server" Text=""></asp:Label></td>
+            </tr>
+            <tr>
+            <td>
+                <asp:Label ID="Label27" runat="server" Text="PhilHealth Number"></asp:Label></td>
+            <td>
+                <asp:Label ID="Label28" runat="server" Text=""></asp:Label></td>
+            </tr>
+            </table>
         </div>
     </div>
 </div>

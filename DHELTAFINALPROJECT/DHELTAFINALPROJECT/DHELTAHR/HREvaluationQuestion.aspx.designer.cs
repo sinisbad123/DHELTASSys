@@ -13,15 +13,6 @@ namespace DHELTASSYSMEGABYTE {
     public partial class HREvaluationQuestion {
         
         /// <summary>
-        /// lnkAssess control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkAssess;
-        
-        /// <summary>
         /// gvEvaluationQuestion control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace DHELTASSYSMEGABYTE {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvEvaluationQuestion;
+        
+        /// <summary>
+        /// btnAddQuestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAddQuestion;
         
         /// <summary>
         /// txtQuestion control.

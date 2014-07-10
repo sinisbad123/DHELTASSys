@@ -32,7 +32,8 @@
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">Company <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="HRHumanResource.aspx">Human Resource</a></li>
-                                <li><a href="HRAssessPersonnel.aspx">Personnel Assessment</a></li>
+                                <li><a href="HRAssessPersonnel.aspx">Personnel Evaluation Assessment</a></li>
+                                 <li><a href="HRAssessReport.aspx">Quarterly Report Assessment</a></li>
                                 <li><a href="HREvaluationQuestion.aspx">Evaluation Questions</a></li>
                                 <li><a href="HRShifting.aspx">Shift Schedule</a></li>
                                 <li><a href="HRCompanyBenefit.aspx">Company Benefit</a></li>
@@ -53,8 +54,8 @@
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="HROffenseSummary">Offense Summary</a></li>
-                                <li><a href="attendance/ViewAllEmployeeAttendance.aspx">Attendance Summary</a></li>
+                                <li><a href="HREmployeeOffense.aspx">Offense Summary</a></li>
+                                <li><a href="HREmployeeAttendance.aspx">Attendance Summary</a></li>
                                 <li><a href="#">Performance Summary</a></li>
                             </ul>
                         </li>

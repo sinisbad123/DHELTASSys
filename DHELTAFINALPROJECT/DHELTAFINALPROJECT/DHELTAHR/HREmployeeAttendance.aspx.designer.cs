@@ -10,42 +10,42 @@
 namespace DHELTAFINALPROJECT.DHELTAHR {
     
     
-    public partial class WebForm11 {
+    public partial class HREmployeeAttendance {
         
         /// <summary>
-        /// grdPedingOffense control.
+        /// grdviewAllSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdPedingOffense;
+        protected global::System.Web.UI.WebControls.GridView grdviewAllSummary;
         
         /// <summary>
-        /// imgProof control.
+        /// lblAttendance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgProof;
+        protected global::System.Web.UI.WebControls.Label lblAttendance;
         
         /// <summary>
-        /// drpDecision control.
+        /// lblEmployeeName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpDecision;
+        protected global::System.Web.UI.WebControls.Label lblEmployeeName;
         
         /// <summary>
-        /// btnEval control.
+        /// grdViewSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEval;
+        protected global::System.Web.UI.WebControls.GridView grdViewSummary;
     }
 }

@@ -8,9 +8,9 @@ using System.Web.UI.WebControls;
 using DHELTASSys.Modules;
 using System.Data;
 
-namespace DHELTAFINALPROJECT.DHELTASV
+namespace DHELTAFINALPROJECT.DHELTAHR
 {
-    public partial class WebForm3 : System.Web.UI.Page
+    public partial class HREmployeeAttendance : System.Web.UI.Page
     {
         AttendanceModuleBL attendance = new AttendanceModuleBL();
         DataTable dt;

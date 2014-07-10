@@ -98,6 +98,12 @@ namespace DHELTASSys.Modules
             DHELTASSysDataAccess.Modify(addRequest);
         }
 
+        public void DenyRequests()
+        {
+            string denyAllRequestReceiving = "EXECUTE DenyAllReceivingRequest'" +TransferRequestID+ "'";
+            DHELTASSysDataAccess.Modify(denyAllRequestReceiving);
+        }
+
         public DataTable SelectPosition()
         {
             string selectPositionQuery = "SELECT * FROM position";
@@ -136,7 +142,7 @@ namespace DHELTASSys.Modules
             //    string cmdTwo = "Execute AddSupervisor";
             //    DHELTASSysDataAccess.Modify(cmdTwo);
 
-            string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+            string connectionString = "Server=localhost;Database=dheltassysfinal;UID=dheltassys;PWD=teammegabyte";
 
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand("AddEmpTransfer", con);
@@ -221,7 +227,8 @@ namespace DHELTASSys.Modules
 
         public void AddTransferRecieve()
         {
-            string updateEmpTransfer = "EXECUTE UpdateEmpTransferReceiving '" + TransfreReceivingID + "'";
+            string updateEmpTransfer = "EXECUTE UpdateEmpTransferReceiving";
+            DHELTASSysDataAccess.Modify(updateEmpTransfer);
         }
 
         //if HR Approve the Transfer by the Requesting Company
@@ -236,6 +243,12 @@ namespace DHELTASSys.Modules
         {
             string updateHRdecision = "EXECUTE UpdateHRReceiving '" + TransfreReceivingID + "'";
             DHELTASSysDataAccess.Modify(updateHRdecision);
+        }
+
+        public void DenyAllRequest()
+        {
+            string denyRequest = "EXECUTE DenyAllRequest'" + transfreReceivingID + "'";
+            DHELTASSysDataAccess.Modify(denyRequest);
         }
 
 

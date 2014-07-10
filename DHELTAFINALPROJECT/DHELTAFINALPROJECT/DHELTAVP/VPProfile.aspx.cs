@@ -20,6 +20,7 @@ namespace DHELTAFINALPROJECT.DHELTAVP
         HRModuleBL hr = new HRModuleBL();
         BenefitsModuleBL benefit = new BenefitsModuleBL();
         AttendanceModuleBL attendance = new AttendanceModuleBL();
+        ShiftModuleBL shift = new ShiftModuleBL();
         int userSession;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -71,6 +72,9 @@ namespace DHELTAFINALPROJECT.DHELTAVP
                         gvAttendanceSummary.DataSource = attendance.GetPersonalAttendanceRecord();
                         gvAttendanceSummary.DataBind();
 
+                        shift.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+                        gvShiftSummary.DataSource = shift.ViewEmployeeShift();
+                        gvShiftSummary.DataBind();
                     }
                 }
             }

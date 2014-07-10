@@ -78,7 +78,7 @@ namespace DHELTASSYSMEGABYTE
                 dtEvaluationStatusEmployee = companyPersonnel.ViewEvaluationStatusEmployee();
                 if (dtEvaluationStatusEmployee.Rows.Count == 0)
                 {
-                    Response.Write("<script>alert('No evaluation made yet for the selected employee.')</script>");
+                    Response.Write("<script>alert('No evaluation made yet for the selected employee!')</script>");
                 }
                 else
                 {
@@ -95,7 +95,7 @@ namespace DHELTASSYSMEGABYTE
                 dtEvaluationStatusSupervisor_Group = companyPersonnel.ViewEvaluationStatusSupervisor_Group();
                 if (dtEvaluationStatusSupervisor_Group.Rows.Count == 0)
                 {
-                    Response.Write("<script>alert('No evaluation made yet for the selected supervisor.')</script>");
+                    Response.Write("<script>alert('No evaluation made yet for the selected supervisor!')</script>");
                 }
                 else
                 {
@@ -154,7 +154,7 @@ namespace DHELTASSYSMEGABYTE
         {
             if (gvCompanyEmployees.SelectedRow == null)
             {
-                Response.Write("<script>alert('Please select first a personnel for the assessment.')</script>");
+                ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('Please select first a personnel for the assessment.');window.location='HRAssessPersonnel.aspx';</script>'");   
             }
             else
             {
@@ -164,7 +164,7 @@ namespace DHELTASSYSMEGABYTE
                 {
                     if (gvEmployeeEvaluationStatus.SelectedRow == null)
                     {
-                        Response.Write("<script>alert('Please select first the assessment status of the employee.')</script>");
+                        ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('Please select first the assessment status of the employee.');window.location='HRAssessPersonnel.aspx';</script>'");   
                     }
                     else
                     {
@@ -173,15 +173,13 @@ namespace DHELTASSYSMEGABYTE
                             dtEvaluationStatusEmployee.Rows[0][8].ToString() != "" &&
                             dtEvaluationStatusEmployee.Rows[0][9].ToString() != "")
                         {
-                            Response.Write("<script>alert('The selected employee has already been assessed.')</script>");
+                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('The selected employee has already been assessed!');window.location='HRAssessPersonnel.aspx';</script>'");   
                         }
                         else
                         {
                             companyPersonnel.Emp_evaluated_id = int.Parse(gvCompanyEmployees.SelectedRow.Cells[0].Text);
                             companyPersonnel.Emp_evaluating_id = int.Parse(gvEmployeeEvaluationStatus.SelectedRow.Cells[4].Text);
                             companyPersonnel.Eval_date = DateTime.Parse(gvEmployeeEvaluationStatus.SelectedRow.Cells[6].Text);
-
-                            //evalDate = DateTime.Parse(gvEmployeeEvaluationStatus.SelectedRow.Cells[5].Text);
 
                             string date = Session["Eval_date"].ToString();
 
@@ -194,11 +192,8 @@ namespace DHELTASSYSMEGABYTE
                                 evalScore_Sum = evalScore_Sum + evalScore;
                             }
                             evalTotalQuestions = dtEvaluationAnswersEmployee.Rows.Count;
-                            //evalTotalQuestions = int.Parse(dtEvaluationAnswersEmployee.Rows.Count.ToString());
                             evalScore_Total = evalTotalQuestions * 4;
                             evalTotalAverageScore = ((evalScore_Sum / evalScore_Total) * 100f);
-
-                            //Response.Write(evalScore_Sum.ToString() + ", " + evalScore_Total.ToString() + ", " + evalTotalAverageScore.ToString());
 
                             companyPersonnel.Eval_status_id = int.Parse(gvEmployeeEvaluationStatus.SelectedRow.Cells[0].Text);
                             companyPersonnel.Eval_score = evalTotalAverageScore;
@@ -208,7 +203,7 @@ namespace DHELTASSYSMEGABYTE
                             auditTrail.AddAuditTrail("Assess the Evaluation of the Employee");
 
                             Session.Remove("Evaluated_EmployeeID");
-                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('You have successfully completed the assessment');window.location='HRAssessPersonnel.aspx';</script>'");
+                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('You have successfully completed the assessment!');window.location='HRAssessPersonnel.aspx';</script>'");
                         }
                     }
                 }
@@ -216,7 +211,7 @@ namespace DHELTASSYSMEGABYTE
                 {
                     if (gvEvaluationStatus_Group.SelectedRow == null)
                     {
-                        Response.Write("<script>alert('Please select first the assessment status of the supervisor.')</script>");
+                        ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('Please select first the assessment status of the supervisor.');window.location='HRAssessPersonnel.aspx';</script>'");   
                     }
                     else
                     {
@@ -225,7 +220,7 @@ namespace DHELTASSYSMEGABYTE
                             dtEvaluationStatusSupervisor_Group.Rows[0][4].ToString() != "" &&
                             dtEvaluationStatusSupervisor_Group.Rows[0][5].ToString() != "")
                         {
-                            Response.Write("<script>alert('The selected supervisor has already been assessed.')</script>");
+                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('The selected supervisor has already been assessed!');window.location='HRAssessPersonnel.aspx';</script>'");   
                         }
                         else
                         {
@@ -255,7 +250,7 @@ namespace DHELTASSYSMEGABYTE
                             auditTrail.AddAuditTrail("Assess the Evaluation of the Supervisor");
 
                             Session.Remove("Evaluated_EmployeeID");
-                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('You have successfully completed the assessment');window.location='HRAssessPersonnel.aspx';</script>'");
+                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('You have successfully completed the assessment!');window.location='HRAssessPersonnel.aspx';</script>'");
                         }
                     }
                 }

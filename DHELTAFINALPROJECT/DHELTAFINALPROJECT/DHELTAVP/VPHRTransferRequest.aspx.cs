@@ -64,6 +64,7 @@ namespace DHELTAFINALPROJECT.DHELTAVP
                         transfer.TransferRequestID = int.Parse(gvEmployee.Rows[i].Cells[1].Text);
                         transfer.UpdateVPRequestingDecision();
                         transfer.AddEmployeeReceive();
+                        transfer.AddTransferRecieve();
 
                     }
                     else
@@ -71,6 +72,8 @@ namespace DHELTAFINALPROJECT.DHELTAVP
                         transfer.VpRequestingDecision = dpApproval.SelectedValue.ToString();
                         transfer.TransferRequestID = int.Parse(gvEmployee.Rows[i].Cells[1].Text);
                         transfer.DenyEmployeeRequest();
+                        transfer.DenyRequests();
+                        transfer.AddTransferRecieve();
 
                     }
                 }

@@ -127,7 +127,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (lblEmpID.Text == null)
+            /*if (lblEmpID.Text == null)
             {
                 Response.Write("<script>alert('Select an Employee first')</script>");
             }
@@ -144,36 +144,83 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                     /*if (DateTime.TryParse(txtDate.Text, out i))
                     {*/
 
-                    try
+            /* try
+             {
+                 DateTime selectedDate = DateTime.Parse(txtDate.Text);
+                 if (selectedDate > DateTime.Now)
+                 {
+
+                     transfer.CompanyID = int.Parse(lblComID.Text);
+                     transfer.YourComID = int.Parse(lblYourCompanyID.Text);
+                     transfer.Emp_id = int.Parse(lblEmpID.Text);
+                     transfer.Date_transfer = selectedDate.ToShortDateString();//txtDate.ToString();
+                     transfer.ModifyRequests();
+
+                     transfer.AddEmpRequest();
+                     Response.Write("<script>alert('Successfully Added!')</script>");
+                 }
+                 else
+                 {
+                     Response.Write("<script>alert('Date should be later than now')</script>");
+                 }
+             }
+             catch
+             {
+                 Response.Write("<script>alert('Please input a valid date!')</script>");
+             }
+         }
+         /*else
+         {
+             Response.Write("<script>alert('Please select a desired date to transfer the employee')</script>");
+         }*/
+
+            if (lblEmpID.Text == null)
+            {
+                Response.Write("<script>alert('Select an Employee first')</script>");
+            }
+            else
+            {
+                //You need a calendar input for this, hindi alam ng user anong format ang ilalagay dyan
+                if (txtDate.Text == null)
+                {
+                    Response.Write("<script>alert('Please select a desired date to transfer the employee')</script>");
+                }
+                else
+                {
+                    if (gvEmployee.Rows.Count < 0)
                     {
-                        DateTime selectedDate = DateTime.Parse(txtDate.Text);
-                        if (selectedDate > DateTime.Now)
+                        Response.Write("<script>alert('Please select a desired date to transfer the employee')</script>");
+                    }
+                    else
+                    {
+
+                        DateTime i;
+
+                        if (DateTime.TryParse(txtDate.Text, out i))
                         {
+                            DateTime selectedDate = DateTime.Parse(txtDate.Text);
+                            if (DateTime.Parse(txtDate.Text) > DateTime.Now)
+                            {
 
-                            transfer.CompanyID = int.Parse(lblComID.Text);
-                            transfer.YourComID = int.Parse(lblYourCompanyID.Text);
-                            transfer.Emp_id = int.Parse(lblEmpID.Text);
-                            transfer.Date_transfer = selectedDate.ToShortDateString();//txtDate.ToString();
-                            transfer.ModifyRequests();
-
-                            transfer.AddEmpRequest();
-                            Response.Write("<script>alert('Successfully Added!')</script>");
+                                transfer.CompanyID = int.Parse(lblComID.Text);
+                                transfer.YourComID = int.Parse(lblYourCompanyID.Text);
+                                transfer.Emp_id = int.Parse(lblEmpID.Text);
+                                transfer.Date_transfer = selectedDate.ToShortDateString();//DateTime.Parse(txtDate.Text);
+                                transfer.ModifyRequests();
+                                transfer.AddEmpRequest();
+                                Response.Write("<script>alert('Successfully Added!')</script>");
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Date should be later than now')</script>");
+                            }
                         }
                         else
                         {
-                            Response.Write("<script>alert('Date should be later than now')</script>");
+                            Response.Write("<script>alert('Please select a desired date to transfer the employee')</script>");
                         }
                     }
-                    catch
-                    {
-                        Response.Write("<script>alert('Please input a valid date!')</script>");
-                    }
                 }
-                /*else
-                {
-                    Response.Write("<script>alert('Please select a desired date to transfer the employee')</script>");
-                }*/
-
             }
         }
     }

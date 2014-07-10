@@ -1,28 +1,18 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/DHELTASV/Supervisor.Master" AutoEventWireup="true" CodeBehind="SVGenerateReport.aspx.cs" Inherits="DHELTASSys.GenerateReport" EnableEventValidation="false"%>
+﻿<%@ Page Language="C#" MasterPageFile="~/DHELTAHR/HumanResource.Master" AutoEventWireup="true" CodeBehind="HRAssessReport.aspx.cs" Inherits="DHELTAFINALPROJECT.DHELTAHR.HRAssessReport"  EnableEventValidation="false" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-<!--
-<div class="sidemenu">
-    <div class="menulist">
-        <ul class="menu">
-        <li class="sidebar"><u>Other Things You Can Do:</u></li>
-            <li class="sidebarmenu">
-                <asp:HyperLink ID="lnkAssess" runat="server" href="HRAssessPersonnel.aspx">Assess Personnel</asp:HyperLink>
-            </li>
-           <li class="sidebarmenu">
-                <a data-toggle="modal" href="#filterModal">Add Evaluation Question</a>
-            </li>
-        </ul>
-    </div>
-</div>
--->
-
 <div class="containerfluid">
     <div class="mainContainer">
         <div class="humanresource">
         <br />
-            <h1>Generate Reports</h1>
+            <h1>Consolidate Reports</h1>
             <hr />
-            <asp:GridView ID="gvActiveEmployees" runat="server" Caption="Active Employees"
+            <asp:GridView ID="gvReportStatus" runat="server" Caption="Report Status"
+            CssClass="table table-striped table-bordered table-condensed" 
+                onselectedindexchanged="gvReportStatus_SelectedIndexChanged" 
+                onrowdatabound="gvReportStatus_RowDataBound" >
+            </asp:GridView>
+            <br />
+            <asp:GridView ID="gvActiveEmployees" runat="server" Caption="Employees under the supervision"
             CssClass="table table-striped table-bordered table-condensed">
             </asp:GridView>
             <br />
@@ -45,13 +35,12 @@
             <asp:GridView ID="gvEmployeeEvaluation" runat="server" Caption="Employee Evaluation"
             CssClass="table table-striped table-bordered table-condensed">
             </asp:GridView>
-            </div>
+            <br>
             <div class="modal-footer">
-                    <asp:Button ID="btnGenerateReport" runat="server" Text="Generate Report" class="btn btn-primary" onclick="btnGenerateReport_Click" />
-                    <asp:Button ID="btnClose" runat="server" Text="Cancel" class="btn btn-default" data-dismiss="modal" />
-              </div>
+                    <asp:Button ID="btnSubmit" runat="server" Text="Submit" class="btn btn-primary" onclick="btnSubmit_Click" />
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </asp:Content>
-

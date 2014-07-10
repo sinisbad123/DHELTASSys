@@ -53,6 +53,13 @@
                     </p>
 
                 </div>
+
+                <hr />
+
+                <div>
+                    <asp:GridView ID="gvBalance" runat="server" CssClass="table table-striped table-bordered table-condensed">
+                    </asp:GridView>
+                </div>
                   
               </div>
               <div class="modal-footer">

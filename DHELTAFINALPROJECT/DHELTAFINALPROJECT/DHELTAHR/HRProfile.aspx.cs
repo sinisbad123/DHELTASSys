@@ -21,6 +21,7 @@ namespace DHELTAFINALPROJECT.DHELTAHR
         BenefitsModuleBL benefit = new BenefitsModuleBL();
         AttendanceModuleBL attendance = new AttendanceModuleBL();
         DisciplineModuleBL discipline = new DisciplineModuleBL();
+        ShiftModuleBL shift = new ShiftModuleBL();
         int userSession;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,6 +46,10 @@ namespace DHELTAFINALPROJECT.DHELTAHR
                         discipline.Emp_id = int.Parse(Session["EmployeeID"].ToString());
                         gvOffense.DataSource = discipline.DisplayOffense();
                         gvOffense.DataBind();
+
+                        shift.Emp_id = int.Parse(Session["EmployeeID"].ToString());
+                        gvShiftSummary.DataSource = shift.ViewEmployeeShift();
+                        gvShiftSummary.DataBind();
                     }
                 }
             }

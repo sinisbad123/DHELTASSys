@@ -345,6 +345,16 @@ namespace DHELTASSys.modules
             return DHELTASSysDataAccess.Select(selectCompanyEmployeesDepartmentQuery);
         }
 
+        public DataTable SelectEvaluationQuestionID()
+        {
+            string SelectEvaluationQuestionIDQuery = "EXECUTE SelectEvaluationQuestionID '" + 
+                Emp_id + "','" +
+                Eval_question + "','" +
+                Eval_category + "','" +
+                Position_name + "'";
+            return DHELTASSysDataAccess.Select(SelectEvaluationQuestionIDQuery);
+        }
+
         public DataTable SelectCompanyEmployeesPosition()
         {
             string selectCompanyEmployeesPositionQuery = "EXECUTE SelectCompanyEmployeesPosition '" + Emp_id + "','" + Position_name + "'";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,7 @@ namespace DHELTASSys
     public partial class GenerateReport : System.Web.UI.Page
     {
         ReportsModuleBL report = new ReportsModuleBL();
+        LeaveModuleBL leave = new LeaveModuleBL();
         DHELTASSysAuditTrail auditTrail = new DHELTASSysAuditTrail();
         DateTime currentDate = DateTime.Now;
         int userSession;
@@ -27,10 +29,6 @@ namespace DHELTASSys
         DataTable dtEmployeeAttendanceRating = new DataTable();
         DataSet dsReport = new DataSet();
 
-        int attendance;
-        float present;
-        float late;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["EmployeeID"] != null)
@@ -39,6 +37,8 @@ namespace DHELTASSys
                 {
                     userSession = int.Parse(Session["EmployeeID"].ToString());
                     report.Emp_id = userSession;
+                    report.Supervisor_id = userSession;
+
                     if (currentDate.Month == 3 || currentDate.Month == 6 || currentDate.Month == 9 || currentDate.Month == 12)
                     {
                         if (currentDate.Month == 3)
@@ -57,138 +57,66 @@ namespace DHELTASSys
                         {
                             quarter = "Fourth";
                         }
-                        report.Eval_quarter = quarter;
-                        
+                        report.Report_quarter = quarter;
                     }
 
-                    if (report.SelectGenerateReportDate().Rows.Count >= 1)
+                    if (report.SelectGenerateReportDate().Rows.Count != 0)
                     {
                         DateTime latestReport = DateTime.Parse(report.SelectGenerateReportDate().Rows[0][0].ToString());
-                        if (latestReport.ToString("MM-yyyy") == currentDate.ToString("MM-yyyy"))
+                        
+                        if (latestReport.Month.ToString() == currentDate.Month.ToString() &&
+                            latestReport.Year.ToString() == currentDate.Year.ToString())
                         {
                             btnGenerateReport.Enabled = false;
-                            ScriptManager.RegisterStartupScript(this, this.GetType(),
-                                "Redit", "alert('Already generated a quarterly report!'); window.location='" +
-                                Request.ApplicationPath + "SVMainPage.aspx';", true);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "Redit", "alert('Already generated a quarterly report!'); window.location='" + Request.ApplicationPath + "DHELTASV/SVMainPage.aspx';", true);
                         }
-                    }
-
-                    dtEmployeeAttendanceRating.Columns.Add("Employee ID");
-                    dtEmployeeAttendanceRating.Columns.Add("Attendance Rating");
-
-                    report.Eval_year = DateTime.Now.Year;
-                    //Active Employee under the Supervisor
-                    dtActiveEmployees = report.ViewActiveEmployees();
-                    gvActiveEmployees.DataSource = dtActiveEmployees;
-                    gvActiveEmployees.DataBind();
-
-                    //Employees' Leave Details            
-                    dtEmployeeLeave = report.ViewCurrentEmployeeLeaveBalance();
-                    gvEmployeeLeave.DataSource = dtEmployeeLeave;
-                    gvEmployeeLeave.DataBind();
-
-                    //Employees' Evaluation ratings
-                    dtEmployeeEvaluation = report.ViewEvaluationEmployees();
-                    gvEmployeeEvaluation.DataSource = dtEmployeeEvaluation;
-                    gvEmployeeEvaluation.DataBind();
-
-                    //Employees' Offenses Details
-
-                    dtEmployeeOffense = report.ViewEmployeeOffenses();
-                    gvEmployeeOffense.DataSource = dtEmployeeOffense;
-                    gvEmployeeOffense.DataBind();
-
-                    if (report.SelectGenerateReportDate().Rows.Count >= 1)
-                    {
-                        //dtEmployeeOffense = report.ViewEmployeeOffenses();
-                        dtEmployeePresent = report.ViewDaysPresentCountDate();
-                        //gvEmployeeOffense.DataSource = dtEmployeeOffense;
-                        gvEmployeePresent.DataSource = dtEmployeePresent;
-
-                        if (report.ViewAttendanceCountDate().Rows.Count >= 1)
-                        {
-                            for (int employees = 0; employees < report.ViewAttendanceCountDate().Rows.Count; employees++)
-                            {
-                                attendance = int.Parse(report.ViewAttendanceCountDate().Rows[employees][1].ToString());
-
-                                for (int empPresent = 0; empPresent < report.ViewDaysPresentCountDate().Rows.Count; empPresent++)
-                                {
-                                    if (report.ViewDaysPresentCountDate().Rows[empPresent][0].ToString() == report.ViewAttendanceCountDate().Rows[employees][0].ToString())
-                                    {
-                                        present = float.Parse(report.ViewDaysPresentCountDate().Rows[empPresent][1].ToString());
-                                        break;
-                                    }
-                                    present = 0;
-                                }
-
-                                for (int empLate = 0; empLate < report.ViewDaysLateCountDate().Rows.Count; empLate++)
-                                {
-                                    if (report.ViewDaysLateCountDate().Rows[empLate][0].ToString() == report.ViewAttendanceCountDate().Rows[employees][0].ToString())
-                                    {
-                                        late = float.Parse(report.ViewDaysLateCountDate().Rows[empLate][1].ToString());
-                                        break;
-                                    }
-                                    late = 0;
-                                }
-
-                                double rating = (((present + (late / 2)) / attendance) * 100);
-
-                                dtEmployeeAttendanceRating.Rows.Add(report.ViewAttendanceCountDate().Rows[employees][0].ToString(), rating + "%");
-                            }
-
-                            gvEmployeeAttendance.DataSource = dtEmployeeAttendanceRating;
-                        }
-
-                        //gvEmployeeOffense.DataBind();
-                        gvEmployeePresent.DataBind();
-                        gvEmployeeAttendance.DataBind();
                     }
                     else
                     {
-                        //dtEmployeeOffense = report.ViewOffensesCount();
+                        
+
+                        report.Report_year = DateTime.Now.Year;
+
+                        //Active Employee under the Supervisor
+                        dtActiveEmployees = report.ViewActiveEmployees();
+
+                        //Employees' Leave Details            
+                        dtEmployeeLeave = report.ViewCurrentEmployeeLeaveBalance();
+
+                        //Employees' Evaluation ratings
+                        dtEmployeeEvaluation = report.ViewEvaluationEmployees();
+
+                        //Employees' Offenses Details
+                        dtEmployeeOffense = report.ViewEmployeeOffenses();
+
+                        //Employees' Present
                         dtEmployeePresent = report.ViewDaysPresentCount();
-                        //gvEmployeeOffense.DataSource = dtEmployeeOffense;
-                        gvEmployeePresent.DataSource = dtEmployeePresent;
+                        
 
-                        if (report.ViewAttendanceCount().Rows.Count >= 1)
+                        if (dtActiveEmployees.Rows.Count == 0 || dtEmployeeLeave.Rows.Count == 0 ||
+                            dtEmployeeEvaluation.Rows.Count == 0 || dtEmployeeOffense.Rows.Count == 0 ||
+                            dtEmployeePresent.Rows.Count == 0)
                         {
-                            for (int employees = 0; employees < report.ViewAttendanceCount().Rows.Count; employees++)
-                            {
-                                attendance = int.Parse(report.ViewAttendanceCount().Rows[employees][1].ToString());
-
-                                for (int empPresent = 0; empPresent < report.ViewDaysPresentCount().Rows.Count; empPresent++)
-                                {
-                                    if (report.ViewDaysPresentCount().Rows[empPresent][0].ToString() == report.ViewAttendanceCount().Rows[employees][0].ToString())
-                                    {
-                                        present = float.Parse(report.ViewDaysPresentCount().Rows[empPresent][1].ToString());
-                                        break;
-                                    }
-                                    present = 0;
-                                }
-
-                                for (int empLate = 0; empLate < report.ViewDaysLateCount().Rows.Count; empLate++)
-                                {
-                                    if (report.ViewDaysLateCount().Rows[empLate][0].ToString() == report.ViewAttendanceCount().Rows[employees][0].ToString())
-                                    {
-                                        late = float.Parse(report.ViewDaysLateCount().Rows[empLate][1].ToString());
-                                        break;
-                                    }
-                                    late = 0;
-                                }
-
-                                double rating = (((present + (late / 2)) / attendance) * 100);
-
-                                dtEmployeeAttendanceRating.Rows.Add(report.ViewAttendanceCount().Rows[employees][0].ToString(), rating + "%");
-                            }
-                            gvEmployeeAttendance.DataSource = dtEmployeeAttendanceRating;
+                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('The required details needed for the generation of the reports are not complete yet!');window.location='SVMainPage.aspx';</script>'");
                         }
-                        //gvEmployeeOffense.DataBind();
-                        gvEmployeePresent.DataBind();
-                        gvEmployeeAttendance.DataBind();
+                        else
+                        {
+                            gvActiveEmployees.DataSource = dtActiveEmployees;
+                            gvActiveEmployees.DataBind();
+
+                            gvEmployeeLeave.DataSource = dtEmployeeLeave;
+                            gvEmployeeLeave.DataBind();
+
+                            gvEmployeeEvaluation.DataSource = dtEmployeeEvaluation;
+                            gvEmployeeEvaluation.DataBind();
+
+                            gvEmployeeOffense.DataSource = dtEmployeeOffense;
+                            gvEmployeeOffense.DataBind();
+
+                            gvEmployeePresent.DataSource = dtEmployeePresent;
+                            gvEmployeePresent.DataBind();
+                        }
                     }
-                    //gvEmployeeEvaluation.DataBind();
-                    //gvActiveEmployees.DataBind();
-                    //gvEmployeeLeave.DataBind();
                 }
                 else if (Session["Position"].ToString() == "Vice President")
                 {
@@ -220,22 +148,24 @@ namespace DHELTASSys
             dtEmployeeEvaluation.TableName = "Employee Evaluation";
             dtEmployeeOffense.TableName = "Employee Offense";
             dtEmployeePresent.TableName = "Employee Present Count";
-            dtEmployeeAttendanceRating.TableName = "Employee Attendance Rating";
             dsReport.Tables.Add(dtActiveEmployees);
             dsReport.Tables.Add(dtEmployeeLeave);
             dsReport.Tables.Add(dtEmployeeEvaluation);
             dsReport.Tables.Add(dtEmployeeOffense);
             dsReport.Tables.Add(dtEmployeePresent);
-            dsReport.Tables.Add(dtEmployeeAttendanceRating);
             string path = "" + System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "";
-            //ExcelLibrary.DataSetHelper.CreateWorkbook(path + @"\" + quarter + " Quarter " + currentDate.Year + " Employee Report.xls", dsReport);
+            ExcelLibrary.DataSetHelper.CreateWorkbook(path + @"\" + quarter + " Quarter " + currentDate.Year + " Employee Report.xls", dsReport);
+            
+            report.AddReportStatusSupervisor();
 
-            //auditTrail.Emp_id = userSession;
-            //auditTrail.AddAuditTrail("Generate Report");
+            auditTrail.Emp_id = userSession;
+            auditTrail.AddAuditTrail("Generate Report");
             ScriptManager.RegisterStartupScript(this, this.GetType(), 
                 "Redit", "alert('Successfully generated a quarterly report!'); window.location='" + 
-                Request.ApplicationPath + "SVMainPage.aspx';", true);
-            //Response.Write("<script>alert('File saved at "+ path + @" \ " + quarter + " Quarter " + currentDate.Year + " Employee Report.xls')</script>");
+                Request.ApplicationPath + "DHELTASV/SVMainPage.aspx';", true);
+            Response.Write("<script>alert('File saved at "+ path + @" \ " + quarter + " Quarter " + currentDate.Year + " Employee Report.xls')</script>");
+            leave.Emp_id = userSession;
+            leave.ResetLeaveBalance();
         }
     }
 }

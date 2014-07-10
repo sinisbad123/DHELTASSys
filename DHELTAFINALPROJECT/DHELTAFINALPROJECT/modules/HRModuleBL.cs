@@ -284,6 +284,15 @@ namespace DHELTASSys.Modules
             return dt;
         }
 
+        //Get employee information
+        public DataTable GetEmployeeInformation()
+        {
+            string cmd = "EXECUTE GetEmployeeInformation"
+                + "'" + Emp_id + "'";
+            DataTable dt = DHELTASSysDataAccess.Select(cmd);
+            return dt;
+        }
+
         public DataTable LogIn()
         {
             string login = "EXECUTE loginUser'" + Emp_id + "'";
@@ -305,6 +314,13 @@ namespace DHELTASSys.Modules
             
         }
 
+
+        public DataTable SeleectAllEmployeeByCompany()
+        {
+            string selectAllEmployee = "EXECUTE SelectAllEmployee";
+            DataTable dt = DHELTASSysDataAccess.Select(selectAllEmployee);
+            return dt;
+        }
 
     }
 }

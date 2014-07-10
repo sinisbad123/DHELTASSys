@@ -22,7 +22,8 @@ namespace DHELTASSYSMEGABYTE
         string userPosition;
         int year;
         DataTable dtEvalStatSV;
-        DataTable dtEvaluationStatusSupervisor_PerEmployee;
+        DataTable dtEvaluated_Supervisor = new DataTable();
+        DataTable dtEvaluationStatusSupervisor_PerEmployee = new DataTable();
 
         EvaluationModuleBL evalSupervisor = new EvaluationModuleBL();
         DHELTASSysAuditTrail auditTrail = new DHELTASSysAuditTrail();
@@ -41,8 +42,6 @@ namespace DHELTASSYSMEGABYTE
                         userSession = int.Parse(Session["EmployeeID"].ToString());
                         userPosition = Session["Position"].ToString();
                         evalSupervisor.Emp_evaluating_id = userSession;
-                        gvSVEvaluate.DataSource = evalSupervisor.ViewEvaluateSupervisors();
-                        gvSVEvaluate.DataBind();
 
                         if (DateTime.Now.Month <= 03)
                         {
@@ -62,6 +61,21 @@ namespace DHELTASSYSMEGABYTE
                         }
                         year = int.Parse(DateTime.Now.Year.ToString());
                         evalSupervisor.Eval_year = year;
+
+                        dtEvaluated_Supervisor = evalSupervisor.ViewEvaluateSupervisors();
+
+                        evalSupervisor.Emp_evaluated_id = int.Parse(dtEvaluated_Supervisor.Rows[0][0].ToString());
+                        
+                        dtEvaluationStatusSupervisor_PerEmployee = evalSupervisor.ViewEvaluationStatusSupervisor_PerEmployee();
+                        if (dtEvaluationStatusSupervisor_PerEmployee.Rows.Count != 0)
+                        {
+                            ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('The supervisor has already been evaluated!');window.location='EmployeeMainPage.aspx';</script>'");                       
+                        }
+                        else
+                        {
+                            gvSVEvaluate.DataSource = dtEvaluated_Supervisor;
+                            gvSVEvaluate.DataBind();           
+                        }
                     }
                     else if (Session["Position"].ToString() == "Vice President")
                     {
@@ -83,37 +97,22 @@ namespace DHELTASSYSMEGABYTE
                 else
                 {
                     Response.Redirect("index.aspx");
-                }
-            //}
-            //else
-            //{
-            //    Response.Write("<script>alert('Hindi pa sched ng evaluation. Atat ka masyado. Wag kang excited.')</script>");
-            //}           
+                }       
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
-        {
-            
+        {         
             if (gvSVEvaluate.SelectedRow == null)
             {
-                Response.Write("<script>alert('No selected supervisor to evaluate.')</script>");
+                ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('No selected supervisor to evaluate!');window.location='EmployeeSVEvaluate.aspx';</script>'");                       
             }
             else
-            {
+            {              
+                evalSupervisor.Emp_evaluating_id = userSession;
                 evalSupervisor.Emp_evaluated_id = int.Parse(gvSVEvaluate.SelectedRow.Cells[0].Text);
-                dtEvaluationStatusSupervisor_PerEmployee = evalSupervisor.ViewEvaluationStatusSupervisor_PerEmployee();
-                if (dtEvaluationStatusSupervisor_PerEmployee.Rows.Count != 0)
-                {
-                    Response.Write("<script>alert('The selected supervisor has already been evaluated.')</script>");
-                }
-                else
-                {
-                    evalSupervisor.Emp_evaluating_id = userSession;
-                    evalSupervisor.Emp_evaluated_id = int.Parse(gvSVEvaluate.SelectedRow.Cells[0].Text);
-                    dtEvalStatSV = evalSupervisor.ViewEvalStatAnswers();
-                    Session.Add("Evaluated_EmployeeID", gvSVEvaluate.SelectedRow.Cells[0].Text);
-                    Response.Redirect("EmployeeSVEvalForm.aspx");
-                }
+                dtEvalStatSV = evalSupervisor.ViewEvalStatAnswers();
+                Session.Add("Evaluated_EmployeeID", gvSVEvaluate.SelectedRow.Cells[0].Text);
+                Response.Redirect("EmployeeSVEvalForm.aspx");
             } 
         }
 

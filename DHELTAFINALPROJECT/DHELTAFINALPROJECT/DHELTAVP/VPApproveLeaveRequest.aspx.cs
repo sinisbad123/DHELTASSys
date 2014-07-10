@@ -34,6 +34,7 @@ namespace DHELTAFINALPROJECT.DHELTAVP
                     if (!IsPostBack)
                     {
                         leave.Emp_id = userSession;
+                        leave.Date_from = DateTime.Now.ToShortDateString();
                         gvPendingRequest.DataSource = leave.ViewVPLeaveRequest();
                         gvPendingRequest.DataBind();
                         if (gvPendingRequest.Rows.Count <= 0)
@@ -67,6 +68,8 @@ namespace DHELTAFINALPROJECT.DHELTAVP
                         leave.Leave_req_id = int.Parse(gvPendingRequest.Rows[i].Cells[1].Text);
                         leave.Vp_decision = dpHRDecision.SelectedValue.ToString();
                         leave.EmployeeLeaveVPDecision();
+                        //leave.Emp_id = int.Parse(gvPendingRequest.Rows[i].Cells[2].Text);
+                        leave.Emp_id = int.Parse(leave.viewLeaveRequestEmployeeID().Rows[0][0].ToString());
                         leave.UpdateLeaveBalance();
                         auditTrail.Emp_id = userSession;
                         auditTrail.AddAuditTrail("Approved " + gvPendingRequest.Rows[i].Cells[2].Text + " Leave Request");

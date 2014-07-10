@@ -28,6 +28,7 @@ namespace DHELTASSYSMEGABYTE
 
         DataTable dtQuestions = new DataTable();
         DataTable dtEvaluated_Employee = new DataTable();
+        DataTable dtEvaluationStatusEmployee = new DataTable();
         RadioButtonList rbtn = new RadioButtonList();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -39,9 +40,7 @@ namespace DHELTASSYSMEGABYTE
                     userSession = int.Parse(Session["EmployeeID"].ToString());
                     userPosition = Session["Position"].ToString();
                     evalEmployee.Emp_evaluating_id = userSession;
-                    gvEmployeeEvaluate.DataSource = evalEmployee.ViewEvaluateEmployees();
-                    gvEmployeeEvaluate.DataBind();
-
+ 
                     if (DateTime.Now.Month <= 03)
                     {
                         evalEmployee.Eval_quarter = "First";
@@ -60,43 +59,61 @@ namespace DHELTASSYSMEGABYTE
                     }
                     year = int.Parse(DateTime.Now.Year.ToString());
                     evalEmployee.Eval_year = year;
+
+                    gvEmployeeEvaluate.DataSource = evalEmployee.ViewEvaluateEmployees();
+                    gvEmployeeEvaluate.DataBind();
+                }
+                else if (Session["Position"].ToString() == "Vice President")
+                {
+                    Response.Redirect("VPMainPage.aspx");
+                }
+                else if (Session["Position"].ToString() == "HR Manager")
+                {
+                    Response.Redirect("HRMainPage.aspx");
+                }
+                else if (Session["Position"].ToString() == "Supervisor")
+                {
+                    Response.Redirect("SVMainPage.aspx");
                 }
                 else
                 {
                     Response.Redirect("index.aspx");
                 }
             }
-            else {
+            else
+            {
                 Response.Redirect("index.aspx");
             }
         }
+
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             if (gvEmployeeEvaluate.SelectedRow == null)
             {
-                Response.Write("<script>alert('No selected employee to evaluate.')</script>");
+                ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('No selected employee to evaluate!');window.location='SVEmployeeEvaluate.aspx';</script>'");   
             }
             else
             {
-                evalEmployee.Emp_evaluated_id = int.Parse(gvEmployeeEvaluate.SelectedRow.Cells[0].Text);
-                dtEvalStatEmp = evalEmployee.ViewEvalStatAnswers();
-
-                if (dtEvalStatEmp.Rows.Count == 0)
-                {
-                    Session.Add("Evaluated_EmployeeID", gvEmployeeEvaluate.SelectedRow.Cells[0].Text);
-                    Response.Redirect("SVEmployeeEvalForm.aspx");
-                }
-                else
-                {
-                    Response.Write("<script>alert('The selected employee has already been evaluated.')</script>");
-                }
+                Session.Add("Evaluated_EmployeeID", gvEmployeeEvaluate.SelectedRow.Cells[0].Text);
+                Response.Redirect("SVEmployeeEvalForm.aspx");
             }
         }
 
         protected void gvEmployeeEvaluate_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             e.Row.Attributes["onclick"] = ClientScript.GetPostBackClientHyperlink(this.gvEmployeeEvaluate, "Select$" + e.Row.RowIndex);
+        }
+
+        protected void gvEmployeeEvaluate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            evalEmployee.Emp_evaluated_id = int.Parse(gvEmployeeEvaluate.SelectedRow.Cells[0].Text);
+
+            dtEvaluationStatusEmployee = evalEmployee.ViewEvaluationStatusEmployee();
+            if (dtEvaluationStatusEmployee.Rows.Count != 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Success", "<script type='text/javascript'>alert('The selected employee has already been evaluated!');window.location='SVEmployeeEvaluate.aspx';</script>'");
+            }
         }
     }
 }

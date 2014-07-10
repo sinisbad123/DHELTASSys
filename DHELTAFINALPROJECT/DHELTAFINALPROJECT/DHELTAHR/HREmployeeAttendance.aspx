@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DHELTASV/Supervisor.Master" AutoEventWireup="true" CodeBehind="SVEmployeeAttendance.aspx.cs" Inherits="DHELTAFINALPROJECT.DHELTASV.WebForm3" EnableEventValidation="false" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/DHELTAHR/HumanResource.Master" AutoEventWireup="true" CodeBehind="HREmployeeAttendance.aspx.cs" Inherits="DHELTAFINALPROJECT.DHELTAHR.HREmployeeAttendance" EnableEventValidation="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-<div class="container">
+    <div class="container">
     <div class="content">
         <div class="mainContent">
             <div class="attendance">
@@ -29,7 +28,4 @@
         </div>
     </div>
 </div>
-
-
-
 </asp:Content>

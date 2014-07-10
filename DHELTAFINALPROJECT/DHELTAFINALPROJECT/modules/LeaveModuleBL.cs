@@ -79,13 +79,13 @@ namespace DHELTASSys.modules
 
         public void UpdateLeaveBalance()
         {
-            string updateLeaveBalanceQuery = "EXECUTE UpdateLeaveBalance '" + Leave_req_id + "'";
+            string updateLeaveBalanceQuery = "EXECUTE UpdateLeaveBalance '" + Leave_req_id + "','"+ Emp_id+"'";
             DHELTASSysDataAccess.Modify(updateLeaveBalanceQuery);
         }
 
         public DataTable ViewVPLeaveRequest()
         {
-            string viewVPLeaveRequestQuery = "EXECUTE ViewVPLeaveRequest '" + Emp_id + "'";
+            string viewVPLeaveRequestQuery = "EXECUTE ViewVPLeaveRequest '" + Emp_id + "','" + Date_from + "'";
             DataTable dtVPLeaveRequest = DHELTASSysDataAccess.Select(viewVPLeaveRequestQuery);
             return dtVPLeaveRequest;
         }
@@ -94,6 +94,12 @@ namespace DHELTASSys.modules
         {
             string employeLeaveHRDecisionQuery = "EXECUTE HRDecision  '" + Hr_manager_decision + "', '" + Leave_req_id + "'";
             DHELTASSysDataAccess.Modify(employeLeaveHRDecisionQuery);
+        }
+        public DataTable viewLeaveRequestEmployeeID()
+        {
+            string viewLeaveRequestEmployeeIDQuery = "EXECUTE viewLeaveRequestEmployeeID '" + Leave_req_id + "'";
+            DataTable dtLeaveRequestEmployeeID = DHELTASSysDataAccess.Select(viewLeaveRequestEmployeeIDQuery);
+            return dtLeaveRequestEmployeeID;
         }
 
         public DataTable ViewHRLeaveRequest()

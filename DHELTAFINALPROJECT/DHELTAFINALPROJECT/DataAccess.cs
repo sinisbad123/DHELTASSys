@@ -12,7 +12,7 @@ namespace DHELTASSYS
     {
         public class DHELTASSysDataAccess
         {
-            public static string connectionString = "SERVER=localhost;DATABASE=dheltassys;UID=dheltassys;PWD=teammegabyte;";
+            public static string connectionString = "SERVER=localhost;DATABASE=dheltassysfinal;UID=dheltassys;PWD=teammegabyte;";
 
             public static void Modify(string SqlStatement)
             {
