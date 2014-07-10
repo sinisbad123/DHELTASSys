@@ -74,49 +74,64 @@ namespace Enrollment
                     }
                     else
                     {
-                        //check if the employee has timed-in
-                        if (attendance.CheckIfEmployeeHasLoggedIn().Rows.Count == 0)
+                        try
                         {
-                            DateTime timeIn = DateTime.Parse(attendance.GetTimeInOfEmployee().Rows[0][0].ToString());
-                            DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
-                            attendance.MacAddress = network.GetMacAddress();
-                            // Time him in
-                            if (currentTime.Subtract(timeIn).TotalMinutes <= 0)
+
+                            //check if the employee has timed-in
+                            if (attendance.CheckIfEmployeeHasLoggedIn().Rows.Count == 0)
                             {
-                                attendance.TimeInEmployee("Present");
-                                MessageBox.Show("Successfully Timed-in.");
+                                DateTime timeIn = DateTime.Parse(attendance.GetTimeInOfEmployee().Rows[0][0].ToString());
+                                DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
+                                attendance.MacAddress = network.GetMacAddress();
+                                // Time him in
+                                if (!attendance.CheckIfEmployeeIsOnLeave())
+                                {
+                                    if (currentTime.Subtract(timeIn).TotalMinutes <= 0)
+                                    {
+                                        attendance.TimeInEmployee("Present");
+                                        MessageBox.Show("Successfully Timed-in.");
+                                    }
+                                    else if (currentTime.Subtract(timeIn).TotalMinutes <= 20)
+                                    {
+                                        attendance.TimeInEmployee("Late");
+                                        MessageBox.Show("Successfully Timed-in.");
+                                    }
+                                    else if (currentTime.Subtract(timeIn).TotalMinutes > 20)
+                                    {
+                                        attendance.TimeInEmployee("Absent");
+                                        MessageBox.Show("Successfully Timed-in.");
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Employee is on leave.");
+                                }
                             }
-                            else if (currentTime.Subtract(timeIn).TotalMinutes <= 20)
+                            else
                             {
-                                attendance.TimeInEmployee("Late");
-                                MessageBox.Show("Successfully Timed-in.");
-                            }
-                            else if (currentTime.Subtract(timeIn).TotalMinutes > 20)
-                            {
-                                attendance.TimeInEmployee("Absent");
-                                MessageBox.Show("Successfully Timed-in.");
+                                //Check if employee has time-out correctly or incorrectly using the time-out in shift table for
+                                //that employee
+                                DateTime timeOut = DateTime.Parse(attendance.GetTimeOutOfEmployee().Rows[0][0].ToString());
+                                DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
+                                if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes < -180)
+                                {
+                                    MessageBox.Show("Can't allow time-out, time-out at least 3 hours before your shift.");
+                                }
+                                else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
+                                {
+                                    attendance.TimeOutEmployee();
+                                    MessageBox.Show("Successfully Timed-out.");
+                                }
+                                else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 0)
+                                {
+                                    MessageBox.Show("You have already timed-out.");
+                                }
+
                             }
                         }
-                        else
+                        catch
                         {
-                            //Check if employee has time-out correctly or incorrectly using the time-out in shift table for
-                            //that employee
-                            DateTime timeOut = DateTime.Parse(attendance.GetTimeOutOfEmployee().Rows[0][0].ToString());
-                            DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
-                            if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >=1 && currentTime.Subtract(timeOut).TotalMinutes < -180)
-                            {
-                                MessageBox.Show("Can't allow time-out, time-out at least 3 hours before your shift.");
-                            }
-                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
-                            {
-                                attendance.TimeOutEmployee();
-                                MessageBox.Show("Successfully Timed-out.");
-                            }
-                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 0)
-                            {
-                                MessageBox.Show("You have already timed-out.");
-                            }
-
+                            MessageBox.Show("Please let the HR Manager know that your shift has already reached its end date.");
                         }
                     }
                 }

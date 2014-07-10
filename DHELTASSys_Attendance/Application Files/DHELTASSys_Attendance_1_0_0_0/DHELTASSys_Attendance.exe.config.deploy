@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <connectionStrings>
+    <clear />
+    <add name="Enrollment.Properties.Settings.dheltassysConnectionString" connectionString="Data Source=localhost;Initial Catalog=dheltassys;Persist Security Info=True;User ID=dheltassys;Password=teammegabyte" providerName="System.Data.SqlClient"/>
+  </connectionStrings>
+</configuration>

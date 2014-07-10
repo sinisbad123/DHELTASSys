@@ -83,6 +83,22 @@ namespace DHELTASSys.Modules
             return dt;
         }
 
+        public bool CheckIfEmployeeIsOnLeave()
+        {
+            string cmd = "EXECUTE CheckIfEmployeeIsOnLeave"
+                + "'" + Emp_id + "',"
+                + "'" + DateTime.Now.ToShortDateString() + "'";
+            DataTable dt = DHELTASSysDataAccess.Select(cmd);
+            if (dt.Rows.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public DataTable CheckIfMacAddressRegistered()
         {
             string cmd = "EXECUTE CheckIfMacAddressRegistered"
@@ -116,7 +132,8 @@ namespace DHELTASSys.Modules
         public DataTable GetTimeInOfEmployee()
         {
             string cmd = "EXECUTE GetTimeInOfEmployee"
-                + "'" + Emp_id + "'";
+                + "'" + Emp_id + "',"
+                + "'" + DateTime.Now.ToShortDateString() + "'";
             DataTable dt = DHELTASSysDataAccess.Select(cmd);
             return dt;
         }
@@ -124,7 +141,8 @@ namespace DHELTASSys.Modules
         public DataTable GetTimeOutOfEmployee()
         {
             string cmd = "EXECUTE GetTimeOutOfEmployee"
-                + "'" + Emp_id + "'";
+                + "'" + Emp_id + "',"
+                + "'" + DateTime.Now.ToShortDateString() + "'";
             DataTable dt = DHELTASSysDataAccess.Select(cmd);
             return dt;
         }
@@ -144,6 +162,7 @@ namespace DHELTASSys.Modules
                 + "'" + DateTime.Now.ToShortTimeString() + "',"
                 + "'" + MacAddress + "',"
                 + "'" + DateTime.Now.ToString("MM-dd-yyyy") + "',"
+                + "'" + DateTime.Now.ToShortDateString() + "',"
                 + "'" + status + "'";
             DHELTASSysDataAccess.Modify(cmd);
         }

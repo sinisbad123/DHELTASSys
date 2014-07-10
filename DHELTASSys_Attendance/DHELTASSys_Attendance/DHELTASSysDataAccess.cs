@@ -15,7 +15,7 @@ namespace DHELTASSys
         {
 
 
-            public static string connectionString = "Server=localhost;Database=dheltassys;UID=dheltassys;PWD=teammegabyte";
+            public static string connectionString = "Server=localhost;Database=dheltassysfinal;UID=dheltassys;PWD=teammegabyte";
             
             public static void Modify(string SqlStatement)
             {

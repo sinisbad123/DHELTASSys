@@ -9,6 +9,7 @@ using System.Net.NetworkInformation;
 
 //imports
 using DHELTASSys.Modules;
+using Marcucu;
 
 namespace Enrollment
 {
@@ -22,6 +23,7 @@ namespace Enrollment
 	public class VerificationForm : CaptureForm
 	{
         AttendanceModuleBL attendance = new AttendanceModuleBL();
+        NetworkUtility network = new NetworkUtility();
 
         delegate void Function();
 
@@ -42,109 +44,146 @@ namespace Enrollment
 
 		protected override void Process(DPFP.Sample Sample)
 		{
-            int i = 0;
-
-            int x = 0;
-
-            DataTable dt = attendance.GetEmployeeFingerprint();
-            
-
-            do
+            try
             {
-                
+                int i = 0;
+
+                int x = 0;
+
+                //Get DataTable containing fingerprint and Employee ID
+                DataTable dt = attendance.GetEmployeeFingerprint();
+
+                //Number of rows retrieved
+                int count = dt.Rows.Count;
 
 
-                byte[] fingerprint = (byte[])dt.Rows[x][1];
-
-                MemoryStream ms = new MemoryStream(fingerprint);
-
-                DPFP.Template Template = new DPFP.Template();
-
-                Template.DeSerialize(ms);
-
-                DPFP.Verification.Verification Verificator = new DPFP.Verification.Verification();
-                
-
-                base.Process(Sample);
-
-                // Process the sample and create a feature set for the enrollment purpose.
-                DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
-
-                // Check quality of the sample and start verification if it's good
-                // TODO: move to a separate task
-                if (features != null)
+                do
                 {
-                    // Compare the feature set with our template
-                    DPFP.Verification.Verification.Result result = new DPFP.Verification.Verification.Result();
-                    Verificator.Verify(features, Template, ref result);
-                    UpdateStatus(result.FARAchieved);
-                    if (result.Verified)
+
+
+                    //Current fingerprint of the row
+                    byte[] fingerprint = (byte[])dt.Rows[x][1];
+
+                    MemoryStream ms = new MemoryStream(fingerprint);
+
+                    DPFP.Template Template = new DPFP.Template();
+
+                    Template.DeSerialize(ms);
+
+                    DPFP.Verification.Verification Verificator = new DPFP.Verification.Verification();
+
+
+                    base.Process(Sample);
+
+                    // Process the sample and create a feature set for the enrollment purpose.
+                    DPFP.FeatureSet features = ExtractFeatures(Sample, DPFP.Processing.DataPurpose.Verification);
+
+                    // Check quality of the sample and start verification if it's good
+                    // TODO: move to a separate task
+                    //If there's a fingerprint template
+                    if (features != null)
                     {
-                        MakeReport("The fingerprint was VERIFIED.");
+                        // Compare the feature set with our template
+                        DPFP.Verification.Verification.Result result = new DPFP.Verification.Verification.Result();
+                        Verificator.Verify(features, Template, ref result);
+                        UpdateStatus(result.FARAchieved);
 
-                        attendance.Emp_id = int.Parse(dt.Rows[x][0].ToString());
-
-                        //check if the employee has timed-in
-                        if (attendance.CheckIfEmployeeHasLoggedIn().Rows.Count == 0)
+                        //if the fingerprint matched any record
+                        if (result.Verified)
                         {
-                            DateTime timeIn = DateTime.Parse(attendance.GetTimeInOfEmployee().Rows[0][0].ToString());
-                            DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
-                            attendance.MacAddress = GetMacAddress();
-                            // Time him in
-                            if (currentTime.Subtract(timeIn).TotalMinutes <= 0)
+                            MakeReport("The fingerprint was VERIFIED.");
+
+                            attendance.Emp_id = int.Parse(dt.Rows[x][0].ToString());
+                            try
                             {
-                                attendance.TimeInEmployee("Present");
-                                MessageBox.Show("Successfully Timed-in.");
-                                break;
+                                //check if the employee hasn't timed in
+                                if (attendance.CheckIfEmployeeHasLoggedIn().Rows.Count == 0)
+                                {
+                                    DateTime timeIn = DateTime.Parse(attendance.GetTimeInOfEmployee().Rows[0][0].ToString());
+                                    DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
+                                    attendance.MacAddress = network.GetMacAddress();
+                                    // Time him in
+                                    if (!attendance.CheckIfEmployeeIsOnLeave())
+                                    {
+                                        if (currentTime.Subtract(timeIn).TotalMinutes <= 0)
+                                        {
+                                            attendance.TimeInEmployee("Present");
+                                            MessageBox.Show("Successfully Timed-in.");
+                                            break;
+                                        }
+                                        else if (currentTime.Subtract(timeIn).TotalMinutes <= 20)
+                                        {
+                                            attendance.TimeInEmployee("Late");
+                                            MessageBox.Show("Successfully Timed-in.");
+                                            break;
+                                        }
+                                        else if (currentTime.Subtract(timeIn).TotalMinutes > 20)
+                                        {
+                                            attendance.TimeInEmployee("Absent");
+                                            MessageBox.Show("Successfully Timed-in.");
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Employee is on leave!");
+                                    }
+                                }
+                                else
+                                {
+                                    //Check if employee has time-out correctly or incorrectly using the time-out in shift table for
+                                    //that employee
+                                    DateTime timeOut = DateTime.Parse(attendance.GetTimeOutOfEmployee().Rows[0][0].ToString());
+                                    DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
+                                    if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes < -180)
+                                    {
+                                        MessageBox.Show("Can't allow time-out, time-out at least 3 hours before your shift.");
+                                        break;
+                                    }
+                                    else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
+                                    {
+                                        attendance.TimeOutEmployee();
+                                        MessageBox.Show("Successfully Timed-out.");
+                                        break;
+                                    }
+                                    else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 0)
+                                    {
+                                        MessageBox.Show("You have already timed-out.");
+                                        break;
+                                    }
+
+                                }
                             }
-                            else if (currentTime.Subtract(timeIn).TotalMinutes <= 20)
+                            catch
                             {
-                                attendance.TimeInEmployee("Late");
-                                MessageBox.Show("Successfully Timed-in.");
-                                break;
+                                MessageBox.Show("Report to the HR Manager for your expired shift schedule.");
                             }
-                            else if (currentTime.Subtract(timeIn).TotalMinutes > 20)
-                            {
-                                attendance.TimeInEmployee("Absent");
-                                MessageBox.Show("Successfully Timed-in.");
-                                break;
-                            }
+                            //catch (Exception ex)
+                            //{
+                            //    MessageBox.Show(ex.ToString());
+                            //}
+                            //Get out of the loop since you found the matching fingerprint or an error has occured
+                            i++;
                         }
-                        else
+                        else // else continue
                         {
-                            //Check if employee has time-out correctly or incorrectly using the time-out in shift table for
-                            //that employee
-                            DateTime timeOut = DateTime.Parse(attendance.GetTimeOutOfEmployee().Rows[0][0].ToString());
-                            DateTime currentTime = DateTime.Parse(DateTime.Now.ToShortTimeString());
-                            if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes < -180)
-                            {
-                                MessageBox.Show("Can't allow time-out, time-out at least 3 hours before your shift.");
-                                break;
-                            }
-                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 1 && currentTime.Subtract(timeOut).TotalMinutes >= -180)
-                            {
-                                attendance.TimeOutEmployee();
-                                MessageBox.Show("Successfully Timed-out.");
-                                break;
-                            }
-                            else if (attendance.CheckIfEmployeeHasTimedOut().Rows.Count >= 0)
-                            {
-                                MessageBox.Show("You have already timed-out.");
-                                break;
-                            }
-
+                            x++;
                         }
 
-                        i++;
+                        //Stop if the loop reaches the maximum row retrieved
+                        if (x == count) 
+                        {
+                            MessageBox.Show("No records found.");
+                            i++; 
+                        }
                     }
-                    else
-                    {
-                        MakeReport("No matching records found.");
-                        x++;
-                        break;
-                    }
-                }
-            } while (i == 0);
+                } while (i == 0);
+            }
+            catch(Exception ex)
+            {
+                //this means that there are no rows retreived
+                MessageBox.Show(ex.ToString());
+            }
 		}
 
 		private void UpdateStatus(int FAR)
@@ -152,23 +191,6 @@ namespace Enrollment
 			// Show "False accept rate" value
 			SetStatus(String.Format("False Accept Rate (FAR) = {0}", FAR));
 		}
-
-
-        public string GetMacAddress()
-        {
-            NetworkInterface[] ni = NetworkInterface.GetAllNetworkInterfaces();
-            String macAddress = string.Empty;
-            foreach (NetworkInterface adapter in ni)
-            {
-                if (macAddress == string.Empty)
-                {
-                    IPInterfaceProperties properties = adapter.GetIPProperties();
-                    macAddress = adapter.GetPhysicalAddress().ToString();
-                }
-            }
-
-            return macAddress;
-        }
 
         private void InitializeComponent()
         {

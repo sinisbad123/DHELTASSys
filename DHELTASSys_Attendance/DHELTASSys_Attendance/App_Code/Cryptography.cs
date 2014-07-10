@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Xml.Serialization;
 
 /// <summary>
-/// Developer: Vasay, Brian Albert H.
+/// Developer: Vasay, Brian Albert H., Marcus T. Ang
 /// Date Created: 06/13/2013
 /// 
 /// ****************************************************************************************************
@@ -20,6 +20,7 @@ using System.Xml.Serialization;
 /// 12/10/2013      Vasay, Brian Albert H.  Created AsymmetricEncryption and SymmetricEncrpytion classes
 /// 01/08/2014      Vasay, Brian Albert H.  Included RSA encryption / decryption methods
 /// 01/08/2014      Vasay, Brian Albert H.  Included XML documentation to all methods and properties
+/// 05/09/2014      Ang, Marcus T.          Tested every method and reported for any other exception
 /// ****************************************************************************************************
 /// </summary>
 namespace BAHV.Common.Cryptography
