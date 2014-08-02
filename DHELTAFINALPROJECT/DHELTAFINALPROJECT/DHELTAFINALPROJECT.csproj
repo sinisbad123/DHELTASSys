@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{85C5C2E1-FAD5-4E88-B71E-77968C3BCFB7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DHELTAFINALPROJECT</RootNamespace>
+    <AssemblyName>DHELTAFINALPROJECT</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="404.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="AddDependent.aspx" />
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\general.css" />
+    <Content Include="css\index.css" />
+    <Content Include="css\reset.css" />
+    <Content Include="DHELTAEMP\EmployeeMainPage.aspx" />
+    <Content Include="DHELTAEMP\EmployeeProfile.aspx" />
+    <Content Include="DHELTAEMP\EmployeeSVEvalForm.aspx" />
+    <Content Include="DHELTAEMP\EmployeeSVEvaluate.aspx" />
+    <Content Include="DHELTAHR\HRQuarterlyReportSummary.aspx" />
+    <Content Include="DHELTAHR\HREvaluationSummary.aspx" />
+    <Content Include="DHELTAHR\HRAssessPersonnel.aspx" />
+    <Content Include="DHELTAHR\HRConsolidateQuarterlyReport.aspx" />
+    <Content Include="DHELTAHR\HREmployeeAttendance.aspx" />
+    <Content Include="DHELTAHR\HREmployeeOffense.aspx" />
+    <Content Include="DHELTAHR\HREvaluationQuestion.aspx" />
+    <Content Include="DHELTAHR\HRMainPage.aspx" />
+    <Content Include="DHELTAHR\HRProfile.aspx" />
+    <Content Include="DHELTAHR\HRHumanResource.aspx" />
+    <Content Include="DHELTAHR\HRShifting.aspx" />
+    <Content Include="DHELTAHR\HRCompanyBenefit.aspx" />
+    <Content Include="DHELTAHR\HRAddEmployeeBenefit.aspx" />
+    <Content Include="DHELTAHR\HRCompanyRequest.aspx" />
+    <Content Include="DHELTAHR\HRRequestReceiving.aspx" />
+    <Content Include="DHELTAHR\HRApproveLeaveRequest.aspx" />
+    <Content Include="DHELTAHR\HROffenseEvaluation.aspx" />
+    <Content Include="DHELTASV\SVQuarterlyReportSummary.aspx" />
+    <Content Include="DHELTASV\SVEmployeeEvalForm.aspx" />
+    <Content Include="DHELTASV\SVEmployeeEvaluate.aspx" />
+    <Content Include="DHELTASV\SVGenerateQuarterlyReport.aspx" />
+    <Content Include="DHELTASV\SVMainPage.aspx" />
+    <Content Include="DHELTASV\SVProfile.aspx" />
+    <Content Include="DHELTASV\SVHumanResource.aspx" />
+    <Content Include="DHELTASV\SVFileOffense.aspx" />
+    <Content Include="DHELTAVP\VPMainPage.aspx" />
+    <Content Include="DHELTAVP\VPHRTransferRequest.aspx" />
+    <Content Include="DHELTAVP\VPReceivingTransfer.aspx" />
+    <Content Include="DHELTAVP\VPProfile.aspx" />
+    <Content Include="DHELTAVP\VPHumanResource.aspx" />
+    <Content Include="DHELTAVP\VPCompanyBenefit.aspx" />
+    <Content Include="DHELTAVP\VPApproveLeaveRequest.aspx" />
+    <Content Include="images\1453420_10151840393147815_498072016_n.jpg" />
+    <Content Include="images\account-details.png" />
+    <Content Include="images\BG.jpg" />
+    <Content Include="images\BG_withtitle.png" />
+    <Content Include="images\contact-details.png" />
+    <Content Include="images\cream_pixels.png" />
+    <Content Include="images\finallogo.png" />
+    <Content Include="images\FreeVector-Orange-Mesh.jpg" />
+    <Content Include="images\light_orange_background-seamless_tile.jpg" />
+    <Content Include="images\orange-burst.png" />
+    <Content Include="images\orange-textured-background.jpg" />
+    <Content Include="images\personal-details-icon.png" />
+    <Content Include="images\red_line_background.jpg" />
+    <Content Include="images\rhinoslider-sprite.png" />
+    <Content Include="images\search-icon.png" />
+    <Content Include="images\title.png" />
+    <Content Include="index.aspx" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\datepicker.js" />
+    <Content Include="js\eye.js" />
+    <Content Include="js\jquery-1.9.1.js" />
+    <Content Include="js\jquery.leanModal.min.js" />
+    <Content Include="js\layout.js" />
+    <Content Include="js\utils.js" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddDependent.aspx.cs">
+      <DependentUpon>AddDependent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddDependent.aspx.designer.cs">
+      <DependentUpon>AddDependent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AuditTrail.cs" />
+    <Compile Include="Cryptography.cs" />
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="DHELTAEMP\Employee.Master.cs">
+      <DependentUpon>Employee.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAEMP\Employee.Master.designer.cs">
+      <DependentUpon>Employee.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeMainPage.aspx.cs">
+      <DependentUpon>EmployeeMainPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeMainPage.aspx.designer.cs">
+      <DependentUpon>EmployeeMainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeProfile.aspx.cs">
+      <DependentUpon>EmployeeProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeProfile.aspx.designer.cs">
+      <DependentUpon>EmployeeProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvalForm.aspx.cs">
+      <DependentUpon>EmployeeSVEvalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvalForm.aspx.designer.cs">
+      <DependentUpon>EmployeeSVEvalForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvaluate.aspx.cs">
+      <DependentUpon>EmployeeSVEvaluate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAEMP\EmployeeSVEvaluate.aspx.designer.cs">
+      <DependentUpon>EmployeeSVEvaluate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRQuarterlyReportSummary.aspx.cs">
+      <DependentUpon>HRQuarterlyReportSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRQuarterlyReportSummary.aspx.designer.cs">
+      <DependentUpon>HRQuarterlyReportSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HREvaluationSummary.aspx.cs">
+      <DependentUpon>HREvaluationSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HREvaluationSummary.aspx.designer.cs">
+      <DependentUpon>HREvaluationSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRAssessPersonnel.aspx.cs">
+      <DependentUpon>HRAssessPersonnel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRAssessPersonnel.aspx.designer.cs">
+      <DependentUpon>HRAssessPersonnel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRConsolidateQuarterlyReport.aspx.cs">
+      <DependentUpon>HRConsolidateQuarterlyReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRConsolidateQuarterlyReport.aspx.designer.cs">
+      <DependentUpon>HRConsolidateQuarterlyReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeAttendance.aspx.cs">
+      <DependentUpon>HREmployeeAttendance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeAttendance.aspx.designer.cs">
+      <DependentUpon>HREmployeeAttendance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeOffense.aspx.cs">
+      <DependentUpon>HREmployeeOffense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HREmployeeOffense.aspx.designer.cs">
+      <DependentUpon>HREmployeeOffense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HREvaluationQuestion.aspx.cs">
+      <DependentUpon>HREvaluationQuestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HREvaluationQuestion.aspx.designer.cs">
+      <DependentUpon>HREvaluationQuestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HumanResource.Master.cs">
+      <DependentUpon>HumanResource.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HumanResource.Master.designer.cs">
+      <DependentUpon>HumanResource.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRMainPage.aspx.cs">
+      <DependentUpon>HRMainPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRMainPage.aspx.designer.cs">
+      <DependentUpon>HRMainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRProfile.aspx.cs">
+      <DependentUpon>HRProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRProfile.aspx.designer.cs">
+      <DependentUpon>HRProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRHumanResource.aspx.cs">
+      <DependentUpon>HRHumanResource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRHumanResource.aspx.designer.cs">
+      <DependentUpon>HRHumanResource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRShifting.aspx.cs">
+      <DependentUpon>HRShifting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRShifting.aspx.designer.cs">
+      <DependentUpon>HRShifting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRCompanyBenefit.aspx.cs">
+      <DependentUpon>HRCompanyBenefit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRCompanyBenefit.aspx.designer.cs">
+      <DependentUpon>HRCompanyBenefit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRAddEmployeeBenefit.aspx.cs">
+      <DependentUpon>HRAddEmployeeBenefit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRAddEmployeeBenefit.aspx.designer.cs">
+      <DependentUpon>HRAddEmployeeBenefit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRCompanyRequest.aspx.cs">
+      <DependentUpon>HRCompanyRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRCompanyRequest.aspx.designer.cs">
+      <DependentUpon>HRCompanyRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRRequestReceiving.aspx.cs">
+      <DependentUpon>HRRequestReceiving.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRRequestReceiving.aspx.designer.cs">
+      <DependentUpon>HRRequestReceiving.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HRApproveLeaveRequest.aspx.cs">
+      <DependentUpon>HRApproveLeaveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HRApproveLeaveRequest.aspx.designer.cs">
+      <DependentUpon>HRApproveLeaveRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAHR\HROffenseEvaluation.aspx.cs">
+      <DependentUpon>HROffenseEvaluation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAHR\HROffenseEvaluation.aspx.designer.cs">
+      <DependentUpon>HROffenseEvaluation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVQuarterlyReportSummary.aspx.cs">
+      <DependentUpon>SVQuarterlyReportSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVQuarterlyReportSummary.aspx.designer.cs">
+      <DependentUpon>SVQuarterlyReportSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\Supervisor.Master.cs">
+      <DependentUpon>Supervisor.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\Supervisor.Master.designer.cs">
+      <DependentUpon>Supervisor.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvalForm.aspx.cs">
+      <DependentUpon>SVEmployeeEvalForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvalForm.aspx.designer.cs">
+      <DependentUpon>SVEmployeeEvalForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvaluate.aspx.cs">
+      <DependentUpon>SVEmployeeEvaluate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVEmployeeEvaluate.aspx.designer.cs">
+      <DependentUpon>SVEmployeeEvaluate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVGenerateQuarterlyReport.aspx.cs">
+      <DependentUpon>SVGenerateQuarterlyReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVGenerateQuarterlyReport.aspx.designer.cs">
+      <DependentUpon>SVGenerateQuarterlyReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVMainPage.aspx.cs">
+      <DependentUpon>SVMainPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVMainPage.aspx.designer.cs">
+      <DependentUpon>SVMainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVProfile.aspx.cs">
+      <DependentUpon>SVProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVProfile.aspx.designer.cs">
+      <DependentUpon>SVProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVHumanResource.aspx.cs">
+      <DependentUpon>SVHumanResource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVHumanResource.aspx.designer.cs">
+      <DependentUpon>SVHumanResource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTASV\SVFileOffense.aspx.cs">
+      <DependentUpon>SVFileOffense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTASV\SVFileOffense.aspx.designer.cs">
+      <DependentUpon>SVFileOffense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VicePresident.Master.cs">
+      <DependentUpon>VicePresident.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VicePresident.Master.designer.cs">
+      <DependentUpon>VicePresident.Master</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VPMainPage.aspx.cs">
+      <DependentUpon>VPMainPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VPMainPage.aspx.designer.cs">
+      <DependentUpon>VPMainPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VPHRTransferRequest.aspx.cs">
+      <DependentUpon>VPHRTransferRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VPHRTransferRequest.aspx.designer.cs">
+      <DependentUpon>VPHRTransferRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VPReceivingTransfer.aspx.cs">
+      <DependentUpon>VPReceivingTransfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VPReceivingTransfer.aspx.designer.cs">
+      <DependentUpon>VPReceivingTransfer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VPProfile.aspx.cs">
+      <DependentUpon>VPProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VPProfile.aspx.designer.cs">
+      <DependentUpon>VPProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VPHumanResource.aspx.cs">
+      <DependentUpon>VPHumanResource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VPHumanResource.aspx.designer.cs">
+      <DependentUpon>VPHumanResource.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VPCompanyBenefit.aspx.cs">
+      <DependentUpon>VPCompanyBenefit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VPCompanyBenefit.aspx.designer.cs">
+      <DependentUpon>VPCompanyBenefit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DHELTAVP\VPApproveLeaveRequest.aspx.cs">
+      <DependentUpon>VPApproveLeaveRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DHELTAVP\VPApproveLeaveRequest.aspx.designer.cs">
+      <DependentUpon>VPApproveLeaveRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="modules\AttendanceModuleBL.cs" />
+    <Compile Include="modules\BenefitsModuleBL.cs" />
+    <Compile Include="modules\DHELTASSysDataHandling.cs" />
+    <Compile Include="modules\DisciplineModuleBL.cs" />
+    <Compile Include="modules\EvaluationModuleBL.cs" />
+    <Compile Include="modules\HRModuleBL.cs" />
+    <Compile Include="modules\LeaveModuleBL.cs" />
+    <Compile Include="modules\ReportsModuleBL.cs" />
+    <Compile Include="modules\ShiftModuleBL.cs" />
+    <Compile Include="modules\TransferModuleBL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DHELTAEMP\Employee.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DHELTAHR\HumanResource.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DHELTASV\Supervisor.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DHELTAVP\VicePresident.Master" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4274</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
